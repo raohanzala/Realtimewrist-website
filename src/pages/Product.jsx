@@ -6,14 +6,28 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import RelatedProducts from '../components/RelatedProducts';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { assets } from '../assets/assets';
+import PolicyModal from '../components/PolicyModal';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
 const Product = () => {
   const { productId } = useParams();
-  const { products, currency, addToCart } = useContext(ShopContext);
+  const { products, currency } = useContext(ShopContext);
   const [image, setImage] = useState('');
   const [size, setSize] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false); // For modal visibility
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); // To track the checkbox state
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false); // Lightbox state
+  const [photoIndex, setPhotoIndex] = useState(0);
 
-  // Memoized product data
+  const handleAddToCartClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCheckboxChange = (e) => {
+    setIsCheckboxChecked(e.target.checked);
+  };
+
   const productData = useMemo(
     () => products.find((item) => item._id === productId),
     [productId, products]
@@ -31,11 +45,22 @@ const Product = () => {
 
   return (
     <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Product Details */}
-      <div className="flex flex-col sm:flex-row sm:gap-12 gap-8">
-        {/* Product Images */}
-        <div className="flex-1 flex flex-col sm:flex-row gap-4">
-          {/* Thumbnails */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-12 gap-8">
+        <div className="flex flex-col gap-4 bg-red-200">
+            <div
+              className="w-full h-full max-w-[500px] max-h-[500px] border bg-blue-200 border-gray-200 rounded overflow-hidden cursor-pointer"
+              onClick={() => {
+                setIsLightboxOpen(true);
+                setPhotoIndex(0);
+              }}
+            >
+              <LazyLoadImage
+                src={image}
+                className="w-full h-full object-cover"
+                alt="Selected Product"
+                effect="blur"
+              />
+            </div>
           <div className="sm:flex sm:flex-col overflow-x-auto sm:overflow-y-auto sm:w-[20%] flex gap-4 p-2">
             {productData.image.map((item, index) => (
               <LazyLoadImage
@@ -49,21 +74,23 @@ const Product = () => {
             ))}
           </div>
 
-          {/* Main Image */}
-          <div className="w-full sm:w-[80%] flex items-center justify-center">
-            <div className="aspect-square w-full border border-gray-200 rounded overflow-hidden">
-              <LazyLoadImage
-                src={image}
-                className="w-full h-full object-contain"
-                alt="Selected Product"
-                effect="blur"
-              />
-            </div>
-          </div>
+          {isLightboxOpen && (
+            <Lightbox
+              mainSrc={productData.image[photoIndex]}
+              nextSrc={productData.image[(photoIndex + 1) % productData.image.length]}
+              prevSrc={productData.image[(photoIndex + productData.image.length - 1) % productData.image.length]}
+              onCloseRequest={() => setIsLightboxOpen(false)}
+              onMovePrevRequest={() =>
+                setPhotoIndex((photoIndex + productData.image.length - 1) % productData.image.length)
+              }
+              onMoveNextRequest={() =>
+                setPhotoIndex((photoIndex + 1) % productData.image.length)
+              }
+            />
+          )}
         </div>
 
-        {/* Product Info */}
-        <div className="flex-1">
+        <div className="">
           <h1 className="font-medium text-2xl">{productData.name}</h1>
           <div className="flex items-center gap-1 mt-2">
             {Array.from({ length: 4 }).map((_, index) => (
@@ -90,9 +117,8 @@ const Product = () => {
                   <button
                     key={index}
                     onClick={() => setSize(item)}
-                    className={`py-2 px-4 border bg-gray-100 transition-colors ${
-                      item === size ? 'border-orange-500 bg-orange-50' : ''
-                    }`}
+                    className={`py-2 px-4 border bg-gray-100 transition-colors ${item === size ? 'border-orange-500 bg-orange-50' : ''
+                      }`}
                   >
                     {item}
                   </button>
@@ -100,24 +126,23 @@ const Product = () => {
               </div>
             </div>
           )}
-
           <button
-            onClick={() => addToCart(productData._id, size)}
+            onClick={handleAddToCartClick}
             className="bg-black text-white px-8 py-3 mt-6 text-sm hover:bg-gray-800 transition-colors"
           >
             ADD TO CART
           </button>
-
           <hr className="mt-8" />
           <div className="text-sm text-gray-500 mt-5">
             <p>100% Original product.</p>
             <p>Cash on delivery is available on this product.</p>
             <p>Easy return and exchange policy within 7 days.</p>
           </div>
+
+          {isModalOpen && <PolicyModal setIsModalOpen={setIsModalOpen} isCheckboxChecked={isCheckboxChecked} setIsCheckboxChecked={setIsCheckboxChecked} productData={productData} size={size} handleCheckboxChange={handleCheckboxChange} />}
         </div>
       </div>
 
-      {/* Product Description and Reviews */}
       <div className="mt-20">
         <div className="flex">
           <b className="border-t border-l px-5 py-3 text-sm cursor-pointer">Description</b>
@@ -128,7 +153,6 @@ const Product = () => {
         </div>
       </div>
 
-      {/* Related Products */}
       <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
     </div>
   );

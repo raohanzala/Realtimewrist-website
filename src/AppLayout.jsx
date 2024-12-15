@@ -7,8 +7,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import SearchBar from './components/SearchBar';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import CartDrawer from './components/CartDrawer';
 
 const AppLayout = ({ children }) => {
+
 
   const [showSearch, setShowSearch] = useState(false);
   useEffect(() => {
@@ -23,10 +25,11 @@ const AppLayout = ({ children }) => {
 
   return (
     <div>
-      <Navbar setShowSearch={setShowSearch} showSearch={showSearch} />
+      <Navbar  setShowSearch={setShowSearch} showSearch={showSearch} />
+      <CartDrawer />
       {showSearch && <SearchBar  setShowSearch={setShowSearch}/>}
 
-      <div className="pt-[125px] pb-24 px-5">
+      <div className="pt-[125px] pb-24">
         <ToastContainer />
         {children}
       </div>

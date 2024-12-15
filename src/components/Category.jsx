@@ -38,6 +38,48 @@ const Category = () => {
       image: assets.rolex_yatch_master_1,
       link: "/sports",
     },
+    {
+      id: 6,
+      title: "Sports",
+      image: assets.rolex_yatch_master_1,
+      link: "/sports",
+    },
+    {
+      id: 6,
+      title: "Sports",
+      image: assets.rolex_yatch_master_1,
+      link: "/sports",
+    },
+    {
+      id: 6,
+      title: "Sports",
+      image: assets.rolex_yatch_master_1,
+      link: "/sports",
+    },
+    {
+      id: 6,
+      title: "Sports",
+      image: assets.rolex_yatch_master_1,
+      link: "/sports",
+    },
+    {
+      id: 6,
+      title: "Sports",
+      image: assets.rolex_yatch_master_1,
+      link: "/sports",
+    },
+    {
+      id: 6,
+      title: "Sports",
+      image: assets.rolex_yatch_master_1,
+      link: "/sports",
+    },
+    {
+      id: 6,
+      title: "Sports",
+      image: assets.rolex_yatch_master_1,
+      link: "/sports",
+    },
   ];
 
   return (
@@ -48,9 +90,9 @@ const Category = () => {
           spaceBetween={10}
           breakpoints={{
             320: { slidesPerView: 3 },
-            480: { slidesPerView: 3 },
-            768: { slidesPerView: 4 },
-            1024: { slidesPerView: 5 },
+            480: { slidesPerView: 4 },
+            768: { slidesPerView: 5 },
+            1024: { slidesPerView: 6 },
             1280: { slidesPerView: 7 },
           }}
           slidesPerView={7}
@@ -58,7 +100,7 @@ const Category = () => {
             prevEl: ".custom-prev",
             nextEl: ".custom-next",
           }}
-          autoplay={{ delay: 2000 }}
+          // autoplay={{ delay: 2000 }}
         >
           {
             categories.map((category, index) => (

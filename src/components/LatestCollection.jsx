@@ -37,7 +37,13 @@ const LatestCollection = ({ }) => {
             prevEl: ".custom-prev",
             nextEl: ".custom-next",
           }}
-          // autoplay={{ delay: 1500 }}
+          breakpoints={{
+            320: { slidesPerView: 2 }, // matches grid-cols-2
+            640: { slidesPerView: 3 }, // matches sm:grid-cols-3
+            768: { slidesPerView: 4 }, // matches md:grid-cols-4
+            1024: { slidesPerView: 5 }, // matches lg:grid-cols-5
+          }}
+          autoplay={{ delay: 1500 }}
           >
           
           {latestProducts.map((item, index) => (

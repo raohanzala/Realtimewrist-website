@@ -30,9 +30,11 @@ const TestimonialSection = () => {
           }}
           spaceBetween={50}
           breakpoints={{
-            // 640: { slidesPerView: 1 },
-            // 768: { slidesPerView: 3 },
-            // 1024: { slidesPerView: 5 },
+            320: { slidesPerView: 2 },
+            480: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 2 },
+            1280: { slidesPerView: 4 },
           }}
           slidesPerView={4} // Center and 2 on each side
           navigation={{

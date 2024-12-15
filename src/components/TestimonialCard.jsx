@@ -3,9 +3,9 @@ import { assets } from '../assets/assets';
 
 const TestimonialCard = () => {
   return (
-    <div className="bg-white rounded-md shadow-lg w-full max-w-[280px] border border-gray-300 overflow-hidden">
+    <div className="bg-white rounded-md shadow-lg w-full border border-gray-300 overflow-hidden">
       {/* WhatsApp Screenshot */}
-      <div className="relative h-[140px] bg-gray-50">
+      <div className="relative h-32  bg-gray-50">
         <img
           src={assets.feedback_2} // Replace with your WhatsApp screenshot path
           alt="WhatsApp Review"

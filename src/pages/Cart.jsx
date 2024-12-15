@@ -4,6 +4,8 @@ import Title from '../components/Title'
 import { assets } from '../assets/assets'
 import CartTotal from '../components/CartTotal'
 import toast from 'react-hot-toast'
+import { RxCross2 } from "react-icons/rx";
+
 
 const Cart = () => {
 
@@ -34,14 +36,16 @@ const Cart = () => {
     
   }, [cartItems, products])
 
-  console.log(products)
+  console.log(cartData)
 
 
   return (
-    <div className='border-t pt-14 max-w-[1280px] mx-auto'>
+    <div className='border-t pt-14 max-w-[1280px] mx-auto px-5'>
       <div className="text-2xl mb-3">
         <Title text1={'YOUR'} text2={'CART'} />
       </div>
+
+      <div>
 
       <div>
         {cartData.length > 0 ?
@@ -49,9 +53,9 @@ const Cart = () => {
             const productData = products.find((product) => product._id === item._id)
             console.log(productData)
             return (
-              <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
+              <div key={index} className='py-4 border-t text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
                 <div className='flex items-start gap-6'>
-                  <img src={productData.image} className='w-16 sm:w-20' alt="" />
+                  <img src={productData.image[0]} className='size-20 object-cover' alt="" />
                   <div>
                     <p className='text-xs sm:text-lg font-medium'>{productData.name}</p>
                     <div className='flex items-center gap-5 mt-2'>
@@ -61,7 +65,12 @@ const Cart = () => {
                   </div>
                 </div>
                 <input onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))} className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1' type="number" min={1} defaultValue={item.quantity} />
-                <img onClick={() => updateQuantity(item._id, item.size, 0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src={assets.bin_icon} alt="" />
+                {/* <img onClick={() => updateQuantity(item._id, item.size, 0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src={assets.bin_icon} alt="" /> */}
+                <div onClick={() => updateQuantity(item._id, item.size, 0)} className='cursor-pointer'>
+
+                <RxCross2 size={20} />
+                </div>
+
               </div>
             )
           }) : <div className='py-9 flex items-center justify-center'>
@@ -75,15 +84,17 @@ const Cart = () => {
           <CartTotal />
           <div className='w-full text-end'>
             <button onClick={() => {
-              if(!cartItems){
+              toast.dismiss()
+              if(cartData.length > 0){
                 navigate('/place-order')
               }else{
                 toast.error('Your cart is empty.')
               }
-              }} className='bg-black text-white text-sm my-8 px-8 py-3'>PROCEED TO CHEKOUT</button>
+              }} className='bg-primary text-white text-sm my-8 px-8 py-3'>PROCEED TO CHEKOUT</button>
           </div>
         </div>
       </div>
+                </div>
     </div>
   )
 }

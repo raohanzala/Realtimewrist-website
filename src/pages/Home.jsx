@@ -15,23 +15,22 @@ const Home = () => {
 
   return (
     <div>
-
       <Hero />
       <div className='max-w-screen-xl mx-auto px-5'>
-
         <Category />
         <LatestCollection />
         <BestSeller />
-
-      {/* <MoreSection/> */}
       </div>
       <CategoryCollection />
-      {/* <OurPolicy/> */}
+      <div className='max-w-screen-2xl mx-auto px-5'>
+
       <TestimonialSection />
+      </div>
       <ServiceSection />
-      {/* <SignupEmail /> */}
-      <NewsLetterBox/>
-      <WhatsAppChat/>
+      <div className='px-5'>
+        <NewsLetterBox />
+      </div>
+      <WhatsAppChat />
     </div>
   )
 }

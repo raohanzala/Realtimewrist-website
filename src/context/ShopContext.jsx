@@ -20,6 +20,8 @@ const ShopContextProvider = ({ children }) => {
   const [token, setToken] = useState('')
   const navigate = useNavigate()
 
+  const [isCartOpen, setIsCartOpen] = useState(false)
+
   // console.log(category)
   
 
@@ -54,6 +56,7 @@ const ShopContextProvider = ({ children }) => {
   const addToCart = async (itemId, size) => {
     toast.dismiss()
     toast.success('Added to cart')
+    setIsCartOpen(true)
     let cartData = structuredClone(cartItems);
   
     if (cartData[itemId]) {
@@ -158,7 +161,7 @@ const ShopContextProvider = ({ children }) => {
     }
   },[])
 
-  const value = { products, currency, delivery_fee, search, setSearch, showSearch, setShowSearch, cartItems, setCartItems, addToCart, getCartCount, updateQuantity, category, setCategory, getCartAmount, navigate, backendUrl, token, setToken }
+  const value = { products, isCartOpen, setIsCartOpen, currency, delivery_fee, search, setSearch, showSearch, setShowSearch, cartItems, setCartItems, addToCart, getCartCount, updateQuantity, category, setCategory, getCartAmount, navigate, backendUrl, token, setToken }
 
   return (
     <ShopContext.Provider value={value}>

@@ -25,11 +25,9 @@ const Navbar = ({ showSearch, setShowSearch }) => {
   const [visible, setVisible] = useState(false)
   const [scrolled, setScrolled] = useState(false);
   const [lastScrollTop, setLastScrollTop] = useState(0);
-  const [isOpen, setIsOpen] = useState(false)
 
 
-  const { getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext)
-  console.log(getCartCount())
+  const { getCartCount, navigate, token, setToken, setCartItems, isCartOpen, setIsCartOpen, } = useContext(ShopContext)
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
@@ -61,53 +59,53 @@ const Navbar = ({ showSearch, setShowSearch }) => {
       <Logo />
 
       {/*  ------------- Social Icons ----------------- */}
-      <div className='flex items-center justify-between p-2 sm:p-3 px-5 font-medium bg-[#232323]'>
-        <div onClick={() => setVisible(true)} className='cursor-pointer pl-2 text-white flex md:hidden text-2xl'>
-          <MdOutlineMenu />
-        </div>
-        <div className='text-xl  text-gray-100 hidden md:flex gap-3 cursor-pointer '>
-          <CiFacebook />
-          <IoLogoInstagram />
-          <AiOutlineYoutube />
-          <FaWhatsapp />
-        </div>
+      <div className='w-full bg-[#232323]'>
 
-        {/* -------------- Menu List ------------------- */}
-        <NavList />
-
-        {/* ---------------- Cart, Search & Proile ----------------- */}
-        <div className='flex items-center'>
-          <div onClick={() => setShowSearch(true)} className='cursor-pointer text-white text-xl pr-2'>
-            <FiSearch />
+        <div className='flex items-center justify-between p-2 sm:p-3 px-5 font-medium bg-[#232323] max-w-screen-2xl mx-auto w-full'>
+          <div onClick={() => setVisible(true)} className='cursor-pointer pl-2 text-white flex md:hidden text-2xl'>
+            <MdOutlineMenu />
           </div>
-          <div className='group relative border-x-[0.5px] px-2'>
-            <div className='text-white text-xl cursor-pointer' onClick={() => token ? null : navigate('/login')}>
-              <IoMdPerson />
+          <div className='text-xl  text-gray-100 hidden md:flex gap-3 items-center cursor-pointer '>
+
+            <CiFacebook />
+            <IoLogoInstagram />
+            <AiOutlineYoutube />
+            <FaWhatsapp />
+          </div>
+
+          {/* -------------- Menu List ------------------- */}
+          <NavList />
+
+          {/* ---------------- Cart, Search & Proile ----------------- */}
+          <div className='flex items-center'>
+            <div onClick={() => setShowSearch(true)} className='cursor-pointer text-white text-xl pr-2'>
+              <FiSearch />
             </div>
-            {token && <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4 z-[99]'>
-              <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
-                <p className='cursor-pointer hover:text-black'> My Profile</p>
-                <p onClick={()=> navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
-                <p onClick={logout} className='cursor-pointer hover:text-black' >Logout</p>
-                {localStorage.getItem('auth-token') ? <p onClick={() => { localStorage.removeItem('auth-token'); window.location.replace('/') }} className='cursor-pointer hover:text-black'>Logout </p> : ''}
+            <div className='group relative border-x-[0.5px] px-2'>
+              <div className='text-white text-xl cursor-pointer' onClick={() => token ? null : navigate('/login')}>
+                <IoMdPerson />
               </div>
-            </div>}
-          </div>
-
-          <div onClick={()=> setIsOpen(true)}  className='relative pl-2'>
-            <div className='text-white text-xl'>
-              <IoMdCart />
+              {token && <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4 z-[99]'>
+                <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
+                  <p className='cursor-pointer hover:text-black'> My Profile</p>
+                  <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
+                  <p onClick={logout} className='cursor-pointer hover:text-black' >Logout</p>
+                  {localStorage.getItem('auth-token') ? <p onClick={() => { localStorage.removeItem('auth-token'); window.location.replace('/') }} className='cursor-pointer hover:text-black'>Logout </p> : ''}
+                </div>
+              </div>}
             </div>
-            <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[red] text-white aspect-square rounded-full text-[8px]'>{getCartCount()}</p>
+            <div onClick={() => setIsCartOpen(true)} className='relative pl-2 cursor-pointer'>
+              <div className='text-white text-xl'>
+                <IoMdCart />
+              </div>
+              <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[red] text-white aspect-square rounded-full text-[8px]'>{getCartCount()}</p>
+            </div>
           </div>
+
+          {/* ------------- Navbar for Small Screens --------------- */}
+
+          <NavSmall visible={visible} setVisible={setVisible} />
         </div>
-
-        <CartDrawer isOpen={isOpen} />
-
-
-        {/* ------------- Navbar for Small Screens --------------- */}
-
-        <NavSmall visible={visible} setVisible={setVisible} />
       </div>
     </div>
   )
