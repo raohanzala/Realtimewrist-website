@@ -31,7 +31,7 @@ const TestimonialCard = () => {
         {/* Rating and Details */}
         <div className="flex justify-between items-center text-sm">
           {/* Rating */}
-          <div className="flex gap-1">
+          <div className="flex gap-1 justify-between">
             {Array.from({ length: 5 }).map((_, index) => (
               <img
                 key={index}

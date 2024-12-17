@@ -52,7 +52,7 @@ const WhatsAppChat = () => {
 
           {/* Footer */}
           <div className="p-3 text-center bg-gray-100 text-xs text-gray-500">
-            Powered by Realtime Wrist
+            Powered by <span className='font-semibold'>Realtime Wrist</span>
           </div>
         </div>
       )}

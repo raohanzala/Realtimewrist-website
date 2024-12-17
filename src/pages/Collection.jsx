@@ -115,7 +115,6 @@ const Collection = () => {
 
     if (loaderRef.current) observer.observe(loaderRef.current);
 
-    // Clean up observer when component unmounts
     return () => {
       if (loaderRef.current) observer.unobserve(loaderRef.current);
     };
@@ -205,13 +204,13 @@ const Collection = () => {
                 size={item.sizes}
               />
             ))
-          )}
+          ) }
         </div>
 
         <div className='py-5'>
-          {isLoading && <LoadingSpinner />}
+          {/* {isLoading ? <LoadingSpinner /> : <p className='text-center'>No products found.</p>} */}
         </div>
-        <div ref={loaderRef} className='h-10 w-full bg-red-500'></div>
+        <div ref={loaderRef} className='h-10 w-full '></div>
         {!hasMore && <p className='text-center text-gray-500 mt-4'>No more products to load</p>}
       </div>
     </div>

@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { assets } from "../assets/assets";
 
 export const ShopContext = createContext()
 
@@ -21,13 +22,6 @@ const ShopContextProvider = ({ children }) => {
   const navigate = useNavigate()
 
   const [isCartOpen, setIsCartOpen] = useState(false)
-
-  // console.log(category)
-  
-
-
-  // Fetching all products from databse
-  
 
   const getProductsData = async()=> {
     try {
@@ -52,11 +46,18 @@ const ShopContextProvider = ({ children }) => {
 
   console.log(cartItems, 'CartItems')
 
+  const playSound = (url) => {
+    const audio = new Audio(url);
+    audio.play().catch(error => console.log('Error playing sound:', error));
+  };
 
   const addToCart = async (itemId, size) => {
     toast.dismiss()
     toast.success('Added to cart')
     setIsCartOpen(true)
+
+    playSound(assets.notification_sound); 
+
     let cartData = structuredClone(cartItems);
   
     if (cartData[itemId]) {

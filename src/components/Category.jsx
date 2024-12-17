@@ -83,7 +83,7 @@ const Category = () => {
   ];
 
   return (
-    <div className="py-12">
+    <div className="pt-12 pb-3 md:pb-6">
       <div className="relative group">
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -100,7 +100,7 @@ const Category = () => {
             prevEl: ".custom-prev",
             nextEl: ".custom-next",
           }}
-          // autoplay={{ delay: 2000 }}
+          autoplay={{ delay: 2000 }}
         >
           {
             categories.map((category, index) => (

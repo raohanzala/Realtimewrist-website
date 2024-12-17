@@ -3,17 +3,28 @@ import { ShopContext } from '../context/ShopContext';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { IoMdCart } from "react-icons/io";
+import PolicyModal from './PolicyModal';
 
 const ProductItem = memo(({ id, description, size, image, name, newPrice, oldPrice }) => {
+  
+  const [isHovered, setIsHovered] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // For modal visibility
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); // To track the checkbox state
   const { currency } = useContext(ShopContext);
 
-  // Hover state
-  const [isHovered, setIsHovered] = useState(false);
+  const handleAddToCartClick = (e) => {
+    e.stopPropagation(); // Stops the event from bubbling up to parent elements
+    e.preventDefault();
+    setIsModalOpen(true);
+  };
 
-  // UseMemo to precompute offer percentage
+  const handleCheckboxChange = (e) => {
+    setIsCheckboxChecked(e.target.checked);
+  };
+
   const offer = useMemo(() => Math.floor(((oldPrice - newPrice) / oldPrice) * 100), [oldPrice, newPrice]);
 
-  // Precompute truncated text
   const shortDescription = useMemo(
     () => (description.length > 60 ? description.slice(0, 60) + '...' : description),
     [description]
@@ -23,10 +34,10 @@ const ProductItem = memo(({ id, description, size, image, name, newPrice, oldPri
     [name]
   );
 
-  // Ensure that we have more than one image before enabling hover effect
   const hasMultipleImages = image && image.length > 1;
 
   return (
+    <>
     <Link to={`/product/${id}`}>
       <div
         className="flex relative w-full h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded"
@@ -53,6 +64,7 @@ const ProductItem = memo(({ id, description, size, image, name, newPrice, oldPri
             }}
             alt={name}
           />
+          
           {/* Second Image (Only if hover and multiple images) */}
           {hasMultipleImages && isHovered && (
             <LazyLoadImage
@@ -67,33 +79,32 @@ const ProductItem = memo(({ id, description, size, image, name, newPrice, oldPri
             />
           )}
         </div>
-
-
-
-
         {/* Product Details */}
-        <div className="text-center relative py-3 px-2">
-          <p
+        <div className={`text-center relative py-3 px-2`}>
+          <div
             className={`absolute duration-200 transition-all z-40 ease-in-out ${isHovered ? 'opacity-100' : 'opacity-0'
-              } -top-10 left-0 bg-primary py-2 font-semibold text-sm uppercase w-full text-center`}
+              } -top-9 left-0 bg-primary hover:bg-button-cta py-2 flex items-center justify-center gap-1 text-white font-semibold text-xs uppercase w-full`}
+              onClick={handleAddToCartClick}
           >
-            Add to cart
-          </p>
+          <IoMdCart className='text-xl' />  Add to cart
+          </div>
           <p className="text-sm tracking-wide font-semibold uppercase mb-1 text-gray-800">{productName}</p>
           <p className="text-xs text-gray-500">{shortDescription}</p>
           <div className="flex gap-2 justify-center items-center mt-2">
-            {oldPrice && (
+            {oldPrice && oldPrice > newPrice && (
               <p className="text-sm text-gray-400 line-through">
                 {currency} {oldPrice}
               </p>
             )}
-            <p className="text-lg font-semibold text-yellow-500">
+            <p className="text-lg font-semibold text-primary">
               {currency} {newPrice}
             </p>
           </div>
         </div>
       </div>
     </Link>
+      {isModalOpen && <PolicyModal setIsModalOpen={setIsModalOpen} isCheckboxChecked={isCheckboxChecked} setIsCheckboxChecked={setIsCheckboxChecked} productId={id} size={size} handleCheckboxChange={handleCheckboxChange} />}
+    </>
   );
 });
 

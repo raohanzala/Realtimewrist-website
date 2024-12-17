@@ -6,6 +6,7 @@ import { assets } from '../assets/assets'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Autoplay } from "swiper/modules";
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import { MdOutlineArrowBack, MdOutlineArrowForward } from 'react-icons/md'
 
 const LatestCollection = ({ }) => {
 
@@ -43,7 +44,7 @@ const LatestCollection = ({ }) => {
             768: { slidesPerView: 4 }, // matches md:grid-cols-4
             1024: { slidesPerView: 5 }, // matches lg:grid-cols-5
           }}
-          autoplay={{ delay: 1500 }}
+          autoplay={{ delay: 5000 }}
           >
           
           {latestProducts.map((item, index) => (
@@ -52,14 +53,17 @@ const LatestCollection = ({ }) => {
             </SwiperSlide>
             ))}
         </Swiper>
-        <div className="custom-prev custom-prev opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-          <button className="absolute text-2xl z-30 text-[#cba135]  p-1 rounded-full -left-2 top-1/2 transform -translate-y-1/2 ">
-            <IoIosArrowBack />
+        <div className="custom-prev custom-prev opacity-0 z-50 group-hover:opacity-100 transition-opacity duration-400 ease-in-out">
+          <button className="absolute text-xl z-30 text-primary  group-hover:translate-x-0 -translate-x-14 bg-white shadow-2xl border  p-1  rounded-full duration-300 ease-in-out -left-2 top-1/2 transform -translate-y-1/2  ">
+          <MdOutlineArrowBack />
+
           </button>
         </div>
-        <div className=" custom-next custom-prev opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-          <button className="absolute text-2xl z-30  p-1 rounded-full -right-2 text-[#cba135] top-1/2 transform -translate-y-1/2 ">
-            <IoIosArrowForward />
+        <div className=" custom-next custom-prev opacity-0 z-50 group-hover:opacity-100 transition-opacity duration-400 ease-in-out">
+          <button className="absolute text-xl z-30 group-hover:translate-x-0 translate-x-14  bg-white shadow-2xl border p-1 rounded-full duration-300 ease-in-out -right-2 text-primary top-1/2 transform -translate-y-1/2 ">
+          <MdOutlineArrowForward />
+
+
           </button>
         </div>
       </div>

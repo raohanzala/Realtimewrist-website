@@ -66,8 +66,7 @@ const [password, setPassword] = useState('')
       {currentState === 'Login' ? '' : <input type="text" name='username' value={name} onChange={(e)=> setName(e.target.value)} className='w-full px-3 py-2 border border-gray-800' placeholder='Name' required />}
       <input type="email" name='email' value={email} onChange={(e) => setEmail(e.target.value)} className='w-full px-3 py-2 border border-gray-800' placeholder='Email' required />
       <input type="password" name='password' value={password} onChange={(e)=>setPassword(e.target.value)} className='w-full px-3 py-2 border border-gray-800' placeholder='Password' required />
-      <div className='w-full flex justify-between text-sm mt-[-8px]'>
-        <p className='cursor-pointer'>Forgot your password?</p>
+      <div className='w-full flex justify-end text-sm mt-[-8px]'>
         {
           currentState === 'Login'
             ? <p onClick={() => setCurrentState('Sign Up')} className='cursor-pointer'>Create account </p>

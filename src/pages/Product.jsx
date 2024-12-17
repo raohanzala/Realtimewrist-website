@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import RelatedProducts from '../components/RelatedProducts';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Breadcrumb from '../components/Breadcrumb'
 import { assets } from '../assets/assets';
 import PolicyModal from '../components/PolicyModal';
 import Lightbox from 'react-image-lightbox';
@@ -33,6 +34,16 @@ const Product = () => {
     [productId, products]
   );
 
+  // const offer = useMemo(() => Math.floor(((productData.oldPrice - productData.newPrice) / productData.oldPrice) * 100) , [productData?.oldPrice, productData?.newPrice]);
+
+  const breadcrumbs = [
+    { label: 'Home', href: '/' }, // Link to home page
+    { label: 'Men', href: '/category/men' }, // Link to Men's category
+    { label: 'Clothing', href: '/category/men/clothing' }, // Link to Clothing sub-category
+    { label: productData?.category, href: `/category/men/clothing/${productData?.category}` }, // Dynamic category (like T-Shirts)
+    { label: productData?.name } // Current product, no href
+  ];
+
   useEffect(() => {
     if (productData) {
       setImage(productData.image[0]);
@@ -45,29 +56,37 @@ const Product = () => {
 
   return (
     <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-12 gap-8">
-        <div className="flex flex-col gap-4 bg-red-200">
-            <div
-              className="w-full h-full max-w-[500px] max-h-[500px] border bg-blue-200 border-gray-200 rounded overflow-hidden cursor-pointer"
-              onClick={() => {
-                setIsLightboxOpen(true);
-                setPhotoIndex(0);
-              }}
-            >
-              <LazyLoadImage
-                src={image}
-                className="w-full h-full object-cover"
-                alt="Selected Product"
-                effect="blur"
-              />
-            </div>
-          <div className="sm:flex sm:flex-col overflow-x-auto sm:overflow-y-auto sm:w-[20%] flex gap-4 p-2">
+      <Breadcrumb breadcrumbs={breadcrumbs} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-12 gap-8 ">
+        <div className="flex flex-col gap-4 ">
+          <div
+            className="w-full relative h-full max-h-[400px] md:max-h-[400px] lg:max-h-[500px] aspect-square border  border-gray-200 rounded overflow-hidden cursor-pointer flex justify-start items-center"
+            onClick={() => {
+              setIsLightboxOpen(true);
+              setPhotoIndex(0);
+            }}
+          >
+            {productData?.oldPrice && productData?.oldPrice > productData?.newPrice && (
+              <div className="absolute top-2 left-2 bg-red-500 flex items-center justify-center shadow-md text-white size-11 text-sm font-bold z-10 rounded-full">
+                -{Math.floor(((productData.oldPrice - productData.newPrice) / productData.oldPrice) * 100)}%
+              </div>
+            )}
+            <LazyLoadImage
+              src={image}
+              className="w-full h-full object-cover "
+              alt="Selected Product"
+              effect="blur"
+            />
+          </div>
+          <div className="overflow-x-auto  sm:overflow-y-auto flex gap-4">
             {productData.image.map((item, index) => (
               <LazyLoadImage
                 key={index}
                 onClick={() => setImage(item)}
                 src={item}
-                className="w-24 sm:w-full sm:h-24 aspect-square cursor-pointer border border-gray-300 hover:opacity-80 transition-opacity rounded object-cover"
+                className={`size-24 cursor-pointer rounded object-cover object-center transition-all duration-300 ease-in-out 
+                  ${image === item ? 'shadow-lg' : 'border-gray-300 grayscale opacity-70 hover:opacity-100 hover:grayscale-0'}
+                `}
                 alt={`Thumbnail ${index + 1}`}
                 effect="blur"
               />
@@ -91,22 +110,25 @@ const Product = () => {
         </div>
 
         <div className="">
-          <h1 className="font-medium text-2xl">{productData.name}</h1>
-          <div className="flex items-center gap-1 mt-2">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <img key={index} src={assets.star_icon} className="w-4" alt="Star Icon" />
-            ))}
-            <img src={assets.star_dull_icon} className="w-4" alt="Dull Star Icon" />
-            <p className="pl-2 text-gray-600">(122)</p>
-          </div>
-          <div className="flex gap-5 mt-5">
-            <p className="text-xl text-gray-400 line-through">
-              {currency} {productData.oldPrice}
-            </p>
-            <p className="text-xl font-semibold text-primary">
+          <h1 className="font-medium text-2xl uppercase">{productData.name}</h1>
+          <div className="flex items-center gap-3 mt-5">
+            {productData?.oldPrice && productData.oldPrice > productData.newPrice && (
+              <p className="text-lg text-gray-500 line-through">
+                <span className=" py-1 px-2 rounded-md">
+                  {currency} {productData.oldPrice}
+                </span>
+              </p>
+            )}
+            <p className="text-2xl font-bold text-primary">
               {currency} {productData.newPrice}
             </p>
+            {productData?.oldPrice && productData?.oldPrice > productData?.newPrice && (
+              <p className="bg-red-500 text-white text-xs font-semibold py-1 px-2 rounded-full">
+                Save {Math.floor(((productData.oldPrice - productData.newPrice) / productData.oldPrice) * 100)}%
+              </p>
+            )}
           </div>
+
           <p className="mt-5 text-gray-500 md:w-4/5">{productData.description}</p>
 
           {productData.sizes.length > 0 && (
@@ -139,7 +161,7 @@ const Product = () => {
             <p>Easy return and exchange policy within 7 days.</p>
           </div>
 
-          {isModalOpen && <PolicyModal setIsModalOpen={setIsModalOpen} isCheckboxChecked={isCheckboxChecked} setIsCheckboxChecked={setIsCheckboxChecked} productData={productData} size={size} handleCheckboxChange={handleCheckboxChange} />}
+          {isModalOpen && <PolicyModal setIsModalOpen={setIsModalOpen} isCheckboxChecked={isCheckboxChecked} setIsCheckboxChecked={setIsCheckboxChecked} productId={productData._id} size={size} handleCheckboxChange={handleCheckboxChange} />}
         </div>
       </div>
 
@@ -159,5 +181,4 @@ const Product = () => {
 };
 
 export default Product;
-
 
