@@ -29,7 +29,7 @@ const AppLayout = ({ children }) => {
       <CartDrawer />
       {showSearch && <SearchBar  setShowSearch={setShowSearch}/>}
 
-      <div className="pt-[125px] pb-24">
+      <div className="pt-[125px] pb-24 overflow-x-hidden w-[100%]">
         <ToastContainer />
         {children}
       </div>

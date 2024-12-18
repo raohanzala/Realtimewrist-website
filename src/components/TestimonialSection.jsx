@@ -52,13 +52,13 @@ const TestimonialSection = () => {
         </Swiper>
 
         {/* Custom Navigation Buttons */}
-        <div className="custom-prev opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-          <button className="absolute text-2xl z-30 text-[#cba135] p-1 rounded-full -left-2 top-1/2 transform -translate-y-1/2">
+        <div className="custom-prev  transition-opacity duration-300 ease-in-out">
+          <button className="absolute text-2xl z-30 text-[#cba135] p-1 rounded-full -left-8 top-1/2 transform -translate-y-1/2">
             <IoIosArrowBack />
           </button>
         </div>
-        <div className="custom-next opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-          <button className="absolute text-2xl z-30 text-[#cba135] p-1 rounded-full -right-2 top-1/2 transform -translate-y-1/2">
+        <div className="custom-next  transition-opacity duration-300 ease-in-out">
+          <button className="absolute text-2xl z-30 text-[#cba135] p-1 rounded-full -right-8 top-1/2 transform -translate-y-1/2">
             <IoIosArrowForward />
           </button>
         </div>

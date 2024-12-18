@@ -91,7 +91,7 @@ const CartDrawer = () => {
               cartData.map((item, index) => {
                 const productData = products.find((product) => product._id === item._id);
                 return (
-                    <div className="p-2 rounded-sm my-3 border text-gray-700 flex relative items-center gap-4">
+                    <div key={index} className="p-2 rounded-sm my-3 border text-gray-700 flex relative items-center gap-4">
                       <img
                         src={productData?.image}
                         className="w-16 h-16 object-cover rounded"
