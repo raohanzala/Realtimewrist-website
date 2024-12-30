@@ -59,9 +59,9 @@ const Navbar = ({ showSearch, setShowSearch }) => {
       <Logo />
 
       {/*  ------------- Social Icons ----------------- */}
-      <div className='w-full bg-[#232323]'>
+      <div className='w-full bg-dark-2'>
 
-        <div className='flex items-center justify-between p-2 sm:p-3 px-5 font-medium bg-[#232323] max-w-screen-2xl mx-auto w-full'>
+        <div className='flex items-center justify-between p-2 sm:p-3 px-5 font-medium bg-dark-2 max-w-screen-2xl mx-auto w-full'>
           <div onClick={() => setVisible(true)} className='cursor-pointer pl-2 text-white flex md:hidden text-2xl'>
             <MdOutlineMenu />
           </div>

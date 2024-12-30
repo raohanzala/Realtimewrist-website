@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="bg-[#232323] text-white">
+    <div className="bg-dark-2 text-white">
       {/* Main Footer Content */}
       <div className="max-w-screen-xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         
@@ -71,7 +71,7 @@ const Footer = () => {
       <div className="bg-[#cba135] py-3">
         <p className="text-center text-sm">
           Copyright {currentYear} @
-          <Link to="/" className="font-semibold hover:text-[#232323] transition-colors duration-200">
+          <Link to="/" className="font-semibold hover:text-dark-2 transition-colors duration-200">
             {' '}realtimewrist.pk{' '}
           </Link>
           - All Rights Reserved.

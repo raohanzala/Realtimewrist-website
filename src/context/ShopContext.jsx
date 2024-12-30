@@ -8,41 +8,42 @@ export const ShopContext = createContext()
 
 
 const ShopContextProvider = ({ children }) => {
-  
+
   const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-  const currency = 'Rs.'
+  const currency = 'Rs. '
   const delivery_fee = 250
   const [products, setProducts] = useState([])
+  const [singleProduct, setSingleProduct] = useState(null)
   const [search, setSearch] = useState('')
   const [showSearch, setShowSearch] = useState(false)
   const [cartItems, setCartItems] = useState({})
-  const [category, setCategory] = useState(['Automatic', 'Casual', 'Formal', 'Luxury' ,'Quartz'])
+  const [category, setCategory] = useState(['Automatic', 'Casual', 'Formal', 'Luxury', 'Quartz'])
   const [token, setToken] = useState('')
   const navigate = useNavigate()
 
   const [isCartOpen, setIsCartOpen] = useState(false)
 
-  const getProductsData = async()=> {
+  const getProductsData = async () => {
     try {
-        const response = await axios.get(backendUrl + '/api/product/list')
+      const response = await axios.get(backendUrl + '/api/product/list')
 
-        if(response.data.success){
-          setProducts(response.data.products)
-          console.log(response);
-          
-        }else{
-          toast.error(response.data.message)
-        }
+      if (response.data.success) {
+        setProducts(response.data.products)
+        console.log(response);
+
+      } else {
+        toast.error(response.data.message)
+      }
     } catch (error) {
-        console.log(error)
-        toast.error(error.message)
+      console.log(error)
+      toast.error(error.message)
     }
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     getProductsData()
-  },[])
+  }, [])
 
   console.log(cartItems, 'CartItems')
 
@@ -53,36 +54,37 @@ const ShopContextProvider = ({ children }) => {
 
   const addToCart = async (itemId, size) => {
     toast.dismiss()
-    toast.success('Added to cart')
-    setIsCartOpen(true)
-
-    playSound(assets.notification_sound); 
-
+    
     let cartData = structuredClone(cartItems);
-  
+    
     if (cartData[itemId]) {
-      if(cartData[itemId][size]){
+      if (cartData[itemId][size]) {
         cartData[itemId][size] += 1
-      }else {
+      } else {
         cartData[itemId][size] = 1
       }
     } else {
-      cartData[itemId]  = {};
-      cartData[itemId][size] = 1; 
+      cartData[itemId] = {};
+      cartData[itemId][size] = 1;
     }
-  
+
     setCartItems(cartData);
-    
-    console.log(itemId, size , 'Item Id and Size')
-    
+
+    console.log(itemId, size, 'Item Id and Size')
+
     if (token) {
       try {
         const response = await axios.post(
           `${backendUrl}/api/cart/add`,
-          { itemId, size }, 
+          { itemId, size },
           { headers: { token } }
         );
         console.log(response);
+        if(response.data.success){
+          toast.success(response.data.message)
+          setIsCartOpen(true)
+          playSound(assets.notification_sound);
+        }
       } catch (error) {
         console.log(error);
         toast.error(error.message);
@@ -90,10 +92,10 @@ const ShopContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(()=> {
-      console.log(cartItems)
+  useEffect(() => {
+    console.log(cartItems)
   }, [cartItems])
-  
+
   const getCartCount = () => {
     return Object.values(cartItems).reduce((total, sizes) => {
       return total + Object.values(sizes).reduce((count, qty) => count + qty, 0);
@@ -107,9 +109,9 @@ const ShopContextProvider = ({ children }) => {
       cartData[itemId][size] = quantity;
       setCartItems(cartData);
 
-      if(token){
+      if (token) {
         try {
-            await axios.post(backendUrl + '/api/cart/update', {itemId, size, quantity}, {headers : {token}})
+          await axios.post(backendUrl + '/api/cart/update', { itemId, size, quantity }, { headers: { token } })
         } catch (error) {
           console.log(error)
           toast.error(error.message)
@@ -121,15 +123,15 @@ const ShopContextProvider = ({ children }) => {
   }
 
 
-  const getUserCart = async ({token})=> {
+  const getUserCart = async ({ token }) => {
     try {
-        const response = await axios.post(backendUrl + '/api/cart/get', {}, {headers: {token}})
-        if(response.data.success){
-          setCartItems(response.data.cartData)
-        }
+      const response = await axios.post(backendUrl + '/api/cart/get', {}, { headers: { token } })
+      if (response.data.success) {
+        setCartItems(response.data.cartData)
+      }
     } catch (error) {
       console.log(error)
-          toast.error(error.message)
+      toast.error(error.message)
     }
   }
 
@@ -155,14 +157,26 @@ const ShopContextProvider = ({ children }) => {
     return totalAmount
   }
 
-  useEffect(()=> {
-    if(!token && localStorage.getItem('token')){
+  const getSingleProduct = async (productId)=> {
+    try {
+      const response = await axios.get(backendUrl + `/api/product/single/${productId}`,)
+      if (response.data.success) {
+        setSingleProduct(response.data.product)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+    }
+  }
+
+  useEffect(() => {
+    if (!token && localStorage.getItem('token')) {
       setToken(localStorage.getItem('token'))
       getUserCart(localStorage.getItem('token'))
     }
-  },[])
+  }, [])
 
-  const value = { products, isCartOpen, setIsCartOpen, currency, delivery_fee, search, setSearch, showSearch, setShowSearch, cartItems, setCartItems, addToCart, getCartCount, updateQuantity, category, setCategory, getCartAmount, navigate, backendUrl, token, setToken }
+  const value = { products, isCartOpen, singleProduct, getSingleProduct, setIsCartOpen, currency, delivery_fee, search, setSearch, showSearch, setShowSearch, cartItems, setCartItems, addToCart, getCartCount, updateQuantity, category, setCategory, getCartAmount, navigate, backendUrl, token, setToken }
 
   return (
     <ShopContext.Provider value={value}>

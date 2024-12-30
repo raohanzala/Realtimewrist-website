@@ -6,6 +6,8 @@ import { useCallback } from 'react';
 import { useContext } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import LoadingSpinner from './LoadingSpinner';
+import { CURRENCY } from '../utils/contants';
+import { formatAmount } from '../helpers';
 
 const SearchBar = ({ setShowSearch }) => {
   const [query, setQuery] = useState('');
@@ -84,13 +86,13 @@ const SearchBar = ({ setShowSearch }) => {
                 <div className="p-2 border-b cursor-pointer hover:bg-gray-100">
                   <div className="flex items-center">
                     <img
-                      src={product.image[0]}
+                      src={product.images[0]}
                       alt={product.name}
-                      className="w-12 h-12 object-cover rounded mr-4"
+                      className="w-12 h-12 object-cover rounded-sm mr-4"
                     />
                     <div>
                       <p className="font-semibold">{product.name}</p>
-                      <p className="text-sm text-gray-500">{product.newPrice}</p>
+                      <p className="text-sm text-gray-500">{CURRENCY}{formatAmount(product.newPrice)}</p>
                     </div>
                   </div>
                 </div>

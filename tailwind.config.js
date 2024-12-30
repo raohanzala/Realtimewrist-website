@@ -21,11 +21,11 @@ export default {
         }
       },
       colors: {
-        'primary': '#e2c765',
-        'white': '#ffffff', // Default white (optional)
-        'charcoal-gray': '#2e2e2e',
-        'button-cta': '#c7a647',
-        'link-icons': '#6574e2',
+        'primary-1': '#e2c765',
+        'primary-2': '#c7a647',
+        'dark-1': '#2e2e2e',
+        'dark-2': '#232323',
+        'text-color' : '#333',
       },
       fontFamily: {
         sans: ["Lato", "serif"],

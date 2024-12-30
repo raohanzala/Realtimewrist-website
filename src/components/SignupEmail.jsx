@@ -16,7 +16,7 @@ function SignupEmail() {
         </p>
         <form onSubmit={onSubmitHandler} className="flex gap-2" >
                 <input className="border p-3 rounded-sm flex w-[400px] focus:shadow-md outline-none transition-shadow duration-300 " required type="email" placeholder="Enter your email for newslatter" />
-                <button type="submit" className="bg-[#232323] border-none text-[#fff] rounded-sm py-2 px-4 font-semibold text-md shadow-sm">SignUp</button>
+                <button type="submit" className="bg-dark-2 border-none text-[#fff] rounded-sm py-2 px-4 font-semibold text-md shadow-sm">SignUp</button>
         </form>
         <p className="text-center text-gray-600 mt-4 text-sm">
           By signing up, you agree to our{" "}

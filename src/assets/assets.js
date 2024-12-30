@@ -11,6 +11,7 @@ import feedback_2 from './Feedbacks/feedback_3.jpeg'
 import feedback_3 from './Feedbacks/feedback_4.jpeg'
 import logo4 from './image.png'
 import notification_sound from './notification-sound.mp3'
+import categoryImg_2 from './categoryImg-2.jpeg'
 
 export const assets = {
     logo,
@@ -18,6 +19,7 @@ export const assets = {
     logo2,
     hero_img,
     hero_img2,
+    categoryImg_2,
     star_dull_icon,
     star_icon,
     rolex_yatch_master_1,

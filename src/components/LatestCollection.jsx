@@ -49,18 +49,18 @@ const LatestCollection = ({ }) => {
           
           {latestProducts.map((item, index) => (
             <SwiperSlide key={index}>
-              <ProductItem key={index} id={item._id} description={item.description} image={item.image} name={item.name} newPrice={item.newPrice} oldPrice={item.oldPrice} />
+              <ProductItem key={index} id={item._id} description={item.description} images={item.images} name={item.name} newPrice={item.newPrice} oldPrice={item.oldPrice} availability={item.availability} />
             </SwiperSlide>
             ))}
         </Swiper>
         <div className="custom-prev custom-prev opacity-0 z-50 group-hover:opacity-100 transition-opacity duration-400 ease-in-out">
-          <button className="absolute text-2xl z-30 text-primary  group-hover:translate-x-0 -translate-x-14 bg-white shadow-2xl border  p-1  rounded-full duration-500 ease-in-out -left-2 top-1/2 transform -translate-y-1/2  ">
+          <button className="absolute text-xl z-30 text-primary-1  group-hover:translate-x-0 -translate-x-14 bg-white shadow-2xl border  p-1  rounded-full duration-500 ease-in-out -left-2 top-1/2 transform -translate-y-1/2  ">
           <IoIosArrowBack />
 
           </button>
         </div>
         <div className=" custom-next custom-prev opacity-0 z-50 group-hover:opacity-100 transition-opacity duration-400 ease-in-out">
-          <button className="absolute text-2xl z-30 group-hover:translate-x-0 translate-x-14  bg-white shadow-2xl border p-1 rounded-full duration-500 ease-in-out -right-2 text-primary top-1/2 transform -translate-y-1/2 ">
+          <button className="absolute text-xl z-30 group-hover:translate-x-0 translate-x-14  bg-white shadow-2xl border p-1 rounded-full duration-500 ease-in-out -right-2 text-primary-1 top-1/2 transform -translate-y-1/2 ">
           <IoIosArrowForward />
           </button>
         </div>

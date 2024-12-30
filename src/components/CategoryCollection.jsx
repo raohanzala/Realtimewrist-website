@@ -15,7 +15,7 @@ const collections = [
   {
     id: 2,
     title: "Women's Collection",
-    image: assets.rolex_yatch_master_1,
+    image: assets.categoryImg_2,
     link: "/womens-collection",
   },
   {
@@ -41,8 +41,6 @@ const CategoryCollection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
             </div>
-
-
             <div className="absolute flex flex-col items-center justify-center bottom-4 left-[50%] top-[80%] -translate-x-[50%] -translate-y-[50%] text-white w-full">
               <div className='flex items-center mb-4'>
                 <h2 className='lg:text-xl text-gray-50 font-medium tracking-widest uppercase'>
@@ -52,7 +50,7 @@ const CategoryCollection = () => {
                   <FaChevronRight />
                 </div>
               </div>
-              <button className='border py-1 px-3 border-white hover:bg-white transition-all duration-100 hover:text-[#232323]'>Explore more</button>
+              <button className='border pt-[4px] pb-2 px-3 border-white hover:bg-white transition-all duration-100 hover:text-dark-2'>Explore more</button>
             </div>
           </Link>
         </div>

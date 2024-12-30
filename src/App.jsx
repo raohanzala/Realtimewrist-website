@@ -21,6 +21,16 @@ const NotFound = lazy(() => import('./components/NotFound')); // Assume you have
 
 const App = () => {
 
+  // const [loading, setLoading] = useState(true)
+  // const location = useLocation()
+
+  // useEffect(() => {
+  //   setLoading(true)
+  //   const timer = setTimeout(() => {
+  //     setLoading(false)
+  //   }, 700) 
+  //   return () => clearTimeout(timer)
+  // }, [location.pathname])
   const [loading, setLoading] = useState(true)
   const location = useLocation()
 
@@ -36,7 +46,7 @@ const App = () => {
     <div>
       <div>
         {loading ?  <LoadingLogo/>  
-       : ( <AppLayout>
+      :  ( <AppLayout>
 
           {/* <Suspense fallback={<LoadingLogo />}> */}
             <ErrorBoundary>
@@ -53,9 +63,10 @@ const App = () => {
                   <Route path='*' element={<NotFound/>} />
                 </Routes>
             </ErrorBoundary>
+          {/* </Suspense> */}
           </AppLayout>)
     
-            }
+           } 
       <Toaster
         position='top-center'
         gutter={12}

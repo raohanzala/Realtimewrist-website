@@ -21,7 +21,7 @@ const Hero = () => {
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000 }}
         loop={true}
-        className="relative w-full h-96 md:h-[400px] lg:h-[500px] overflow-hidden"
+        className="relative w-full h-screen overflow-hidden"
       >
         <SwiperSlide className="relative">
           <img src={assets.hero_img} alt="Slide 1" className="w-full h-full object-cover" />
@@ -43,12 +43,12 @@ const Hero = () => {
         </SwiperSlide>
       </Swiper>
       <div className="custom-prev custom-prev ">
-        <button className="absolute text-2xl z-30 text-[#cba135] bg-[rgba(0,0,0,0.5)]  p-[6px] rounded-full left-2 top-1/2 ">
+        <button className="absolute text-2xl z-30 text-primary-2  shadow-2xl   p-[6px] rounded-full left-2 top-[60%] ">
           <IoIosArrowBack />
         </button>
       </div>
       <div className=" custom-next custom-prev">
-        <button className="absolute text-2xl z-30  p-[6px] bg-[rgba(0,0,0,0.5)] rounded-full right-2 text-[#cba135] top-1/2 ">
+        <button className="absolute text-2xl z-30  p-[6px] rounded-full right-2 text-[#cba135] top-[60%] ">
           <IoIosArrowForward />
         </button>
       </div>

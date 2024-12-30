@@ -8,6 +8,7 @@ import SearchBar from './components/SearchBar';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import CartDrawer from './components/CartDrawer';
+import WhatsAppChat from './components/WhatsAppChat'
 
 const AppLayout = ({ children }) => {
 
@@ -33,6 +34,7 @@ const AppLayout = ({ children }) => {
         <ToastContainer />
         {children}
       </div>
+      <WhatsAppChat />   
       <Footer />
     </div>
   );

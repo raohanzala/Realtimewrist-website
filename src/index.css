@@ -11,6 +11,7 @@ a.active hr{
 
 body {
   @apply font-sans; 
+  color: #333;
 }
 
 

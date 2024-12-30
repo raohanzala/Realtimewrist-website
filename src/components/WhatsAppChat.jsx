@@ -13,13 +13,14 @@ const WhatsAppChat = () => {
       {/* 🔥 Floating WhatsApp Icon */}
       <button 
         onClick={toggleChat} 
-        className="fixed bottom-5 right-5 z-50 bg-gradient-to-r from-green-400 to-green-600 p-3 rounded-full shadow-xl hover:scale-110 transition-transform transform hover:rotate-12 hover:shadow-2xl"
+        className="fixed bottom-5 animate-scale-up right-5 z-50 bg-gradient-to-r from-green-400 to-green-600 p-3 rounded-full shadow-xl hover:scale-110 transition-transform transform hover:rotate-12 hover:shadow-2xl"
       >
+
         <img 
           src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
           alt="WhatsApp Chat" 
-          className="w-9 h-9 animate-pulse" 
-        />
+          className="w-8 h-8 animate-pulse" 
+          />
       </button>
 
       {/* 🔥 Popup Chat Window */}
@@ -33,7 +34,7 @@ const WhatsAppChat = () => {
               <h3 className="text-lg font-semibold">Chat with Us</h3>
               <p className="text-sm">We typically reply within a few minutes</p>
             </div>
-            <button onClick={toggleChat} className="text-white text-2xl hover:scale-125 transition-transform">&times;</button>
+            <button onClick={toggleChat} className="text-white text-2xl -translate-y-4 hover:scale-125 transition-transform">&times;</button>
           </div>
 
           {/* Chat Body */}
@@ -41,7 +42,7 @@ const WhatsAppChat = () => {
             <p className="text-sm mb-3">Hi there! 👋<br/>How can we help you today?</p>
             
             <a 
-              href="https://wa.me/923001234567?text=Hi!%20I%20need%20help%20with%20your%20products." 
+              href="https://wa.me/923278272361?text=Hi!%20I%20need%20help%20with%20your%20products." 
               target="_blank" 
               rel="noopener noreferrer" 
               className="block bg-gradient-to-r from-green-500 to-green-600 text-white text-center py-2 rounded-lg mt-3 hover:bg-green-700 transition-transform transform hover:scale-105"

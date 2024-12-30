@@ -15,7 +15,7 @@ const Breadcrumb = ({ breadcrumbs }) => {
          
           
           {index !== 0 && (
-            <AiOutlineRight className="w-4 h-4 text-gray-400" /> // Custom Separator Icon
+            <AiOutlineRight className="w-4 h-4 text-gray-400" /> 
           )}
 
           {breadcrumb.href ? (
@@ -26,7 +26,7 @@ const Breadcrumb = ({ breadcrumbs }) => {
               {breadcrumb.label}
             </Link>
           ) : (
-            <span className="text-primary font-medium">{breadcrumb.label}</span>
+            <span className="text-primary-1 font-medium">{breadcrumb.label}</span>
           )}
         </div>
       ))}

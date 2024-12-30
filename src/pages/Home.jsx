@@ -9,7 +9,6 @@ import SignupEmail from '../components/SignupEmail'
 import ServiceSection from '../components/ServiceSection'
 import CategoryCollection from '../components/CategoryCollection'
 import TestimonialSection from '../components/TestimonialSection'
-import WhatsAppChat from '../components/WhatsAppChat'
 
 const Home = () => {
 
@@ -18,8 +17,8 @@ const Home = () => {
       <Hero />
       <div className='max-w-screen-xl mx-auto px-5'>
         <Category />
-        <LatestCollection />
         <BestSeller />
+        <LatestCollection />
       </div>
       <CategoryCollection />
       <div className='max-w-screen-2xl mx-auto px-5'>
@@ -30,7 +29,6 @@ const Home = () => {
       <div className='px-5'>
         <NewsLetterBox />
       </div>
-      <WhatsAppChat />
     </div>
   )
 }

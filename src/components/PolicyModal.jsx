@@ -1,32 +1,32 @@
 import React, { useContext } from 'react'
 import { ShopContext } from '../context/ShopContext';
 import ReactDOM from 'react-dom';
+import Button from './Button'
+import toast from 'react-hot-toast';
 
+const PolicyModal = ({ isCheckboxChecked, setIsModalOpen, setIsCheckboxChecked, productId, handleCheckboxChange }) => {
 
-const PolicyModal = ({ isCheckboxChecked, setIsModalOpen, setIsCheckboxChecked, productId, size, handleCheckboxChange }) => {
-
-console.log(productId, 'ID')
   const { addToCart } = useContext(ShopContext)
 
   const handleContinueClick = () => {
     if (isCheckboxChecked) {
-      addToCart(productId, size);
+      addToCart(productId);
       setIsModalOpen(false);
-      setIsCheckboxChecked(false);
+      setIsCheckboxChecked(true);
     } else {
-      alert('Please agree to the terms and conditions before continuing.');
+      toast.error('Please agree to the terms and conditions before continuing.');
     }
   };
 
   return ReactDOM.createPortal(
     <div>
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+        className="fixed inset-0 w-full h-full bg-black bg-opacity-50 z-40"
         onClick={() => setIsModalOpen(false)}
       ></div>
 
       <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg shadow-lg p-8 w-11/12 max-w-md relative">
+        <div className="bg-white rounded shadow-lg p-8 w-11/12 max-w-md relative">
           <h2 className="text-xl font-bold mb-4">Important Information</h2>
           <p className="text-sm text-gray-700">
             Please note that by adding this product to the cart, you are agreeing to the following terms:
@@ -37,7 +37,6 @@ console.log(productId, 'ID')
             <li>You can return or exchange this product within 7 days.</li>
           </ul>
 
-          {/* Checkbox for user agreement */}
           <div className="mt-6">
             <label className="flex items-center">
               <input
@@ -50,20 +49,21 @@ console.log(productId, 'ID')
             </label>
           </div>
 
-          {/* Modal Footer Buttons */}
           <div className="flex justify-end gap-4 mt-6">
-            <button
+            <Button
               onClick={() => setIsModalOpen(false)}
-              className="bg-gray-300 text-gray-800 py-2 px-4 rounded hover:bg-gray-400"
+              variant='primary'
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleContinueClick}
-              className={`py-2 px-4 rounded text-white ${isCheckboxChecked ? 'bg-primary ' : 'bg-gray-500 cursor-not-allowed'}`}
+              disabled={!isCheckboxChecked}
+              variant='secondary'
+              // className={`py-2 px-4 rounded text-white ${isCheckboxChecked ? 'bg-primary ' : 'bg-gray-500 cursor-not-allowed'}`}
             >
               Agree & Continue
-            </button>
+            </Button>
           </div>
         </div>
       </div>

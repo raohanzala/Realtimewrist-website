@@ -12,7 +12,7 @@ const Contact = () => {
       </div>
 
       <div className='my-10 flex flex-col justify-center md:flex-row gap-10 mb-28'>
-          <img src={assets.logo4} className='w-full md:max-w-[480px] py-24 px-8 bg-[#232323]' alt="" />
+          <img src={assets.logo4} className='w-full md:max-w-[480px] py-24 px-8 bg-dark-2' alt="" />
         <div className='flex flex-col justify-center items-start gap-6'>
           <p className='font-semibold text-xl text-gray-600'>Our Store</p>
           <p className='text-gray-500'>74400 Saddar <br /> CO-Operative Market, karachi</p>

@@ -16,11 +16,11 @@ const Collection = () => {
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relevant');
 
-  const [pageProducts, setPageProducts] = useState([]); // All loaded products
-  const [page, setPage] = useState(1); // Current page of products
-  const [isLoading, setIsLoading] = useState(false); // Loading indicator for infinite scroll
-  const [hasMore, setHasMore] = useState(true); // Flag to check if there are more products to load
-  const loaderRef = useRef(null); // Reference for infinite scroll detection
+  const [pageProducts, setPageProducts] = useState([]); 
+  const [page, setPage] = useState(1); 
+  const [isLoading, setIsLoading] = useState(false); 
+  const [hasMore, setHasMore] = useState(true); 
+  const loaderRef = useRef(null); 
 
   const toggleCategory = (e) => {
     const { value } = e.target;
@@ -82,7 +82,6 @@ const Collection = () => {
 
       console.log(response, 'paginatesd')
 
-      // Filter out duplicate products
       setPageProducts((prevProducts) => {
         const combinedProducts = [...prevProducts, ...newProducts];
         const uniqueProducts = combinedProducts.filter(
@@ -91,9 +90,8 @@ const Collection = () => {
         return uniqueProducts;
       });
 
-      // Correctly check pagination data
       if (response.data.pagination.currentPage >= response.data.pagination.totalPages) {
-        setHasMore(false); // No more pages to load
+        setHasMore(false); 
       }
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -138,7 +136,6 @@ const Collection = () => {
   if (!filterProducts) {
     return <LoadingSpinner />
   }
-
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t max-w-[1280px] mx-auto px-5'>
@@ -200,8 +197,9 @@ const Collection = () => {
                 newPrice={item.newPrice}
                 oldPrice={item.oldPrice}
                 id={item._id}
-                image={item.image}
+                images={item.images}
                 size={item.sizes}
+                availability={item.availability}
               />
             ))
           ) }
