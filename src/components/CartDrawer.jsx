@@ -112,9 +112,9 @@ const CartDrawer = () => {
             )}
           </div>
 
-          <div className="p-4 border-t mt-auto">
+          <div className="sm:p-4 p-2 border-t mt-auto">
             <CartTotal isHeading={false} />
-            <div className="flex gap-4 mt-4">
+            <div className="flex sm:gap-4 gap-2 mt-4">
               <Button variant='secondary' className={`w-full relative`} onClick={handleViewCart} startIcon={<IoMdCart className='text-xl' />}>
                   View Cart
                 <p className='absolute right-[-5px] -top-1 w-4 text-center leading-4 bg-[red] text-white aspect-square rounded-full text-[8px]'>{getCartCount()}</p>
