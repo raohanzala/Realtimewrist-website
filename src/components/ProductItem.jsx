@@ -39,7 +39,7 @@ const ProductItem = memo(({ id, description, size, images, name, newPrice, oldPr
     <>
       <Link to={`/product/${id}`}>
         <div
-          className="flex relative w-full h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded"
+          className="flex relative w-full hover:shadow-md h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >

@@ -17,8 +17,8 @@ const Home = () => {
       <Hero />
       <div className='max-w-screen-xl mx-auto px-5'>
         <Category />
-        <BestSeller />
         <LatestCollection />
+        <BestSeller />
       </div>
       <CategoryCollection />
       <div className='max-w-screen-2xl mx-auto px-5'>

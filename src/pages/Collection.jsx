@@ -36,6 +36,8 @@ const Collection = () => {
     );
   };
 
+  console.log(category, subCategory, 'CATE')
+
   const applyFilter = () => {
     let productsCopy = [...pageProducts];
 
@@ -74,7 +76,6 @@ const Collection = () => {
   };
 
   const fetchProducts = async () => {
-    // if (isLoading) return; // Stop duplicate calls
     setIsLoading(true);
     try {
       const response = await axios.get(backendUrl + `/api/product/paginated-list?page=${page}&limit=10`);
@@ -95,8 +96,8 @@ const Collection = () => {
       }
     } catch (error) {
       console.error('Error fetching products:', error);
-    } finally {
-      setIsLoading(false);
+    } finally{
+      setIsLoading(false)
     }
   };
 
@@ -143,7 +144,8 @@ const Collection = () => {
       <div className="min-w-60 ">
         <p onClick={() => setShowFilter(prev => !prev)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>
           FILTERS
-          <img src={assets.dropdown_icon} className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} alt="Dropdown Icon" />
+          {/* <img src={assets.dropdown_icon} className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} alt="Dropdown Icon" /> */}
+          <p className={`h-3 ${showFilter ? 'rotate-90' : ''}`}>^</p>
         </p>
         {/* Category Filter */}
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'}`}>
@@ -178,9 +180,9 @@ const Collection = () => {
       </div>
 
       <div className='flex-1'>
-        <div className="flex justify-between text-base sm:text-2xl mb-4">
+        <div className="flex justify-between items-center text-base sm:text-2xl">
           <Title text1={'ALL'} text2={'COLLECTIONS'} />
-          <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2'>
+          <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-300 py-3 focus:outline-none focus:ring-1 focus:ring-primary-1 rounded text-sm px-2'>
             <option value="relevant">Sort by : Relevant</option>
             <option value="low-high">Sort by : Low to High</option>
             <option value="high-low">Sort by : High to Low</option>
@@ -188,7 +190,7 @@ const Collection = () => {
         </div>
 
         <div className='relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-          {filterProducts.length > 0 && (
+           {isLoading ? <ProductSkeleton/> : filterProducts.length > 0 && (
             filterProducts.map((item) => (
               <ProductItem
                 key={item._id}
@@ -214,5 +216,36 @@ const Collection = () => {
     </div>
   );
 };
+
+const ProductSkeleton = () => {
+  const skeletons = Array(10).fill(0); // You can adjust the number of skeletons here
+
+  return (
+    <>
+      {skeletons.map((_, index) => (
+         <div key={index} className="flex relative w-full hover:shadow-md h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded animate-pulse">
+         
+         <div className="relative overflow-hidden aspect-w-1 aspect-h-1 w-full">
+          
+           <div className="absolute w-full h-full object-cover bg-gray-300"></div>
+         </div>
+   
+         <div className="text-center relative py-3 px-2 z-10">
+      
+           <div className="h-4 bg-gray-200 rounded-sm w-32 mb-1 mx-auto"></div>
+   
+           <div className="h-3 bg-gray-200 rounded-sm w-24 mb-2 mx-auto"></div>
+   
+           <div className="flex gap-2 justify-center items-center mt-2">
+             <div className="h-4 bg-gray-200 rounded-sm w-16"></div>
+             <div className="h-4 bg-gray-200 rounded-sm w-24"></div>
+           </div>
+         </div>
+       </div>
+      ))}
+    </>
+  );
+};
+
 
 export default Collection;

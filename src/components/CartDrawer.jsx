@@ -81,7 +81,7 @@ const CartDrawer = () => {
 
           <div className="flex-1 overflow-y-auto p-4">
             {cartData.length === 0 ? (
-              <div className="py-20 flex gap-1 items-center justify-center text-gray-300">
+              <div className="py-20 flex gap-1 h-full items-center justify-center text-gray-300">
                 <IoMdCart size={30}/>
                 <p className="text-xl ">Your cart is empty</p>
               </div>

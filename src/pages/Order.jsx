@@ -13,6 +13,7 @@ const Order = () => {
     const {backendUrl, token, currency} = useContext(ShopContext)
 
     const [orderData, setOrderData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     const loadOrderData = async ()=> {
 
@@ -40,6 +41,8 @@ const Order = () => {
 
       } catch (error) {
         console.log(error)
+      }finally{
+        setIsLoading(false)
       }
 
     }
@@ -59,11 +62,11 @@ const Order = () => {
 </div>
 
 <div>
-  {orderData.length > 0 ? orderData.map((item, index)=>(
+  {isLoading ? <SkeletonRow/> : orderData.length > 0 ? orderData.map((item, index)=>(
 
     <div key={item._id} className='py-4 border-t border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
        <div className='flex items-start gap-6 text-sm'>
-        <img  className='size-16 object-cover rounded-sm' src={item?.images[0]} alt="" />
+        <img  className='size-16 object-cover rounded-sm' src={item?.images?.[0]} alt="" />
         <div>
           <p className='sm:text-base font-medium'>{item.name}</p>
           <div className='flex items-center gap-3 text-base text-gray-700'>
@@ -93,5 +96,44 @@ const Order = () => {
     </div>
   )
 }
+
+const SkeletonRow = () => {
+
+  const skeletons = Array(3).fill(0);
+
+  return (
+    <>
+    {skeletons.map((_, index) => (
+      <div key={index} className="py-4 border-t border-b text-gray-300 animate-pulse flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      {/* Image Placeholder */}
+      <div className="flex items-start gap-6">
+        <div className="w-16 h-16 bg-gray-200 rounded-sm"></div>
+        <div>
+          {/* Text placeholders */}
+          <div className="h-4 bg-gray-200 rounded-sm w-36 mb-2"></div>
+          <div className="flex items-center gap-3">
+            <div className="h-4 bg-gray-200 rounded-sm w-16"></div>
+            <div className="h-4 bg-gray-200 rounded-sm w-24"></div>
+          </div>
+          <div className="flex gap-2 mt-2">
+            <div className="h-4 bg-gray-200 rounded-sm w-28"></div>
+            <div className="h-4 bg-gray-200 rounded-sm w-32"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Status and Button Placeholder */}
+      <div className="md:w-1/2 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 bg-gray-200 rounded-full"></div>
+          <div className="h-4 bg-gray-200 rounded-sm w-24"></div>
+        </div>
+        <div className="h-8 bg-gray-200 rounded-sm w-28"></div>
+      </div>
+    </div>))}
+      </>
+  );
+};
+
 
 export default Order

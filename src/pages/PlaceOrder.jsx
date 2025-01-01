@@ -14,19 +14,24 @@ const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
   phone: Yup.string()
     .required('Phone number is required')
-    .matches(/^\d+$/, 'Phone number must be numeric'),
+    .matches(/^\d+$/, 'Phone number must be numeric')
+    .trim(),
   whatsapp: Yup.string()
     .required('WhatsApp number is required')
-    .matches(/^\d+$/, 'WhatsApp number must be numeric'),
-  email: Yup.string().email('Invalid email address').required('Email is required'),
-  street: Yup.string().required('Street is required'),
+    .matches(/^\d+$/, 'WhatsApp number must be numeric')
+    .trim(),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required'),
   city: Yup.string().required('City is required'),
   zipcode: Yup.string()
     .required('Zipcode is required')
-    .matches(/^\d+$/, 'Zipcode must be numeric'),
+    .matches(/^\d+$/, 'Zipcode must be numeric')
+    .trim(),
   country: Yup.string().required('Country is required'),
-  note: Yup.string(),
+  note: Yup.string().nullable(), // Allow empty value
 });
+
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState('cod');
@@ -61,7 +66,9 @@ const PlaceOrder = () => {
     }
   };
 
-  const onSubmitHandler = async (values) => {
+  const onSubmitHandler = async (values) => {  
+    console.log('onSubmitHandler triggered'); // Debug log
+
     if (cartItems.length === 0) {
       toast.error('Your cart is empty');
       return;
@@ -121,12 +128,16 @@ const PlaceOrder = () => {
         note: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={onSubmitHandler}
+      onSubmit={(values) => {
+        console.log('Formik onSubmit called', values); // Debug
+        onSubmitHandler(values);
+      }}
     >
-      {({ values, handleChange, handleSubmit }) => (
+      {({ values, handleChange, errors, handleSubmit }) => (
+        <>
         <Form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] justify-between gap-10 sm:gap-5 pt-5 px-5 sm:pt-14 min-h-[80vh] border-t max-w-[1280px] mx-auto"
+          className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] justify-between gap-10 sm:gap-5 pt-5 px-5 sm:pt-14 border-t max-w-[1280px] mx-auto"
         >
           {/* --------- Left Side ----------- */}
           <div className="flex flex-col w-full my-5">
@@ -153,14 +164,14 @@ const PlaceOrder = () => {
                 name="phone"
                 value={values.phone}
                 onChange={handleChange}
-                placeholder="Enter phone number"
+                placeholder="Phone number"
               />
               <Input
                 type="number"
                 name="whatsapp"
                 value={values.whatsapp}
                 onChange={handleChange}
-                placeholder="Enter WhatsApp number"
+                placeholder="WhatsApp number"
               />
             </div>
             <Input
@@ -226,13 +237,14 @@ const PlaceOrder = () => {
               </div>
 
               <div className="flex justify-end mt-8">
-                <button type="submit" variant="primaryBig">
+                <Button onClick={()=> console.log('trig')} type="submit" variant="primaryBig">
                   PLACE ORDER
-                </button>
+                </Button>
               </div>
             </div>
           </div>
         </Form>
+            </>
       )}
     </Formik>
   );
