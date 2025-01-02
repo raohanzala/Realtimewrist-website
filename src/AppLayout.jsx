@@ -15,7 +15,6 @@ const AppLayout = ({ children }) => {
 
   const [showSearch, setShowSearch] = useState(false);
   useEffect(() => {
-    // Apply no-scroll class to body when search bar is shown
     if (showSearch) {
       document.body.classList.add('no-scroll');
     } else {
@@ -30,7 +29,7 @@ const AppLayout = ({ children }) => {
       <CartDrawer />
       {showSearch && <SearchBar  setShowSearch={setShowSearch}/>}
 
-      <div className="pt-[125px] pb-24 overflow-x-hidden w-[100%]">
+      <div className="pt-[125px] min-h-screen pb-24 overflow-x-hidden w-[100%]">
         <ToastContainer />
         {children}
       </div>

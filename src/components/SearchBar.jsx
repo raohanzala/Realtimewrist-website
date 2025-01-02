@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useCallback } from 'react';
 import { useContext } from 'react';
 import { ShopContext } from '../context/ShopContext';
-import LoadingSpinner from './LoadingSpinner';
+import Spinner from './Spinner';
 import { CURRENCY } from '../utils/contants';
 import { formatAmount } from '../helpers';
 
@@ -15,7 +15,7 @@ const SearchBar = ({ setShowSearch }) => {
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef(null);
 
-  const {backendUrl} = useContext(ShopContext)
+  const { backendUrl } = useContext(ShopContext)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -71,13 +71,13 @@ const SearchBar = ({ setShowSearch }) => {
           />
           <button
             onClick={() => setShowSearch(false)}
-            className="text-2xl hover:text-[#cba135] text-gray-500"
+            className="text-xl hover:text-text-color text-gray-500"
           >
             <IoMdClose />
           </button>
         </div>
 
-        {isLoading && <div className='py-6'> <LoadingSpinner className='size-6'/></div>}
+        {isLoading && <div className='py-6 flex items-center justify-center'> <Spinner variant={'secondary'} /></div>}
 
         {filteredProducts.length > 0 && !isLoading && (
           <div className="mt-4 max-h-60 overflow-y-auto">

@@ -5,9 +5,7 @@ import { Toaster } from 'react-hot-toast'
 import AppLayout from './AppLayout'
 import LoadingLogo from './components/LoadingLogo'
 import ErrorBoundary from './components/ErrorBoundary'
-import LoadingSpinner from './components/LoadingSpinner'
 
-// Lazy loading components for better performance
 const Home = lazy(() => import('./pages/Home'));
 const Collection = lazy(() => import('./pages/Collection'));
 const About = lazy(() => import('./pages/About'));
@@ -48,7 +46,7 @@ const App = () => {
         {loading ?  <LoadingLogo/>  
       :  ( <AppLayout>
 
-          {/* <Suspense fallback={<LoadingLogo />}> */}
+          <Suspense fallback={<LoadingLogo />}>
             <ErrorBoundary>
                 <Routes>
                   <Route path='/' element={<Home />} />
@@ -63,7 +61,7 @@ const App = () => {
                   <Route path='*' element={<NotFound/>} />
                 </Routes>
             </ErrorBoundary>
-          {/* </Suspense> */}
+          </Suspense>
           </AppLayout>)
     
            } 

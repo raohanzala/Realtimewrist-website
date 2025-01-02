@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import Spinner from '../components/Spinner';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
@@ -133,7 +134,7 @@ const PlaceOrder = () => {
         onSubmitHandler(values);
       }}
     >
-      {({ values, handleChange, errors, handleSubmit }) => (
+      {({ values, handleChange, errors, isSubmitting, handleSubmit }) => (
         <>
         <Form
           onSubmit={handleSubmit}
@@ -205,21 +206,19 @@ const PlaceOrder = () => {
               onChange={handleChange}
               rows={4}
               className="border border-gray-300 focus:border-primary-1 focus:outline-none rounded-sm py-1.5 px-3.5 w-full"
-              placeholder="Additional Information about your order or product."
+              placeholder="Additional Information about your order or product (optional)."
             ></textarea>
                         <ErrorMessage name="note" component="div" className="text-red-500 text-sm" />
 
               </div>
           </div>
 
-          {/* ------------ Right Side ------------------- */}
           <div className="mt-8">
             <div className="mt-8">
               <CartTotal />
             </div>
             <div className="mt-12">
               <Title text1={"PAYMENT"} text2={"METHOD"} />
-              {/* ------------ Payment Method Selection ------------- */}
               <div className="flex gap-3 flex-col lg:flex-row">
                 <div
                   onClick={() => setMethod('cod')}
@@ -237,8 +236,8 @@ const PlaceOrder = () => {
               </div>
 
               <div className="flex justify-end mt-8">
-                <Button onClick={()=> console.log('trig')} type="submit" variant="primaryBig">
-                  PLACE ORDER
+                <Button type="submit" variant="primaryBig">
+                  {!isSubmitting ? "PLACE ORDER" : <Spinner />}
                 </Button>
               </div>
             </div>

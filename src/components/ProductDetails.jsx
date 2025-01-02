@@ -3,7 +3,6 @@ import { ShopContext } from "../context/ShopContext";
 import { BsWhatsapp } from "react-icons/bs";
 import { formatAmount } from "../helpers";
 import { CURRENCY } from "../utils/contants";
-import LoadingSpinner from "./LoadingSpinner";
 import Button from "./Button";
 
 const ProductDetails = ({ productData, handleAddToCartClick }) => {
@@ -44,6 +43,7 @@ const ProductDetails = ({ productData, handleAddToCartClick }) => {
           variant='primaryBig'
         >
          ADD TO CART
+          {/* {!isSubmitting ? (productToEdit ? "Update Product" : "Add Product") : <SpinnerMini />} */}
         </Button>
         <Button variant="secondary"  className="bg-primary-1 py-3 px-8 text-sm uppercase text-white">
           Order Now

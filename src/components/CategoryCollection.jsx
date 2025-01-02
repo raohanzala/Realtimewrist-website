@@ -10,19 +10,19 @@ const collections = [
     id: 1,
     title: "Men's Collection",
     image: assets.rolex_yatch_master_1,
-    link: "/mens-collection",
+    link: "/mens",
   },
   {
     id: 2,
     title: "Women's Collection",
     image: assets.categoryImg_2,
-    link: "/womens-collection",
+    link: "/womens",
   },
   {
     id: 3,
-    title: "Kid's Collection",
+    title: "All Collection",
     image: assets.rolex_yatch_master_1,
-    link: "/kids-collection",
+    link: "/all",
   },
 ];
 

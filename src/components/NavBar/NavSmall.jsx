@@ -19,22 +19,26 @@ const NavSmall = ({ visible, setVisible }) => {
 
   return (
     <div
-    className={`fixed inset-0 bg-blackbg-opacity-50 z-[9999] transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+    className={`fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-[9999] w-full h-full  transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} 
+    onClick={() => setVisible(false)}
+    >
 
-    <div className={`absolute top-0 right-0 bottom-0 h-screen z-[9999] overflow-hidden bg-[#232323] transition-all ${visible ? 'max-w-[300px] w-full' : 'w-0'}`}>
+    <div className={`absolute top-0 right-0 shadow-xl max-w-[300px] w-full h-screen z-[9999] overflow-hidden bg-dark-2 transition-all ${visible ? 'translate-x-0' : 'translate-x-full'}`}
+    onClick={(e)=> e.stopPropagation()}
+    >
 
       <div className='flex flex-col text-gray-50'>
-        <div onClick={() => setVisible(false)} className='flex items-center gap-1 p-3 cursor-pointer'>
+        <div onClick={() => setVisible(false)} className='flex items-center gap-1 p-3 cursor-pointer mb-5'>
           
           <IoChevronBackSharp className='' />
           <p>Back</p>
         </div>
-        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-t border-[hsla(0,0%,100%,.2)]' to='/'>HOME</NavLink>
-        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-t border-[hsla(0,0%,100%,.2)]' to='/collection'>ALL COLLECTION</NavLink>
-        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-t border-[hsla(0,0%,100%,.2)]' to='/midrange'>MIDRANGE</NavLink>
-        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-t border-[hsla(0,0%,100%,.2)]' to='/original'>ORIGINAL</NavLink>
-        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-t border-[hsla(0,0%,100%,.2)]' to='/about'>ABOUT</NavLink>
-        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-t border-[hsla(0,0%,100%,.2)]' to='/contact'>CONTACT</NavLink>
+        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-b border-[hsla(0,0%,100%,.2)]' to='/'>HOME</NavLink>
+        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-b border-[hsla(0,0%,100%,.2)]' to='/collection'>ALL COLLECTION</NavLink>
+        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-b border-[hsla(0,0%,100%,.2)]' to='/midrange'>MIDRANGE</NavLink>
+        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-b border-[hsla(0,0%,100%,.2)]' to='/original'>ORIGINAL</NavLink>
+        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-b border-[hsla(0,0%,100%,.2)]' to='/about'>ABOUT</NavLink>
+        <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border-b border-[hsla(0,0%,100%,.2)]' to='/contact'>CONTACT</NavLink>
       </div>
     </div>
     </div>

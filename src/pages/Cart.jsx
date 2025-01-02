@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title'
-import { assets } from '../assets/assets'
-import { Link } from 'react-router-dom';
 import CartTotal from '../components/CartTotal'
 import toast from 'react-hot-toast'
 import { MdOutlineCancel } from "react-icons/md";
@@ -15,7 +13,7 @@ import { formatAmount } from '../helpers';
 
 const Cart = () => {
 
-  const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext)
+  const { products, cartItems, updateQuantity, navigate } = useContext(ShopContext)
   const [cartData, setCartData] = useState([])
 
   useEffect(() => {
@@ -39,8 +37,6 @@ const Cart = () => {
     }
 
   }, [cartItems, products])
-
-  console.log(cartData)
 
   const handleCheckout = ()=> {
       toast.dismiss()
@@ -75,12 +71,10 @@ const Cart = () => {
                       <p className='text-xs sm:text-lg font-semibold uppercase'>{productData.name}</p>
                       <div className='flex items-center gap-5 mt-2'>
                         <p>{CURRENCY}{formatAmount(productData.newPrice)}</p>
-                        {/* {productData.sizes.length > 0 && <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50'>{item.size}</p>} */}
                       </div>
                     </div>
                   </div>
                   <QuantityInput item={item} />
-                  {/* <img onClick={() => updateQuantity(item._id, item.size, 0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src={assets.bin_icon} alt="" /> */}
                   <div onClick={() => updateQuantity(item._id, item.size, 0)} className='cursor-pointer'>
                     <MdOutlineCancel size={25} className='opacity-30 hover:opacity-90' />
                   </div>

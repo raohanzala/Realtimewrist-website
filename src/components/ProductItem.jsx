@@ -39,7 +39,7 @@ const ProductItem = memo(({ id, description, size, images, name, newPrice, oldPr
     <>
       <Link to={`/product/${id}`}>
         <div
-          className="flex relative w-full hover:shadow-md h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded"
+          className="flex relative w-full h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -89,7 +89,7 @@ const ProductItem = memo(({ id, description, size, images, name, newPrice, oldPr
               <IoMdCart className='text-xl' />  Add to cart
             </button>
             <p className="text-sm tracking-wide font-semibold uppercase mb-1 text-gray-800 truncate">{productName}</p>
-            <p className="text-xs text-gray-500 hover:opacity-65">{shortDescription}</p>
+            <p className="text-xs text-gray-500 hover:underline">{shortDescription}</p>
             <div className="flex gap-2 justify-center items-center mt-2">
               {oldPrice && oldPrice > newPrice && (
                 <p className="text-xs sm:text-sm text-gray-400 line-through">

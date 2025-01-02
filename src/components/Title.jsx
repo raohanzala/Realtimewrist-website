@@ -1,10 +1,8 @@
 const Title = ({ text1, text2 }) => {
   return (
-    <div className="mb-3 sm:mb-6">
-      <p className="text-xl sm:text-2xl text-gray-800">
+      <h1 className="text-xl sm:text-2xl text-gray-800">
         {text1} <span className="font-semibold">{text2}</span>
-      </p>
-    </div>
+      </h1>
   );
 };
 

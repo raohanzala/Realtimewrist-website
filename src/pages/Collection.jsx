@@ -3,7 +3,7 @@ import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
 import Title from '../components/Title';
 import ProductItem from '../components/ProductItem';
-import LoadingSpinner from '../components/LoadingSpinner';
+import Spinner from '../components/Spinner';
 import { useRef } from 'react';
 import axios from 'axios'
 
@@ -16,11 +16,11 @@ const Collection = () => {
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relevant');
 
-  const [pageProducts, setPageProducts] = useState([]); 
-  const [page, setPage] = useState(1); 
-  const [isLoading, setIsLoading] = useState(false); 
-  const [hasMore, setHasMore] = useState(true); 
-  const loaderRef = useRef(null); 
+  const [pageProducts, setPageProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef(null);
 
   const toggleCategory = (e) => {
     const { value } = e.target;
@@ -92,11 +92,11 @@ const Collection = () => {
       });
 
       if (response.data.pagination.currentPage >= response.data.pagination.totalPages) {
-        setHasMore(false); 
+        setHasMore(false);
       }
     } catch (error) {
       console.error('Error fetching products:', error);
-    } finally{
+    } finally {
       setIsLoading(false)
     }
   };
@@ -135,13 +135,13 @@ const Collection = () => {
   }, [sortType]);
 
   if (!filterProducts) {
-    return <LoadingSpinner />
+    return <Spinner />
   }
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t max-w-[1280px] mx-auto px-5'>
       {/* Filter Options */}
-      <div className="min-w-60 ">
+      <div className=" min-w-48 lg:min-w-60 ">
         <p onClick={() => setShowFilter(prev => !prev)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>
           FILTERS
           {/* <img src={assets.dropdown_icon} className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} alt="Dropdown Icon" /> */}
@@ -180,9 +180,9 @@ const Collection = () => {
       </div>
 
       <div className='flex-1'>
-        <div className="flex justify-between items-center text-base sm:text-2xl">
+        <div className="flex justify-between items-center mb-5 text-base sm:text-2xl">
           <Title text1={'ALL'} text2={'COLLECTIONS'} />
-          <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-300 py-3 focus:outline-none focus:ring-1 focus:ring-primary-1 rounded text-sm px-2'>
+          <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-300 py-3 focus:outline-none focus:ring-2 focus:ring-primary-1 rounded text-sm px-2'>
             <option value="relevant">Sort by : Relevant</option>
             <option value="low-high">Sort by : Low to High</option>
             <option value="high-low">Sort by : High to Low</option>
@@ -190,7 +190,7 @@ const Collection = () => {
         </div>
 
         <div className='relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-           {isLoading ? <ProductSkeleton/> : filterProducts.length > 0 && (
+          {isLoading ? <ProductSkeleton /> : filterProducts.length > 0 && (
             filterProducts.map((item) => (
               <ProductItem
                 key={item._id}
@@ -204,11 +204,10 @@ const Collection = () => {
                 availability={item.availability}
               />
             ))
-          ) }
+          )}
         </div>
-
-        <div className='py-5'>
-          {/* {isLoading ? <LoadingSpinner /> : <p className='text-center'>No products found.</p>} */}
+        <div className='py-10 flex justify-center items-end'>
+          {isLoading ? <Spinner variant={'secondary'} size={30} /> : <p className='text-center'>No products found.</p>}
         </div>
         <div ref={loaderRef} className='h-10 w-full '></div>
         {!hasMore && <p className='text-center text-gray-500 mt-4'>No more products to load</p>}
@@ -218,30 +217,26 @@ const Collection = () => {
 };
 
 const ProductSkeleton = () => {
-  const skeletons = Array(10).fill(0); // You can adjust the number of skeletons here
+  const skeletons = Array(10).fill(0);
 
   return (
     <>
       {skeletons.map((_, index) => (
-         <div key={index} className="flex relative w-full hover:shadow-md h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded animate-pulse">
-         
-         <div className="relative overflow-hidden aspect-w-1 aspect-h-1 w-full">
-          
-           <div className="absolute w-full h-full object-cover bg-gray-300"></div>
-         </div>
-   
-         <div className="text-center relative py-3 px-2 z-10">
-      
-           <div className="h-4 bg-gray-200 rounded-sm w-32 mb-1 mx-auto"></div>
-   
-           <div className="h-3 bg-gray-200 rounded-sm w-24 mb-2 mx-auto"></div>
-   
-           <div className="flex gap-2 justify-center items-center mt-2">
-             <div className="h-4 bg-gray-200 rounded-sm w-16"></div>
-             <div className="h-4 bg-gray-200 rounded-sm w-24"></div>
-           </div>
-         </div>
-       </div>
+        <div key={index} className="flex relative w-full hover:shadow-md h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded animate-pulse">
+
+          <div className="relative overflow-hidden aspect-w-1 aspect-h-1 w-full">
+            <div className="absolute w-full h-full object-cover bg-gray-300"></div>
+          </div>
+
+          <div className="text-center relative py-3 px-2 z-10">
+            <div className="h-4 bg-gray-200 rounded-sm w-32 mb-1 mx-auto"></div>
+            <div className="h-3 bg-gray-200 rounded-sm w-24 mb-2 mx-auto"></div>
+            <div className="flex gap-2 justify-center items-center mt-2">
+              <div className="h-4 bg-gray-200 rounded-sm w-16"></div>
+              <div className="h-4 bg-gray-200 rounded-sm w-24"></div>
+            </div>
+          </div>
+        </div>
       ))}
     </>
   );

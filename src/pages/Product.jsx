@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import RelatedProducts from '../components/RelatedProducts';
-import LoadingSpinner from '../components/LoadingSpinner';
+import Spinner from '../components/Spinner';
 import Breadcrumb from '../components/Breadcrumb'
 import PolicyModal from '../components/PolicyModal';
 import 'react-image-lightbox/style.css';
@@ -56,7 +56,7 @@ const Product = () => {
   }, [singleProduct]);
 
   if (!singleProduct) {
-    return <LoadingSpinner />;
+    return <Spinner />;
   }
 
   return (

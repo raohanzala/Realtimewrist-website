@@ -73,6 +73,10 @@ body {
   background-color: #cba135 !important; 
 } */
 
+.swiper-pagination-bullet {
+  background-color: #cba135 !important; 
+}
+
 
 .no-scroll {
   overflow: hidden;
