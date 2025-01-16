@@ -8,6 +8,53 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-coverflow';
+import { assets } from '../assets/assets';
+
+
+const testimonials = [
+  {
+    image : assets.categoryImg_2,
+    review : '“I absolutely love the product! It exceeded my expectations in both quality”',
+    name : 'Kashif Ameen',
+    marks : 2,
+  },
+  {
+    image : assets.categoryImg_2,
+    review : '“I absolutely love the product! It exceeded my expectations in both quality”',
+    name : 'Kashif Ameen',
+    marks : 2,
+  },
+  {
+    image : assets.categoryImg_2,
+    review : '“I absolutely love the product! It exceeded my expectations in both quality”',
+    name : 'Kashif Ameen',
+    marks : 2,
+  },
+  {
+    image : assets.categoryImg_2,
+    review : '“I absolutely love the product! It exceeded my expectations in both quality”',
+    name : 'Kashif Ameen',
+    marks : 2,
+  },
+  {
+    image : assets.categoryImg_2,
+    review : '“I absolutely love the product! It exceeded my expectations in both quality”',
+    name : 'Kashif Ameen',
+    marks : 2,
+  },
+  {
+    image : assets.categoryImg_2,
+    review : '“I absolutely love the product! It exceeded my expectations in both quality”',
+    name : 'Kashif Ameen',
+    marks : 2,
+  },
+  {
+    image : assets.categoryImg_2,
+    review : '“I absolutely love the product! It exceeded my expectations in both quality”',
+    name : 'Kashif Ameen',
+    marks : 2,
+  },
+]
 
 const TestimonialSection = () => {
   return (
@@ -44,9 +91,9 @@ const TestimonialSection = () => {
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop={true}
         >
-          {[...Array(8)].map((_, index) => (
+          {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
-              <TestimonialCard />
+              <TestimonialCard testimonial={testimonial} />
             </SwiperSlide>
           ))}
         </Swiper>

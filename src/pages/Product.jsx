@@ -41,11 +41,9 @@ const Product = () => {
   // const offer = useMemo(() => Math.floor(((productData.oldPrice - productData.newPrice) / productData.oldPrice) * 100) , [productData?.oldPrice, productData?.newPrice]);
 
   const breadcrumbs = [
-    { label: 'Home', href: '/' }, // Link to home page
-    { label: 'Men', href: '/category/men' }, // Link to Men's category
-    { label: 'Clothing', href: '/category/men/clothing' }, // Link to Clothing sub-category
-    { label: singleProduct?.category, href: `/category/men/clothing/${singleProduct?.category}` }, // Dynamic category (like T-Shirts)
-    { label: singleProduct?.name } // Current product, no href
+    { label: 'Home', href: '/' },
+    { label: singleProduct?.category, href: `/${singleProduct?.category}` }, 
+    { label: singleProduct?.name } 
   ];
   console.log(singleProduct?.images, 'PRODUCTIMAGE')
 
@@ -56,7 +54,7 @@ const Product = () => {
   }, [singleProduct]);
 
   if (!singleProduct) {
-    return <Spinner />;
+    return <div className='w-full h-screen flex justify-center items-center'> <Spinner size={50} variant='secondary' /></div>;
   }
 
   return (

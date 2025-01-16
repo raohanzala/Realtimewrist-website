@@ -14,6 +14,21 @@ body {
   color: #333;
 }
 
+*:disabled {
+  cursor: not-allowed;
+}
+
+select:disabled,
+input:disabled,
+textarea:disabled {
+  background-color: #e5e7eb;
+  color: #6b7280;
+}
+
+/* a.active{
+  background: #cba135;
+} */
+
 
 ::-webkit-scrollbar{
   display: none;
@@ -24,6 +39,14 @@ body {
     background-color: black;
     color: white;
   }
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #e2c765 ;
+  outline-offset: -1px;
 }
 
 /* .swiper-slide {

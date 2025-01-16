@@ -39,8 +39,8 @@ const ProductImageGallery = ({ image, setImage , singleProduct}) => {
                 key={index}
                 onClick={() => setImage(item)}
                 src={item}
-                className={`size-24  cursor-pointer rounded p-[2px] border-white border-2 object-cover object-center transition-all duration-300 ease-in-out
-                  ${image === item ? ' border-primary-1' : 'shadow-lg'}
+                className={`size-24  cursor-pointer rounded p-[2px] border-transparent border-2 object-cover object-center transition-all duration-300 ease-in-out
+                  ${image === item ? ' border-[red] border-2' : 'shadow-lg border-[red]'}
                 `}
                 alt={`Thumbnail ${index + 1}`}
                 effect="blur"

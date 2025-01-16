@@ -8,26 +8,17 @@ import { ShopContext } from '../context/ShopContext';
 import Spinner from './Spinner';
 import { CURRENCY } from '../utils/contants';
 import { formatAmount } from '../helpers';
+import { useOutsideClick } from '../hooks/useOutsideclick';
 
 const SearchBar = ({ setShowSearch }) => {
   const [query, setQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const searchRef = useRef(null);
 
   const { backendUrl } = useContext(ShopContext)
+  const close = ()=> setShowSearch(false)
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShowSearch(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [setShowSearch]);
+  const ref = useOutsideClick(close, false)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -51,23 +42,23 @@ const SearchBar = ({ setShowSearch }) => {
       }
     };
 
-    const debounceFetch = setTimeout(fetchProducts, 300); // Debounce API calls
+    const debounceFetch = setTimeout(fetchProducts, 300);
     return () => clearTimeout(debounceFetch);
   }, [query]);
 
   return (
     <div
-      ref={searchRef}
+      
       className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-[999] flex justify-center items-start pt-20"
     >
-      <div className="bg-white rounded-sm w-11/12 sm:w-3/4 md:w-1/2 p-4">
+      <div className="bg-white rounded-sm w-11/12 sm:w-3/4 md:w-1/2 p-4" ref={ref}>
         <div className="flex justify-between items-center border-b pb-2">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search products..."
-            className="w-full border-none outline-none text-lg px-2"
+            className="w-full border-none focus:outline-none text-lg px-2"
           />
           <button
             onClick={() => setShowSearch(false)}

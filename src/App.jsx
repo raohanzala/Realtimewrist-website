@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast'
 import AppLayout from './AppLayout'
 import LoadingLogo from './components/LoadingLogo'
 import ErrorBoundary from './components/ErrorBoundary'
+import LoginCopy from './pages/LoginCopy'
 
 const Home = lazy(() => import('./pages/Home'));
 const Collection = lazy(() => import('./pages/Collection'));
@@ -55,7 +56,7 @@ const App = () => {
                   <Route path='/contact' element={<Contact />} />
                   <Route path='/product/:productId' element={<Product />} />
                   <Route path='/cart' element={<Cart />} />
-                  <Route path='/login' element={<Login />} />
+                  <Route path='/login' element={<LoginCopy />} />
                   <Route path='/place-order' element={<PlaceOrder />} />
                   <Route path='/orders' element={<Orders />} />
                   <Route path='*' element={<NotFound/>} />

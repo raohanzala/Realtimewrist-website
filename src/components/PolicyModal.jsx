@@ -1,19 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { ShopContext } from '../context/ShopContext';
 import ReactDOM from 'react-dom';
 import Button from './Button'
 import toast from 'react-hot-toast';
+import Spinner from './Spinner';
 
 const PolicyModal = ({ isCheckboxChecked, setIsModalOpen, setIsCheckboxChecked, productId, handleCheckboxChange }) => {
 
   const { addToCart } = useContext(ShopContext)
 
-  const handleContinueClick = () => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleContinueClick = async () => {
+    setIsLoading(true)
     if (isCheckboxChecked) {
-      addToCart(productId);
+      await addToCart(productId);
       setIsModalOpen(false);
       setIsCheckboxChecked(true);
+      setIsLoading(false)
     } else {
+      setIsLoading(false)
       toast.error('Please agree to the terms and conditions before continuing.');
     }
   };
@@ -49,10 +55,10 @@ const PolicyModal = ({ isCheckboxChecked, setIsModalOpen, setIsCheckboxChecked, 
             </label>
           </div>
 
-          <div className="flex justify-end gap-4 mt-6">
+          <div className="flex justify-between gap-4 mt-6">
             <Button
               onClick={() => setIsModalOpen(false)}
-              variant='primary'
+              variant='cancel'
             >
               Cancel
             </Button>
@@ -62,7 +68,7 @@ const PolicyModal = ({ isCheckboxChecked, setIsModalOpen, setIsCheckboxChecked, 
               variant='secondary'
               // className={`py-2 px-4 rounded text-white ${isCheckboxChecked ? 'bg-primary ' : 'bg-gray-500 cursor-not-allowed'}`}
             >
-              Agree & Continue
+              {!isLoading ? 'Agree & Continue' : <Spinner/>}
             </Button>
           </div>
         </div>

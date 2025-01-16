@@ -10,14 +10,14 @@ const QuantityInput = ({ item }) => {
     if (quantity > 1) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
-      updateQuantity(item._id, item.size, newQuantity);
+      updateQuantity(item._id, newQuantity);
     }
   };
 
   const handleIncrease = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
-    updateQuantity(item._id, item.size, newQuantity);
+    updateQuantity(item._id, newQuantity);
   };
 
   return (

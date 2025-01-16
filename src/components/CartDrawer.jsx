@@ -16,6 +16,9 @@ const CartDrawer = () => {
   const { products, currency, cartItems, updateQuantity, getCartCount, navigate, isCartOpen, setIsCartOpen } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
+  console.log(cartItems, 'cartItems')
+  console.log(cartItems, 'cartData')
+
   useEffect(() => {
     if (isCartOpen) {
       document.body.style.overflow = 'hidden'; 
@@ -36,7 +39,6 @@ const CartDrawer = () => {
           if (cartItems[items][item] > 0) {
             tempData.push({
               _id: items,
-              size: item,
               quantity: cartItems[items][item]
             });
           }
@@ -64,7 +66,7 @@ const CartDrawer = () => {
   return (
     <>
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[9999] transition-opacity duration-300 ${isCartOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-black bg-opacity-50 z-[9999] transition-opacity duration-300 ${isCartOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={() => setIsCartOpen(false)}
       />
 
@@ -104,7 +106,7 @@ const CartDrawer = () => {
                       </div>
                       <QuantityInput item={item}/>
                       <button className='absolute -top-1 -right-1 bg-white '>
-                        <ImCancelCircle size={14} className='text-gray-500 hover:text-black' onClick={() => updateQuantity(item._id, item.size, 0)} />
+                        <ImCancelCircle size={14} className='text-gray-500 hover:text-black' onClick={() => updateQuantity(item._id, 0)} />
                       </button>
                     </div>
                 );

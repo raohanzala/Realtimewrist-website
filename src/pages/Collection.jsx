@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
-import { assets } from '../assets/assets';
 import Title from '../components/Title';
 import ProductItem from '../components/ProductItem';
 import Spinner from '../components/Spinner';
 import { useRef } from 'react';
 import axios from 'axios'
-
+import Empty from '../components/Empty';
+import { IoChevronDownSharp } from "react-icons/io5";
 
 const Collection = () => {
   const { products = [], search, showSearch, backendUrl } = useContext(ShopContext);
@@ -78,7 +78,7 @@ const Collection = () => {
   const fetchProducts = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(backendUrl + `/api/product/paginated-list?page=${page}&limit=10`);
+      const response = await axios.get(backendUrl + `/api/product/products?page=${page}&limit=10`);
       const newProducts = response.data.products;
 
       console.log(response, 'paginatesd')
@@ -126,13 +126,13 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, search, showSearch, pageProducts]);
+  }, [category, subCategory, search, showSearch, pageProducts, applyFilter]);
 
   useEffect(() => {
     if (filterProducts.length > 0) {
       sortProduct(filterProducts);
     }
-  }, [sortType]);
+  }, [sortType, sortProduct, filterProducts]);
 
   if (!filterProducts) {
     return <Spinner />
@@ -144,10 +144,9 @@ const Collection = () => {
       <div className=" min-w-48 lg:min-w-60 ">
         <p onClick={() => setShowFilter(prev => !prev)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>
           FILTERS
-          {/* <img src={assets.dropdown_icon} className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} alt="Dropdown Icon" /> */}
-          <p className={`h-3 ${showFilter ? 'rotate-90' : ''}`}>^</p>
+          <p className={` text-lg ${!showFilter ? '-rotate-90' : ''}`}><IoChevronDownSharp />
+          </p>
         </p>
-        {/* Category Filter */}
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'}`}>
           <p className='mb-3 text-sm font-medium'>CATEGORIES</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
@@ -159,7 +158,6 @@ const Collection = () => {
             </p>
           </div>
         </div>
-        {/* SubCategory Filter */}
         <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'}`}>
           <p className='mb-3 text-sm font-medium'>TYPE</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
@@ -207,11 +205,13 @@ const Collection = () => {
           )}
         </div>
         <div className='py-10 flex justify-center items-end'>
-          {isLoading ? <Spinner variant={'secondary'} size={30} /> : <p className='text-center'>No products found.</p>}
+          {isLoading ? <Spinner variant={'secondary'} /> : <Empty resourceName='products'/>}
         </div>
         <div ref={loaderRef} className='h-10 w-full '></div>
         {!hasMore && <p className='text-center text-gray-500 mt-4'>No more products to load</p>}
       </div>
+
+
     </div>
   );
 };

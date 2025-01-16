@@ -15,6 +15,8 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { FaWhatsapp } from "react-icons/fa6";
 import { MdOutlineMenu } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../store/slices/userSlice'
 
 
 
@@ -25,7 +27,10 @@ const Navbar = ({ setShowSearch }) => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
 
 
-  const { getCartCount, navigate, token, setToken, setCartItems, isCartOpen, setIsCartOpen, } = useContext(ShopContext)
+  const { getCartCount, navigate, setCartItems, isCartOpen, setIsCartOpen, } = useContext(ShopContext)
+
+  const dispatch = useDispatch()
+  const {isLoggedIn}  = useSelector((state)=> state.user)
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
@@ -38,11 +43,11 @@ const Navbar = ({ setShowSearch }) => {
     setLastScrollTop(scrollTop)
   };
 
-  const logout = () => {
+  const logOut = () => {
     navigate('/login')
-    localStorage.removeItem('token')
-    setToken('')
     setCartItems({})
+    dispatch(logout())
+
   }
 
   useEffect(() => {
@@ -75,18 +80,18 @@ const Navbar = ({ setShowSearch }) => {
             <NavList />
 
             <div className='flex items-center'>
-              <div onClick={() => setShowSearch(true)} className='cursor-pointer text-white text-xl pr-2'>
+              <div onClick={(e) => {setShowSearch(true); e.stopPropagation()}} className='cursor-pointer text-white text-xl pr-2'>
                 <FiSearch />
               </div>
               <div className='group relative border-x-[0.5px] px-2'>
-                <div className='text-white text-xl cursor-pointer' onClick={() => token ? null : navigate('/login')}>
+                <div className='text-white text-xl cursor-pointer' onClick={() => isLoggedIn ? null : navigate('/login')}>
                   <IoMdPerson />
                 </div>
-                {token && <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4 z-[99]'>
+                {isLoggedIn && <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4 z-[99]'>
                   <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
                     <p className='cursor-pointer hover:text-black'> My Profile</p>
                     <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
-                    <p onClick={logout} className='cursor-pointer hover:text-black' >Logout</p>
+                    <p onClick={logOut} className='cursor-pointer hover:text-black' >Logout</p>
                     {localStorage.getItem('auth-token') ? <p onClick={() => { localStorage.removeItem('auth-token'); window.location.replace('/') }} className='cursor-pointer hover:text-black'>Logout </p> : ''}
                   </div>
                 </div>}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { assets } from '../assets/assets';
 
-const TestimonialCard = () => {
+const TestimonialCard = ({testimonial}) => {
   return (
     <div className="bg-white rounded-md shadow-lg w-full border border-gray-300 overflow-hidden">
       {/* WhatsApp Screenshot */}
       <div className="relative h-32  bg-gray-50">
         <img
-          src={assets.feedback_2} // Replace with your WhatsApp screenshot path
+          src={testimonial.image} // Replace with your WhatsApp screenshot path
           alt="WhatsApp Review"
           className="w-full h-full object-cover"
         />
@@ -22,7 +22,7 @@ const TestimonialCard = () => {
       <div className="p-4">
         {/* Review Text */}
         <p className="text-sm text-gray-700 leading-relaxed">
-          “I absolutely love the product! It exceeded my expectations in both quality”
+          {testimonial.review}
         </p>
 
         {/* Separator */}
@@ -32,7 +32,7 @@ const TestimonialCard = () => {
         <div className="flex justify-between items-center text-sm">
           {/* Rating */}
           <div className="flex gap-1 justify-between">
-            {Array.from({ length: 5 }).map((_, index) => (
+            {Array.from({ length: testimonial.marks }).map((_, index) => (
               <img
                 key={index}
                 src={assets.star_icon}
@@ -44,7 +44,7 @@ const TestimonialCard = () => {
 
           {/* Verified Tag */}
           <div className="text-gray-500 font-medium">
-           Kashif Ameen
+           {testimonial.name}
           </div>
         </div>
       </div>

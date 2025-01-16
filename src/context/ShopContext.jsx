@@ -45,12 +45,13 @@ const ShopContextProvider = ({ children }) => {
     getProductsData()
   }, [])
 
-  console.log(cartItems, 'CartItems')
-
   const playSound = (url) => {
     const audio = new Audio(url);
     audio.play().catch(error => console.log('Error playing sound:', error));
   };
+
+
+  console.log(cartItems, 'CartItems')
 
   const addToCart = async (itemId, size) => {
     toast.dismiss()
@@ -72,7 +73,6 @@ const ShopContextProvider = ({ children }) => {
 
     console.log(itemId, size, 'Item Id and Size')
 
-    if (token) {
       try {
         const response = await axios.post(
           `${backendUrl}/api/cart/add`,
@@ -81,16 +81,17 @@ const ShopContextProvider = ({ children }) => {
         );
         console.log(response);
         if(response.data.success){
-          toast.success(response.data.message)
-          setIsCartOpen(true)
           playSound(assets.notification_sound);
+          setIsCartOpen(true)
+          toast.success(response.data.message)
         }
       } catch (error) {
         console.log(error);
         toast.error(error.message);
       }
-    }
   };
+  
+  
 
   useEffect(() => {
     console.log(cartItems)
@@ -102,23 +103,23 @@ const ShopContextProvider = ({ children }) => {
     }, 0);
   };
 
-  const updateQuantity = async (itemId, size, quantity) => {
+  const updateQuantity = async (itemId, quantity) => {
     let cartData = structuredClone(cartItems)
 
-    if (cartData[itemId] && cartData[itemId][size]) {
-      cartData[itemId][size] = quantity;
+    if (cartData[itemId]) {
+      cartData[itemId] = quantity;
       setCartItems(cartData);
 
       if (token) {
         try {
-          await axios.post(backendUrl + '/api/cart/update', { itemId, size, quantity }, { headers: { token } })
+          await axios.post(backendUrl + '/api/cart/update', { itemId, quantity }, { headers: { token } })
         } catch (error) {
           console.log(error)
           toast.error(error.message)
         }
       }
     } else {
-      console.error(`Item ${itemId} with size ${size} does not exist in the cart`);
+      toast.error(`Item ${itemId} does not exist in the cart`);
     }
   }
 
