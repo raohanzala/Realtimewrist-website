@@ -4,19 +4,19 @@ import axiosInstance from "./axiosInstance";
 import { useDispatch } from "react-redux";
 import { login } from "../store/slices/userSlice";
 
-export function useSignIn() {
+export function useUpdateQuantity() {
   const dispatch = useDispatch()
 
-    const {isLoading, mutate : signIn } = useMutation({
+    const {isLoading, mutate : updateQuantity } = useMutation({
       mutationFn : async (values)=> {
-       const {data} = await axiosInstance.post('/user/login', values)
-       return data
+        console.log(values, 'QUERY DATA')
+          const {data} = await axiosInstance.post('/cart/update', values)
+          return data
       },
-      
       onSuccess : (data)=> {
         if(data.success){
-          dispatch(login(data))
-          toast.success(data.message || 'Login Successfully')
+          // dispatch(login(data))
+          toast.success(data.message || 'Updated Successfully')
         }else {
           toast.error(data.message)
         }
@@ -24,5 +24,5 @@ export function useSignIn() {
       onError: (err)=> toast.error(err.message) 
     })
 
-    return {isLoading, signIn}
+    return {isLoading, updateQuantity}
 }

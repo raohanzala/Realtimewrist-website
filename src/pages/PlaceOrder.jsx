@@ -1,16 +1,16 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Title from "../components/Title";
 import CartTotal from "../components/CartTotal";
-import { ShopContext } from "../context/ShopContext";
 import toast from "react-hot-toast";
-import axios from "axios";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Spinner from "../components/Spinner";
 import FormRowVerticle from "../components/FormRowVerticle";
 import { DELIVERY_FEE } from "../utils/contants";
+import { useSelector } from "react-redux";
+import { usePlaceOrder } from "../api/usePlaceOrder";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -36,73 +36,36 @@ const validationSchema = Yup.object({
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState("cod");
-  const {
-    cartItems,
-    setCartItems,
-    getCartAmount,
-    backendUrl,
-    products,
-    token,
-    navigate,
-  } = useContext(ShopContext);
 
-  const order = async (orderData) => {
-    try {
-      const response = await axios.post(
-        backendUrl + "/api/order/place",
-        orderData,
-        { headers: { token } }
-      );
-      console.log(response);
-      if (response.data.success) {
-        setCartItems({});
-        navigate("/orders");
-      } else {
-        toast.error(response.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.data.message);
-    }
+  const {items} = useSelector((state)=> state.cart)
+  const {placeOrder}  = usePlaceOrder()
+
+
+  console.log(items, 'ORDERDATA')
+  const order = async (values) => {
+
+    let orderData = {
+      address: values,
+      items: items,
+      amount: DELIVERY_FEE ,
+    };
+
+    console.log(orderData)
+    placeOrder(orderData)
   };
 
   const onSubmitHandler = async (values) => {
     console.log("onSubmitHandler triggered");
 
-    if (cartItems.length === 0) {
+    if (items.length === 0) {
       toast.error("Your cart is empty");
       return;
     }
 
     try {
-      let orderItems = [];
-
-      for (const items in cartItems) {
-        for (const item in cartItems[items]) {
-          if (cartItems[items][item] > 0) {
-            const itemInfo = structuredClone(
-              products.find((product) => product._id === items)
-            );
-            if (itemInfo) {
-              itemInfo.size = item;
-              itemInfo.quantity = cartItems[items][item];
-              orderItems.push(itemInfo);
-            }
-          }
-        }
-      }
-
-      let orderData = {
-        address: values,
-        items: orderItems,
-        amount: getCartAmount() + DELIVERY_FEE,
-      };
-
-      console.log(orderData, "OrderData");
-
       switch (method) {
         case "cod":
-          order(orderData);
+          order(values);
           break;
         default:
           break;

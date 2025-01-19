@@ -170,12 +170,12 @@ const ShopContextProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    if (!token && localStorage.getItem('token')) {
-      setToken(localStorage.getItem('token'))
-      getUserCart(localStorage.getItem('token'))
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!token && localStorage.getItem('token')) {
+  //     setToken(localStorage.getItem('token'))
+  //     getUserCart(localStorage.getItem('token'))
+  //   }
+  // }, [])
 
   const value = { products, isCartOpen, singleProduct, getSingleProduct, setIsCartOpen, currency, delivery_fee, search, setSearch, showSearch, setShowSearch, cartItems, setCartItems, addToCart, getCartCount, updateQuantity, category, setCategory, getCartAmount, navigate, backendUrl, token, setToken }
 

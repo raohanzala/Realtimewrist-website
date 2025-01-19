@@ -1,30 +1,20 @@
 import { useContext, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
+import { useDispatch } from 'react-redux';
+import { decrementQuantity, incrementQuantity } from '../store/slices/cartSlice';
 
 const QuantityInput = ({ item }) => {
-  const [quantity, setQuantity] = useState(item.quantity || 1);
 
-  const { updateQuantity } = useContext(ShopContext);
+  const dispatch = useDispatch()
 
-  const handleDecrease = () => {
-    if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      updateQuantity(item._id, newQuantity);
-    }
-  };
+  console.log(item)
 
-  const handleIncrease = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    updateQuantity(item._id, newQuantity);
-  };
 
   return (
     <div className="flex gap-2 items-center">
       {/* Decrease Button */}
       <button
-        onClick={handleDecrease}
+        onClick={()=> dispatch(decrementQuantity({itemId : item._id}))}
         className="flex justify-center items-center size-7 bg-gray-200 text-gray-600 rounded-md hover:bg-gray-300 active:bg-gray-400 transition-colors"
       >
         -
@@ -34,12 +24,12 @@ const QuantityInput = ({ item }) => {
       <div 
         className="w-9 h-8 flex justify-center items-center text-center border border-gray-300 rounded-md bg-white"
       >
-        {quantity}
+        {item.quantity}
       </div>
 
       {/* Increase Button */}
       <button
-        onClick={handleIncrease}
+        onClick={()=> dispatch(incrementQuantity({itemId : item._id}))}
         className="flex justify-center items-center size-7 bg-gray-200 text-gray-600 rounded-md hover:bg-gray-300 active:bg-gray-400 transition-colors"
       >
         +

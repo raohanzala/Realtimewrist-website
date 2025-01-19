@@ -8,8 +8,10 @@ const LoadingLogo = () => {
         <img
           src={assets.logo2}
           alt="Logo"
-          className="w-full h-full object-contain animate-pulse"
+          className="w-full h-full object-contain animate-scale-up"
         />
+        
+        <div className='w-full bg-primary-2'><div className='text-xl text-center'>Loading...</div></div>
       </div>
     </div>
   );

@@ -6,10 +6,11 @@ import { FaChevronRight } from "react-icons/fa6";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-function CategoryItem({categoryName, categoryImg}) {
+function CategoryItem({categoryName, categoryImg, link}) {
   return (
-    <Link>
-      <div className="size-[88px] sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden relative m-auto">
+    // size-[88px] sm:size-28 md:size-32
+    <Link to={`${link}`}>
+      <div className="h-28 rounded overflow-hidden relative m-auto">
         <div className="relative w-full h-full flex items-center justify-center hover:scale-110 duration-300">
           <LazyLoadImage
             effect="blur"
@@ -22,7 +23,7 @@ function CategoryItem({categoryName, categoryImg}) {
         <div className="bg-[rgba(0,0,0,0.7)] w-full ">
         <div className="absolute  text-center flex items-center bottom-4 left-[50%] top-[75%] -translate-x-[50%] -translate-y-[50%] text-white">
           <div>
-            <h2 className='lg:text-sm text-xs text-gray-50 font-semibold uppercase'>{categoryName}</h2>
+            <h2 className='lg:text-sm text-xs text-gray-50 font-semibold text-nowrap uppercase'>{categoryName}</h2>
           </div>
         </div>
         </div>

@@ -1,26 +1,50 @@
-import React, { useContext, useState } from 'react'
-import { ShopContext } from '../context/ShopContext';
-import ReactDOM from 'react-dom';
-import Button from './Button'
-import toast from 'react-hot-toast';
-import Spinner from './Spinner';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import Button from "./Button";
+import toast from "react-hot-toast";
+import Spinner from "./Spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/slices/cartSlice";
+import { useUserCart } from "../api/useUserCart";
+import { useAddUserCart } from "../api/useAddToCart";
 
-const PolicyModal = ({ isCheckboxChecked, setIsModalOpen, setIsCheckboxChecked, productId, handleCheckboxChange }) => {
+const PolicyModal = ({
+  isCheckboxChecked,
+  setIsModalOpen,
+  setIsCheckboxChecked,
+  product,
+  handleCheckboxChange,
+}) => {
+  console.log(product);
+  const dispatch = useDispatch();
 
-  const { addToCart } = useContext(ShopContext)
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false)
+  const { items } = useSelector((state) => state.cart);
+  const { isLoggedIn } = useSelector((state) => state.user);
+
+  const data = useUserCart();
+  const { userAddCart } = useAddUserCart();
+
+  console.log(data, "CARTDATA");
 
   const handleContinueClick = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (isCheckboxChecked) {
-      await addToCart(productId);
+      if (isLoggedIn) {
+        await userAddCart({ itemId: product._id, item: product, quantity: 1 }, {onSuccess : ()=> {
+          dispatch(addToCart({ itemId: product._id, item: product, quantity: 1 }))
+        }});
+      } else {
+        dispatch(addToCart({ itemId: product._id, item: product, quantity: 1 }));
+      }
       setIsModalOpen(false);
       setIsCheckboxChecked(true);
-      setIsLoading(false)
     } else {
-      setIsLoading(false)
-      toast.error('Please agree to the terms and conditions before continuing.');
+      setIsLoading(false);
+      toast.error(
+        "Please agree to the terms and conditions before continuing."
+      );
     }
   };
 
@@ -35,7 +59,8 @@ const PolicyModal = ({ isCheckboxChecked, setIsModalOpen, setIsCheckboxChecked, 
         <div className="bg-white rounded shadow-lg p-8 w-11/12 max-w-md relative">
           <h2 className="text-xl font-bold mb-4">Important Information</h2>
           <p className="text-sm text-gray-700">
-            Please note that by adding this product to the cart, you are agreeing to the following terms:
+            Please note that by adding this product to the cart, you are
+            agreeing to the following terms:
           </p>
           <ul className="list-disc list-inside mt-4 text-sm text-gray-700">
             <li>This is a 100% original product.</li>
@@ -51,31 +76,30 @@ const PolicyModal = ({ isCheckboxChecked, setIsModalOpen, setIsCheckboxChecked, 
                 checked={isCheckboxChecked}
                 onChange={handleCheckboxChange}
               />
-              <span className="text-sm text-gray-700">I agree to the terms and conditions.</span>
+              <span className="text-sm text-gray-700">
+                I agree to the terms and conditions.
+              </span>
             </label>
           </div>
 
           <div className="flex justify-between gap-4 mt-6">
-            <Button
-              onClick={() => setIsModalOpen(false)}
-              variant='cancel'
-            >
+            <Button onClick={() => setIsModalOpen(false)} variant="cancel">
               Cancel
             </Button>
             <Button
               onClick={handleContinueClick}
               disabled={!isCheckboxChecked}
-              variant='secondary'
+              variant="secondary"
               // className={`py-2 px-4 rounded text-white ${isCheckboxChecked ? 'bg-primary ' : 'bg-gray-500 cursor-not-allowed'}`}
             >
-              {!isLoading ? 'Agree & Continue' : <Spinner/>}
+              {!isLoading ? "Agree & Continue" : <Spinner />}
             </Button>
           </div>
         </div>
       </div>
     </div>,
-    document.getElementById('modal-root')
-  )
-}
+    document.getElementById("modal-root")
+  );
+};
 
-export default PolicyModal
+export default PolicyModal;

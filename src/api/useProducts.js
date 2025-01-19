@@ -3,25 +3,25 @@ import { useSearchParams } from "react-router-dom";
 import axiosInstance from "./axiosInstance";
 
 export function useProducts() {
-
   const [searchParams] = useSearchParams();
-
-  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
-
+  
+  // Get the 'page' query parameter or default to 1 if not available
+  const page = Number(searchParams.get("page") || 1);
+  
   const { isLoading, error, data } = useQuery({
     queryKey: ["products", page],
-    queryFn: (page = 1, pageSize = 10) => {
-        const response = axiosInstance.get(
-          `/product/products?page=${page}&pageSize=${pageSize}`
-        );
-        const data = response.data
-        return data;
-        // console.error("Error fetching products:", error);
-        // throw new Error("Products could not be loaded");
+    queryFn: async () => {
+      try {
+        const response = await axiosInstance.get(`/product/products?page=${page}&pageSize=10`);
+        return response.data;  
+      } catch (err) {
+        throw new Error(err.response?.data?.message || "An error occurred while fetching products.");
+      }
     },
   });
 
-  const { products, currentPage, totalPages, totalProducts } = data || {};
+  // Extract useful data or default to empty values if no data is fetched
+  const { products = [], pageSize = 10, totalProducts = 0, currentPage = 1 } = data || {};
 
-  return { isLoading,error, products, currentPage, totalPages, totalProducts};
+  return { isLoading, error, products, pageSize, totalProducts, currentPage };
 }

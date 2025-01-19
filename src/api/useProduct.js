@@ -6,16 +6,26 @@ export function useProduct() {
   const { productId } = useParams();
 
   const {
-    isLoading,
+    isPending,
     data,
     error,
   } = useQuery({
     queryKey: ["product", productId],
-    queryFn: () => axiosInstance.get(`/product/single/${productId}`,),
+    queryFn: async () => {
+     const {data}  = await axiosInstance.get(`/product/single/${productId}`)
+     return data
+    }
+      ,
     retry: false,
   });
 
   const { product } = data || {}
 
-  return { isLoading, error, product };
+  return { isPending, error, product };
 }
+
+
+
+
+
+

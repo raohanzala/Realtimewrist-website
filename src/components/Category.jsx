@@ -39,27 +39,27 @@ const Category = () => {
     },
     {
       id: 6,
-      title: "Sports",
+      title: "quartz",
       image: assets.rolex_yatch_master_1,
-      link: "/sports",
+      link: "/quartz",
     },
     {
       id: 6,
-      title: "Sports",
+      title: "midrange",
       image: assets.rolex_yatch_master_1,
-      link: "/sports",
+      link: "/midrange",
     },
     {
       id: 6,
-      title: "Sports",
+      title: "under 5k",
       image: assets.rolex_yatch_master_1,
-      link: "/sports",
+      link: "/under-5k",
     },
     {
       id: 6,
-      title: "Sports",
+      title: "under 10k",
       image: assets.rolex_yatch_master_1,
-      link: "/sports",
+      link: "/under-10k",
     },
     {
       id: 6,
@@ -86,7 +86,7 @@ const Category = () => {
       <div className="relative group">
         <Swiper
           modules={[Navigation, Autoplay]}
-          spaceBetween={10}
+          spaceBetween={30}
           breakpoints={{
             320: { slidesPerView: 3 },
             480: { slidesPerView: 4 },
@@ -94,7 +94,7 @@ const Category = () => {
             1024: { slidesPerView: 6 },
             1280: { slidesPerView: 7 },
           }}
-          slidesPerView={7}
+          slidesPerView={5}
           navigation={{
             prevEl: ".custom-prev",
             nextEl: ".custom-next",
@@ -104,7 +104,7 @@ const Category = () => {
           {
             categories.map((category, index) => (
               <SwiperSlide key={index}>
-                <CategoryItem categoryImg={category.image} categoryName={category.title} key={index} />
+                <CategoryItem categoryImg={category.image} categoryName={category.title} link={category.link}  key={index} />
               </SwiperSlide>
             ))
           }

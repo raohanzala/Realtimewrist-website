@@ -12,50 +12,39 @@ import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import { useSignIn } from "../api/useSignIn";
 import { useSignUp } from "../api/useSignup";
-
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
-  name: Yup.string().required('Name is required'),
-  email: Yup.string().required('Email is required'),
+  name: Yup.string(),
+  email: Yup.string(),
   password: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
+    .min(6, 'Password must be at least 6 characters'),
 });
 
 const LoginCopy = () => {
   const [currentState, setCurrentState] = useState("Login");
-  const { token, setToken, navigate } = useContext(ShopContext);
+const navigate = useNavigate()
 
   const {signIn, isLoading : isSigningIn} = useSignIn()
   const {signUp, isLoading : isSigningUp}= useSignUp()
+
+  const {userData, token : token2, isLoggedIn} = useSelector((state)=> state.user)
+  console.log(userData, token2, isLoggedIn, currentState)
 
   const onSubmitHandler = async (values) => {
 
     try {
       if (currentState === "Sign Up") {
-        // const response = await axios.post(backendUrl + "/api/user/register", {
-        //   name,
-        //   email,
-        //   password,
-        // });
-
-        console.log(values, 'VALUES')
-
-        signIn(values)
-      } else {
-        // const response = await axios.post(backendUrl + "/api/user/login", {
-        //   email,
-        //   password,
-        // });
-        console.log('ELSE');
-        // if (response.data.success) {
-        //   setToken(response.data.token);
-        //   localStorage.setItem("token", response.data.token);
-        // } else {
-        //   toast.error(response.data.message);
-        // }
+        
+        const {email, name, password} = values
+        console.log(email, name, password, 'VALUES')
 
         signUp(values)
+      } else {
+        console.log('ELSE');
+        const {email, password} = values
+        signIn({email, password})
       }
     } catch (error) {
       console.log(error);
@@ -64,16 +53,11 @@ const LoginCopy = () => {
   };
 
   useEffect(() => {
-    if (token) {
+    if (isLoggedIn) {
       navigate("/");
     }
-  }, [token, navigate]);
+  }, [isLoggedIn, navigate]);
 
-  useEffect(() => {
-    if (!token && localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
-    }
-  }, []);
 
   return (
      <Formik
@@ -104,7 +88,7 @@ const LoginCopy = () => {
         <FormRowVerticle name='name'>
         <Input
           type="text"
-          name="username"
+          name="name"
           value={values.name}
           onChange={handleChange}
           placeholder="Name"
@@ -122,6 +106,7 @@ const LoginCopy = () => {
         placeholder="Email"
         />
         </FormRowVerticle>
+
         <FormRowVerticle name='password'>
 
       <Input

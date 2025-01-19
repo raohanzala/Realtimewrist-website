@@ -8,11 +8,15 @@ import PolicyModal from './PolicyModal';
 import { formatAmount } from '../helpers';
 import { CURRENCY } from '../utils/contants';
 
-const ProductItem = memo(({ id, description, size, images, name, newPrice, oldPrice, availability }) => {
+const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, availability }) => {
 
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+
+  const product = {
+    _id : id, description, images, name, newPrice, oldPrice, availability
+  }
 
   const handleAddToCartClick = (e) => {
     e.stopPropagation();
@@ -103,7 +107,7 @@ const ProductItem = memo(({ id, description, size, images, name, newPrice, oldPr
           </div>
         </div>
       </Link>
-      {isModalOpen && <PolicyModal setIsModalOpen={setIsModalOpen} isCheckboxChecked={isCheckboxChecked} setIsCheckboxChecked={setIsCheckboxChecked} productId={id} size={size} handleCheckboxChange={handleCheckboxChange} />}
+      {isModalOpen && <PolicyModal setIsModalOpen={setIsModalOpen} isCheckboxChecked={isCheckboxChecked} setIsCheckboxChecked={setIsCheckboxChecked} product={product} handleCheckboxChange={handleCheckboxChange} />}
     </>
   );
 });

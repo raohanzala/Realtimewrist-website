@@ -7,20 +7,20 @@ import { useRef } from 'react';
 import axios from 'axios'
 import Empty from '../components/Empty';
 import { IoChevronDownSharp } from "react-icons/io5";
+import { useProducts } from '../api/useProducts';
+import { useInifniteScroll } from '../api/useInfiniteScroll';
 
 const Collection = () => {
-  const { products = [], search, showSearch, backendUrl } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(true);
-  const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relevant');
 
-  const [pageProducts, setPageProducts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
+
+  const {products,isLoading, pageSize, totalProducts, currentPage} =  useProducts()
+
 
   const toggleCategory = (e) => {
     const { value } = e.target;
@@ -35,108 +35,6 @@ const Collection = () => {
       prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
     );
   };
-
-  console.log(category, subCategory, 'CATE')
-
-  const applyFilter = () => {
-    let productsCopy = [...pageProducts];
-
-    if (showSearch && search) {
-      productsCopy = productsCopy.filter(item =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
-    if (category.length > 0) {
-      productsCopy = productsCopy.filter(item => category.includes(item.category));
-    }
-
-    if (subCategory.length > 0) {
-      productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
-    }
-
-    sortProduct(productsCopy);
-  };
-
-  const sortProduct = (productsToSort) => {
-    let sortedProducts = [...productsToSort];
-
-    switch (sortType) {
-      case 'low-high':
-        sortedProducts.sort((a, b) => a.newPrice - b.newPrice);
-        break;
-      case 'high-low':
-        sortedProducts.sort((a, b) => b.newPrice - a.newPrice);
-        break;
-      default:
-        break;
-    }
-
-    setFilterProducts(sortedProducts);
-  };
-
-  const fetchProducts = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get(backendUrl + `/api/product/products?page=${page}&limit=10`);
-      const newProducts = response.data.products;
-
-      console.log(response, 'paginatesd')
-
-      setPageProducts((prevProducts) => {
-        const combinedProducts = [...prevProducts, ...newProducts];
-        const uniqueProducts = combinedProducts.filter(
-          (item, index, array) => array.findIndex(p => p._id === item._id) === index
-        );
-        return uniqueProducts;
-      });
-
-      if (response.data.pagination.currentPage >= response.data.pagination.totalPages) {
-        setHasMore(false);
-      }
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    } finally {
-      setIsLoading(false)
-    }
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const target = entries[0];
-        if (target.isIntersecting && hasMore) {
-          setPage((prevPage) => prevPage + 1); // Increment page to fetch new products
-        }
-      },
-      { root: null, rootMargin: '0px', threshold: 0.1 }
-    );
-
-    if (loaderRef.current) observer.observe(loaderRef.current);
-
-    return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
-    };
-  }, [hasMore]);
-
-  useEffect(() => {
-    fetchProducts(page);
-  }, [page]);
-
-
-  useEffect(() => {
-    applyFilter();
-  }, [category, subCategory, search, showSearch, pageProducts, applyFilter]);
-
-  useEffect(() => {
-    if (filterProducts.length > 0) {
-      sortProduct(filterProducts);
-    }
-  }, [sortType, sortProduct, filterProducts]);
-
-  if (!filterProducts) {
-    return <Spinner />
-  }
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t max-w-[1280px] mx-auto px-5'>
@@ -188,8 +86,8 @@ const Collection = () => {
         </div>
 
         <div className='relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-          {isLoading ? <ProductSkeleton /> : filterProducts.length > 0 && (
-            filterProducts.map((item) => (
+          {isLoading ? <ProductSkeleton /> : products.length > 0 && (
+            products.map((item) => (
               <ProductItem
                 key={item._id}
                 name={item.name}

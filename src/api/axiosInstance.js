@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {store} from '../store/store'
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -6,11 +7,11 @@ const axiosInstance = axios.create({
   baseURL: `${backendUrl}/api`,  
 });
 
-axiosInstance.defaults.headers.common['token'] = `${localStorage.getItem('token')}`;  
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = store.getState().user.token;
+    console.log(token, 'AXIOS TOKEN')
     if (token) {
       config.headers['token'] = `${token}`;
     }

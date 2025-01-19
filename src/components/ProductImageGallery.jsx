@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Lightbox from "react-image-lightbox";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const ProductImageGallery = ({ image, setImage , singleProduct}) => {
+const ProductImageGallery = ({ product}) => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false); // Lightbox state
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [setImage, image] = useState(null)
 
   // const images = productData.image.map((item) => ({
   //   original: item,
@@ -21,9 +22,9 @@ const ProductImageGallery = ({ image, setImage , singleProduct}) => {
               setPhotoIndex(0);
             }}
           >
-            {singleProduct?.oldPrice && singleProduct?.oldPrice > singleProduct?.newPrice && (
+            {product?.oldPrice && product?.oldPrice > product?.newPrice && (
               <div className="absolute top-2 left-2 bg-red-500 flex items-center justify-center shadow-md text-white size-11 text-sm font-bold z-10 rounded-full">
-                -{Math.floor(((singleProduct.oldPrice - singleProduct.newPrice) / singleProduct.oldPrice) * 100)}%
+                -{Math.floor(((product.oldPrice - product.newPrice) / product.oldPrice) * 100)}%
               </div>
             )}
             <LazyLoadImage
@@ -34,7 +35,7 @@ const ProductImageGallery = ({ image, setImage , singleProduct}) => {
             />
           </div>
           <div className="overflow-x-auto sm:overflow-y-auto flex gap-4">
-            {singleProduct.images.map((item, index) => (
+            {product.images.map((item, index) => (
               <LazyLoadImage
                 key={index}
                 onClick={() => setImage(item)}
@@ -50,15 +51,15 @@ const ProductImageGallery = ({ image, setImage , singleProduct}) => {
 
           {isLightboxOpen && (
             <Lightbox
-              mainSrc={singleProduct.images[photoIndex]}
-              nextSrc={singleProduct.images[(photoIndex + 1) % singleProduct.images.length]}
-              prevSrc={singleProduct.images[(photoIndex + singleProduct.images.length - 1) % singleProduct.images.length]}
+              mainSrc={product.images[photoIndex]}
+              nextSrc={product.images[(photoIndex + 1) % product.images.length]}
+              prevSrc={product.images[(photoIndex + product.images.length - 1) % product.images.length]}
               onCloseRequest={() => setIsLightboxOpen(false)}
               onMovePrevRequest={() =>
-                setPhotoIndex((photoIndex + singleProduct.images.length - 1) % singleProduct.images.length)
+                setPhotoIndex((photoIndex + product.images.length - 1) % product.images.length)
               }
               onMoveNextRequest={() =>
-                setPhotoIndex((photoIndex + 1) % singleProduct.images.length)
+                setPhotoIndex((photoIndex + 1) % product.images.length)
               }
             />
           )}

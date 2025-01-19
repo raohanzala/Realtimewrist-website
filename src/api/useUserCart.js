@@ -9,11 +9,13 @@ export function useUserCart() {
     error,
   } = useQuery({
     queryKey: ["orders"],
-    queryFn: () =>  axiosInstance.post('/cart/get'),
+    queryFn:async () =>   {
+      const data = await axiosInstance.get('/cart/get')
+      return data
+    },
     retry: false,
   });
 
-  const { userCart } = data || {}
 
-  return { isLoading, error, userCart };
+  return { isLoading, error, data };
 }

@@ -1,5 +1,3 @@
-import { useContext, useEffect, useState } from 'react'
-import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title'
 import CartTotal from '../components/CartTotal'
 import toast from 'react-hot-toast'
@@ -9,38 +7,20 @@ import Breadcrumb from '../components/Breadcrumb';
 import Button from '../components/Button';
 import { CURRENCY } from '../utils/contants';
 import { formatAmount } from '../helpers';
+import { useSelector } from 'react-redux'
+import { removeFromCart } from '../store/slices/cartSlice'
+import { useNavigate } from 'react-router-dom'
 
 
 const Cart = () => {
 
-  const { products, cartItems, updateQuantity, navigate } = useContext(ShopContext)
-  const [cartData, setCartData] = useState([])
+  const navigate = useNavigate()
+  const {items : cartItems} = useSelector((state)=> state.cart)
 
-  useEffect(() => {
-
-    if (products.length > 0) {
-      const tempData = []
-
-      for (const items in cartItems) {
-        for (const item in cartItems[items]) {
-          if (cartItems[items][item] > 0) {
-            tempData.push({
-              _id: items,
-              size: item,
-              quantity: cartItems[items][item]
-
-            })
-          }
-        }
-      }
-      setCartData(tempData)
-    }
-
-  }, [cartItems, products])
 
   const handleCheckout = ()=> {
       toast.dismiss()
-      if (cartData.length > 0) navigate('/place-order')
+      if (cartItems.length > 0) navigate('/place-order')
       else  toast.error('Your cart is empty.')
   }
 
@@ -57,25 +37,22 @@ const Cart = () => {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-5'>
-
         <div className='max-h-[60vh] overflow-y-scroll'>
-          {cartData.length > 0 ?
-            cartData.map((item, index) => {
-              const productData = products.find((product) => product._id === item._id)
-              console.log(productData)
+          {cartItems.length > 0 ?
+            cartItems.map((item, index) => {
               return (
-                <div className={`py-4 ${index !== cartData.length - 1 && 'border-b'} border-y py-5 text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4`} key={item._id}>
+                <div className={`py-4 ${index !== item.length - 1 && 'border-b'} border-y py-5 text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4`} key={item._id}>
                   <div className='flex items-start gap-6'>
-                    <img src={productData.images[0]} className='size-16 object-cover rounded-sm' alt="" />
+                    <img src={item.images[0]} className='size-16 object-cover rounded-sm' alt="" />
                     <div>
-                      <p className='text-xs sm:text-lg font-semibold uppercase'>{productData.name}</p>
+                      <p className='text-xs sm:text-lg font-semibold uppercase'>{item.name}</p>
                       <div className='flex items-center gap-5 mt-2'>
-                        <p>{CURRENCY}{formatAmount(productData.newPrice)}</p>
+                        <p>{CURRENCY}{formatAmount(item.newPrice)}</p>
                       </div>
                     </div>
                   </div>
                   <QuantityInput item={item} />
-                  <div onClick={() => updateQuantity(item._id, item.size, 0)} className='cursor-pointer'>
+                  <div onClick={() => removeFromCart({itemId : item._id})} className='cursor-pointer'>
                     <MdOutlineCancel size={25} className='opacity-30 hover:opacity-90' />
                   </div>
 
