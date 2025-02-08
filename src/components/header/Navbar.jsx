@@ -1,0 +1,189 @@
+import React, {
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { assets } from "../../assets/assets";
+import { Link } from "react-router-dom";
+import { ShopContext } from "../../context/ShopContext";
+import NavList from "./NavList";
+import Logo from "./Logo";
+import NavSmall from "./NavSmall";
+import TopBar from "./TopBar";
+
+import { IoMdArrowDropdown, IoMdCart } from "react-icons/io";
+import { IoMdPerson } from "react-icons/io";
+import { FiSearch } from "react-icons/fi";
+import { CiFacebook } from "react-icons/ci";
+import { IoLogoInstagram, IoPersonCircleOutline } from "react-icons/io5";
+import { AiOutlineYoutube } from "react-icons/ai";
+import { VscAccount } from "react-icons/vsc";
+import { RxPerson } from "react-icons/rx";
+
+
+import { FaWhatsapp } from "react-icons/fa6";
+import { MdOutlineMenu, MdOutlinePersonOutline } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/slices/userSlice";
+import { clearCart, openCart } from "../../store/slices/cartSlice";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaShoppingCart,
+  FaSignOutAlt,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
+import Login from "../../pages/Login";
+import Modal from "../Modal";
+import { RiAccountCircleLine } from "react-icons/ri";
+import { useSocialLinks } from "../../api/useSocialLinks";
+import SocialLinks from "../SocialLinks";
+
+const Navbar = forwardRef(({ setShowSearch }, ref) => {
+  const [visible, setVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+  const [isLoginModal, setIsLoginModal] = useState(false);
+
+  const { navigate } = useContext(ShopContext);
+
+  const { totalItems } = useSelector((state) => state.cart);
+  const {facebook , instagram, linkedin, whatsapp, youtube}  = useSocialLinks()
+  console.log(facebook , instagram, linkedin, whatsapp, youtube, 'SOCIAL')
+
+  const dispatch = useDispatch();
+  const { isLoggedIn, userData } = useSelector((state) => state.user);
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    if (scrollTop > lastScrollTop && scrollTop > 200) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+
+    setLastScrollTop(scrollTop);
+  };
+
+  const logOut = () => {
+    navigate("/login");
+    dispatch(logout());
+    dispatch(clearCart());
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollTop]);
+
+  return (
+    <>
+      <div
+        ref={ref} // Forward the ref to this div element
+        className={`flex flex-col bg-white w-full fixed shadow-md z-[99] transition-transform duration-300 ease-in-out ${scrolled ? "-translate-y-full" : "translate-y-0"
+          }`}
+      >
+        <TopBar />
+        <Logo />
+
+        {/*  ------------- Social Icons ----------------- */}
+        <div className="w-full bg-dark-2">
+          <div className="flex items-center justify-between p-2 sm:p-3 px-5 font-medium bg-dark-2 max-w-screen-2xl mx-auto w-full">
+            <div
+              onClick={() => setVisible(true)}
+              className="cursor-pointer pl-2 text-white flex md:hidden text-2xl"
+            >
+              <MdOutlineMenu />
+            </div>
+            <SocialLinks/>
+
+            <NavList />
+
+            <div className="flex items-center">
+              <div
+                onClick={(e) => {
+                  setShowSearch(true);
+                  e.stopPropagation();
+                }}
+                className="cursor-pointer text-white text-xl pr-2"
+              >
+                <FiSearch />
+              </div>
+
+              {/* User Avatar */}
+              <div className="group relative border-x-[0.5px] px-2">
+                <div
+                  className="flex items-center space-x-1 text-white text-xl cursor-pointer"
+                  onClick={(e) => { (isLoggedIn ? null : navigate('/login')) }}
+                >
+                  {isLoggedIn ?
+                    <div className="w-7 h-7 rounded-full uppercase bg-gray-400 text-white flex items-center justify-center">
+                      {userData?.name?.split(" ")[0][0]}
+                    </div> : (
+                      <div className="text-sm flex gap-2 items-center"><IoPersonCircleOutline size={25} />
+
+                      </div>
+                    )
+                  }
+                  {isLoggedIn && (
+                    <div className="text-white text-sm pt-1">
+                      <IoMdArrowDropdown />
+                    </div>
+                  )}
+                </div>
+
+                {isLoggedIn && (
+                  <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4 z-[99]">
+                    <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-white text-gray-500 rounded-sm shadow-lg">
+                      <p
+                        onClick={() => navigate("/orders")}
+                        className="cursor-pointer hover:text-black flex items-center gap-2"
+                      >
+                        <FaShoppingCart className="text-gray-600" />
+                        My Orders
+                      </p>
+                      <p
+                        onClick={logOut}
+                        className="cursor-pointer hover:text-black flex items-center gap-2"
+                      >
+                        <FaSignOutAlt className="text-gray-600" />
+                        Logout
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div
+                onClick={() => dispatch(openCart())}
+                className="relative pl-2 cursor-pointer"
+              >
+                <div className="text-white text-xl">
+                  <IoMdCart />
+                </div>
+                <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[red] text-white aspect-square rounded-full text-[8px]">
+                  {totalItems}
+                </p>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+
+      {
+        isLoginModal && <Modal isOpen={isLoginModal} onClose={() => setIsLoginModal(false)}>
+          <Login />
+        </Modal>
+      }
+      <NavSmall visible={visible} setVisible={setVisible} />
+    </>
+  );
+});
+
+export default Navbar;
