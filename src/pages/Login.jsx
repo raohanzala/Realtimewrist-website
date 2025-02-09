@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useSignIn } from "../api/useSignIn";
-import { useSignUp } from "../api/useSignup";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { addToCart, closeCart } from "../store/slices/cartSlice";
@@ -13,6 +12,7 @@ import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import FormRowVerticle from "../components/FormRowVerticle";
 import Input from "../components/Input";
+import { useSignUp } from "../api/useSignup";
 
 const signUpSchema = Yup.object({
   name: Yup.string().required("Name is required"),
