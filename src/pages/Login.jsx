@@ -12,7 +12,7 @@ import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import FormRowVerticle from "../components/FormRowVerticle";
 import Input from "../components/Input";
-import { useSignUp } from "../api/useSignup";
+import { useSignUp } from "../api/useSignUp";
 
 const signUpSchema = Yup.object({
   name: Yup.string().required("Name is required"),

@@ -6,17 +6,12 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import { assets } from '../assets/assets';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 
 const slideList = [
   {title : 'Massive Discount', image : assets.hero_img2},
-  {title : 'Massive Discount', image : assets.hero_img3},
   {title : 'Massive Discount', image : assets.hero_img5},
   {title : 'Massive Discount', image : assets.hero_img6},
-  {title : 'Massive Discount', image : assets.hero_img7},
-  {title : 'Massive Discount', image : assets.hero_img8},
-  {title : 'Massive Discount', image : assets.hero_img9},
-  {title : 'Massive Discount', image : assets.hero_img10},
-  {title : 'Massive Discount', image : assets.hero_img11},
 ]
 
 const Hero = () => {
@@ -48,7 +43,7 @@ const Hero = () => {
             {/* <h3 className='text-sm font-semibold italic mb-3'>NEW COLLECTION</h3> */}
             <h1 className=' text-6xl font-semibold'>SUMMER SALE</h1>
             <h2 className="text-xl font-semibold tracking-wider mb-7">Massive Discount</h2>
-            <button className='text-lg py-2 px-5 bg-[red]'>Discover Now !</button>
+            <Link to='/all-collection' className='text-lg py-2 px-5 bg-[red]'>Discover Now !</Link>
           </div>
         </SwiperSlide>
         })}

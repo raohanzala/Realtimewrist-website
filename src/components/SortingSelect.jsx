@@ -24,7 +24,7 @@ const CollectionHeader = ({ category }) => {
         <select
           onChange={handleSortChange}
           value={currentSort}
-          className="border-2 border-gray-300 py-3 focus:outline-none focus:ring-2 focus:ring-[#e2c765] rounded text-sm px-3"
+          className="border-2 border-gray-300 px-1 py-3 sm:px-3 focus:outline-none focus:ring-2 focus:ring-[#e2c765] rounded text-sm"
         >
           <option value="default">Sort by: Default</option>
           <option value="price-low-high">Sort by: Low to High</option>

@@ -39,7 +39,7 @@ function ServiceSection() {
         {services.map((service, index) => (
           <div
             key={index}
-            className="flex items-center gap-6 max-w-sm bg-white border shadow-sm p-4 rounded-lg transition-transform transform "
+            className="flex items-center gap-6 max-w-sm p-4 rounded-lg transition-transform transform "
           >
             <div className="text-5xl text-[#cba035b3] flex-shrink-0">
               {service.icon}

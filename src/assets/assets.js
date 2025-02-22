@@ -3,14 +3,8 @@ import logo from './logo2.png'
 import logo2 from './logo_3.png'
 import hero_img from './hero1.webp'
 import hero_img2 from './hero2.webp'
-import hero_img3 from './SHOP_NOW.png'
 import hero_img5 from './hero-5.jpg'
 import hero_img6 from './hero-6.jpg'
-import hero_img7 from './hero-7.jpg'
-import hero_img8 from './hero-8.jpg'
-import hero_img9 from './hero-9.jpg'
-import hero_img10 from './hero-10.jpg'
-import hero_img11 from './hero-11.jpg'
 // import hero_img12 from './hero-12.jpg'
 import star_dull_icon from './star_dull_icon.png'
 import star_icon from './star_icon.png'
@@ -34,15 +28,8 @@ export const assets = {
     logo2,
     hero_img,
     hero_img2,
-    hero_img3,
-    // hero_img4,
     hero_img5,
     hero_img6,
-    hero_img7,
-    hero_img8,
-    hero_img9,
-    hero_img10,
-    hero_img11,
     categoryImg_2,
     star_dull_icon,
     star_icon,

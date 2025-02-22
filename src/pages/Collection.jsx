@@ -38,7 +38,7 @@ const Collection = () => {
       <CollectionsSidebar />
 
       <div className="flex-1">
-        <div className="flex justify-between items-center mb-5 text-base sm:text-2xl">
+        <div className="flex justify-between items-center mb-3 text-base sm:text-2xl">
           <SortingSelect category={'All'}/>
         </div>
 
