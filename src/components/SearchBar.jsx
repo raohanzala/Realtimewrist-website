@@ -8,7 +8,7 @@ import { ShopContext } from '../context/ShopContext';
 import Spinner from './Spinner';
 import { CURRENCY } from '../utils/contants';
 import { formatAmount } from '../helpers';
-import { useOutsideClick } from '../hooks/useOutsideclick';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 import { RiSearchLine } from 'react-icons/ri';
 
 const SearchBar = ({ setShowSearch }) => {
