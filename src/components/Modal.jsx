@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; // Import ReactDOM for creating a portal
-import { useOutsideClick } from '../hooks/useOutsideclick';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 
 const Modal = ({ title, children, isOpen, onClose }) => {
   const ref = useOutsideClick(onClose, false);
