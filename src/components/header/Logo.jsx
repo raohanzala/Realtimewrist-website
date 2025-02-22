@@ -26,7 +26,7 @@ const Logo = () => {
         <img
           src={assets.logo2}
           alt="Logo"
-          className="w-full max-w-[260px] h-auto md:max-w-[200px] md:h-[55px] sm:max-w-[200px] sm:h-[55px]"
+          className="w-full max-w-[180px] h-auto sm:max-w-[200px] sm:h-[55px]"
         />
       </Link>
 

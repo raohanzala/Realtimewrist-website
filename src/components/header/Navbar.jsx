@@ -96,7 +96,7 @@ const Navbar = forwardRef(({ setShowSearch }, ref) => {
           <div className="flex items-center justify-between p-2 sm:p-3 px-5 font-medium bg-dark-2 max-w-screen-2xl mx-auto w-full">
             <div
               onClick={() => setVisible(true)}
-              className="cursor-pointer pl-2 text-white flex md:hidden text-2xl"
+              className="cursor-pointer pl-2 text-white flex md:hidden text-xl sm:text-2xl"
             >
               <MdOutlineMenu />
             </div>
@@ -110,7 +110,7 @@ const Navbar = forwardRef(({ setShowSearch }, ref) => {
                   setShowSearch(true);
                   e.stopPropagation();
                 }}
-                className="cursor-pointer text-white text-xl pr-2"
+                className="cursor-pointer text-white text-base sm:text-xl pr-2"
               >
                 <FiSearch />
               </div>
@@ -125,7 +125,7 @@ const Navbar = forwardRef(({ setShowSearch }, ref) => {
                     <div className="w-7 h-7 rounded-full uppercase bg-gray-400 text-white flex items-center justify-center">
                       {userData?.name?.split(" ")[0][0]}
                     </div> : (
-                      <div className="text-sm flex gap-2 items-center"><IoPersonCircleOutline size={25} />
+                      <div className="text-xl sm:text-2xl flex gap-2 items-center"><IoPersonCircleOutline />
 
                       </div>
                     )
@@ -163,7 +163,7 @@ const Navbar = forwardRef(({ setShowSearch }, ref) => {
                 onClick={() => dispatch(openCart())}
                 className="relative pl-2 cursor-pointer"
               >
-                <div className="text-white text-xl">
+                <div className="text-white text-lg sm:text-xl">
                   <IoMdCart />
                 </div>
                 <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[red] text-white aspect-square rounded-full text-[8px]">

@@ -34,7 +34,7 @@ const Hero = () => {
         autoplay={{ delay: 3000 }}
         loop={true}
         effect=''
-        className="relative w-full h-[630px] overflow-hidden"
+        className="relative w-full sm:h-[630px] h-[400px] overflow-hidden"
       >
         {slideList.map((slide, index)=> {
           return <SwiperSlide className="relative" key={index}>

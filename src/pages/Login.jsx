@@ -82,6 +82,8 @@ const Login = () => {
   }, [isLoggedIn, navigate, location.state]);
 
   return (
+    <div className="px-5">
+
     <Formik
       initialValues={
         currentState === "Login"
@@ -94,7 +96,7 @@ const Login = () => {
       {({ values, handleChange, isSubmitting, handleSubmit }) => (
         <Form
           onSubmit={handleSubmit}
-          className="flex flex-col items-center w-96 border bg-white text-gray-800 shadow-lg rounded m-auto mt-20 py-10 px-8"
+          className="flex flex-col items-center max-w-96 border bg-white text-gray-800 shadow-lg rounded m-auto mt-20 py-10 px-8"
         >
           <img src={assets.logo2} alt="Logo" className="w-[50%] m-auto mb-3" />
 
@@ -158,6 +160,7 @@ const Login = () => {
         </Form>
       )}
     </Formik>
+        </div>
   );
 };
 
