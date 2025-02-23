@@ -35,7 +35,7 @@ const CollectionsSidebar = ({ isShowFilter = true }) => {
 
   return (
     <div className="min-w-48 lg:min-w-60 mb-5">
-      <p className="my-2 text-xl flex uppercase items-center gap-2">
+      <p className="my-2 text-xl flex uppercase items-center gap-2 justify-center sm:justify-start">
         Filters
         <span className="text-lg">
           <RiEqualizer2Line />

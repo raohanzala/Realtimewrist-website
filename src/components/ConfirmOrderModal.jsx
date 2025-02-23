@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ConfirmOrderModal = () => {
   return (
-    <div className="flex flex-col items-center text-center px-4 py-2">
+    <div className="flex flex-col items-center text-center">
       {/* Success Icon */}
       <AiFillCheckCircle className="text-green-500 w-16 h-16 mb-4 animate-bounce" />
 

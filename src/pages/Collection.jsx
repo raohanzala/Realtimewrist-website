@@ -38,9 +38,7 @@ const Collection = () => {
       <CollectionsSidebar />
 
       <div className="flex-1">
-        <div className="flex justify-between items-center mb-3 text-base sm:text-2xl">
           <SortingSelect category={'All'}/>
-        </div>
 
         <div className="relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6 overflow-y-scroll">
           {status === "pending" ? (

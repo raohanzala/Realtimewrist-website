@@ -16,7 +16,7 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const product = {
-    _id : id, description, images, name, newPrice, oldPrice, availability
+    _id: id, description, images, name, newPrice, oldPrice, availability
   }
 
   const handleAddToCartClick = (e) => {
@@ -55,11 +55,11 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
           )}
 
           <div className={`relative overflow-hidden aspect-w-1 aspect-h-1 w-full ${availability === 'Out of stock'}`}>
-          {availability === 'Out of stock' && (
-            <div className="absolute top-[50%] -translate-y-[50%] left-0 bg-[hsla(0,0%,100%,.9)] py-3 h-fit flex items-center justify-center z-20">
-              <p className="text-[#333] font-bold sm:text-base text-sm uppercase tracking-wide">Not Available</p>
-            </div>
-          )}
+            {availability === 'Out of stock' && (
+              <div className="absolute top-[50%] -translate-y-[50%] left-0 bg-[hsla(0,0%,100%,.9)] py-3 h-fit flex items-center justify-center z-20">
+                <p className="text-[#333] font-bold sm:text-base text-sm uppercase tracking-wide">Not Available</p>
+              </div>
+            )}
             <LazyLoadImage
               src={images?.[0]}
               effect="blur"
@@ -86,10 +86,10 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
           <div className={`text-center relative py-3 px-2 z-10 ${availability === 'Out of stock' ? 'opacity-75' : ''}`}>
 
             <button
-            disabled={availability === 'Out of stock'}
-            className={`absolute duration-200 disabled:cursor-not-allowed z-20 transition-all ease-in-out ${isHovered ? 'opacity-100 ' : 'opacity-0'
-            } -top-9 left-0 bg-primary-1 hover:bg-primary-2 py-2 flex items-center justify-center gap-1 text-white font-semibold text-xs uppercase w-full`}
-            onClick={handleAddToCartClick}
+              disabled={availability === 'Out of stock'}
+              className={`absolute duration-200 disabled:cursor-not-allowed z-20 transition-all ease-in-out ${isHovered ? 'opacity-100 ' : 'opacity-0'
+                } -top-9 left-0 bg-primary-1 hover:bg-primary-2 py-2 flex items-center justify-center gap-1 text-white font-semibold text-xs uppercase w-full`}
+              onClick={handleAddToCartClick}
             >
               <IoMdCart className='text-xl' />  Add to cart
             </button>
@@ -109,8 +109,8 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
         </div>
       </Link>
 
-      <Modal isOpen={isModalOpen} onClose={()=> setIsModalOpen(false)}>
-<PolicyModal setIsModalOpen={setIsModalOpen} isCheckboxChecked={isCheckboxChecked} setIsCheckboxChecked={setIsCheckboxChecked} product={product} handleCheckboxChange={handleCheckboxChange} />
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <PolicyModal setIsModalOpen={setIsModalOpen} isCheckboxChecked={isCheckboxChecked} setIsCheckboxChecked={setIsCheckboxChecked} product={product} handleCheckboxChange={handleCheckboxChange} />
       </Modal>
     </>
   );

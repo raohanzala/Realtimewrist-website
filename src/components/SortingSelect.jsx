@@ -17,7 +17,7 @@ const CollectionHeader = ({ category }) => {
   };
 
   return (
-    <div className="flex justify-between items-center w-full mb-5 text-base sm:text-2xl">
+    <div className="flex sm:justify-between justify-center gap-5 items-center sm:flex-nowrap flex-wrap w-full mb-8 text-base sm:text-2xl">
       <Title text1={category} text2={"COLLECTION"} />
 
       <div className="relative">

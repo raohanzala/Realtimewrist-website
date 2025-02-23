@@ -47,8 +47,6 @@ const PlaceOrder = () => {
   const {isLoggedIn} = useSelector((state)=> state.user)
   const { formData } = useSelector((state) => state.order); 
 
-  console.log(formData, 'FORMDTAA')
-
   const {placeOrder, isPending, orderSuccess, setOrderSuccess}  = usePlaceOrder()
 
   const order = async (values) => {
@@ -73,6 +71,7 @@ const PlaceOrder = () => {
 
     if (!isLoggedIn) {
       dispatch(saveFormData(values));
+      toast.error('Please login to continue.')
       navigate("/login", { state: { from: "/place-order" } });
       return; 
     }

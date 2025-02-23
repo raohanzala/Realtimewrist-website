@@ -8,21 +8,24 @@ const WhatsAppChat = () => {
   };
 
   return (
-    <div>
-      <button 
-        onClick={toggleChat} 
-        className="fixed bottom-5 animate-scale-up right-5 z-50 bg-gradient-to-r from-green-400 to-green-600 p-3 rounded-full shadow-xl hover:scale-110 transition-transform transform hover:rotate-12 hover:shadow-2xl"
-      >
+    <div className="fixed bottom-6 right-6 flex items-center justify-center z-50">
+    {/* Ping Effect */}
+    <div className="absolute bottom-0 right-0 h-14 w-14 rounded-full bg-green-500 opacity-75 animate-ping"></div>
 
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-          alt="WhatsApp Chat" 
-          className="w-8 h-8 animate-pulse" 
-          />
-      </button>
+    {/* WhatsApp Button */}
+    <button
+      onClick={toggleChat}
+      className="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-green-400 to-green-600 shadow-xl transition-transform transform hover:scale-110 hover:rotate-12 hover:shadow-2xl"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp Chat"
+        className="w-8 h-8"
+      />
+    </button>
 
       {isOpen && (
-        <div 
+        <div
           className={`fixed bottom-20 right-5 bg-white w-72 shadow-xl rounded-lg z-50 overflow-hidden border-gray-200 transition-all duration-500 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
           {/* Header */}
@@ -36,12 +39,12 @@ const WhatsAppChat = () => {
 
           {/* Chat Body */}
           <div className="p-4">
-            <p className="text-sm mb-3">Hi there! 👋<br/>How can we help you today?</p>
-            
-            <a 
-              href="https://wa.me/923278272361?text=Hi!%20I%20need%20help%20with%20your%20products." 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <p className="text-sm mb-3">Hi there! 👋<br />How can we help you today?</p>
+
+            <a
+              href="https://wa.me/923278272361?text=Hi!%20I%20need%20help%20with%20your%20products."
+              target="_blank"
+              rel="noopener noreferrer"
               className="block bg-gradient-to-r from-green-500 to-green-600 text-white text-center py-2 rounded-lg mt-3 hover:bg-green-700 transition-transform transform hover:scale-105"
             >
               Start Chat
