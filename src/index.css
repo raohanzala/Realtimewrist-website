@@ -93,6 +93,11 @@ select:focus {
   background-color: #cba135 !important; 
 }
 
+@media (max-width: 640px) {
+  .swiper-pagination {
+    display: none !important;
+  }
+}
 
 .no-scroll {
   overflow: hidden;

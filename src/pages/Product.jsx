@@ -31,7 +31,6 @@ const Product = () => {
     { label: product?.category?.name, href: `/category/${product?.category.name}/${product?.category._id}` },
     { label: product?.name },
   ];
-  console.log(product, "PRODUCTIMAGE");
 
   if (isPending || !product) {
     return (

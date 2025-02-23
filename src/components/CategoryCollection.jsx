@@ -9,19 +9,19 @@ const collections = [
   {
     id: 1,
     title: "Men's Collection",
-    image: assets.rolex_yatch_master_1,
+    image: 'https://images.pexels.com/photos/1751599/pexels-photo-1751599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     link: "/gender/Men",
   },
   {
     id: 2,
     title: "Women's Collection",
-    image: assets.categoryImg_2,
+    image: 'https://cdn.pixabay.com/photo/2020/04/11/14/49/wrist-watch-5030716_1280.jpg',
     link: "/gender/Women",
   },
   {
     id: 3,
     title: "All Collection",
-    image: assets.rolex_yatch_master_1,
+    image: 'https://images.unsplash.com/photo-1609587312208-cea54be969e7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     link: "/all-collection",
   },
 ];
@@ -32,11 +32,11 @@ const CategoryCollection = () => {
       {collections.map((collection) => (
         <div key={collection.id} className="overflow-hidden relative group h-96 max-h-96">
           <Link to={collection.link}>
-            <div className="relative w-full h-full transform group-hover:scale-110 duration-300 flex items-center justify-center">
+            <div className="relative w-full h-96 transform group-hover:scale-110 duration-300 flex items-center justify-center">
               <LazyLoadImage
                 effect="blur"
                 src={collection.image}
-                className="max-w-full max-h-full object-center"
+                className="w-full h-96 object-cover"
                 alt={collection.title}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>

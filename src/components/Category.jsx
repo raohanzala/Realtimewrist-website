@@ -39,7 +39,7 @@ const Category = () => {
           }
 
         </Swiper>
-        <div className="custom-prev custom-prev  z-50 transition-opacity duration-400 ease-in-out">
+        {/* <div className="custom-prev custom-prev  z-50 transition-opacity duration-400 ease-in-out">
           <button className="absolute text-2xl z-30 duration-500 ease-in-out  text-[#cba135]   p-[2px] rounded-full  -left-4 top-1/2 transform -translate-y-1/2 ">
             <IoIosArrowBack />
           </button>
@@ -48,7 +48,7 @@ const Category = () => {
           <button className="absolute text-2xl z-30 duration-500 ease-in-out  p-[2px] rounded-full  -right-4 text-[#cba135] top-1/2 transform -translate-y-1/2 ">
             <IoIosArrowForward />
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   )

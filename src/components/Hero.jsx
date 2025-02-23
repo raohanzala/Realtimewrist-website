@@ -3,10 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { assets } from "../assets/assets";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css'; 
+
 
 const slideList = [
   {
@@ -32,49 +35,30 @@ const slideList = [
   },
 ];
 
-
 const Hero = () => {
-  // Create references for navigation buttons
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-
   return (
-    <div className="relative">
+    <div className="relative w-full sm:h-screen h-[400px]">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay, EffectFade]}
-        spaceBetween={30}
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={50}
         slidesPerView={1}
         effect="fade"
-        fadeEffect={{ crossFade: true }}
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000 }}
         loop={true}
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current,
-        }}
-        onSwiper={(swiper) => {
-          // Assign buttons after Swiper is initialized
-          setTimeout(() => {
-            if (swiper?.params?.navigation) {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-              swiper.navigation.init();
-              swiper.navigation.update();
-            }
-          });
-        }}
-        className="relative w-full sm:h-screen h-[400px] overflow-hidden"
+        navigation={{ nextEl: ".custom-next", prevEl: ".custom-prev" }}
+        className="relative w-full h-full sm:h-screen overflow-hidden"
       >
         {slideList.map((slide, index) => (
-          <SwiperSlide key={index} className="relative">
+          <SwiperSlide key={index} className="relative w-full h-full flex">
             {/* Background Image */}
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-full object-cover"
+              // effect="blur"
+              className="w-full h-screen object-cover"
             />
-            
+
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/20"></div>
 
@@ -88,7 +72,7 @@ const Hero = () => {
               </p>
               <Link
                 to={slide.link}
-                className="mt-4 bg-gold bg-[#cba135] text-black font-semibold px-6 py-3 rounded-full transition animate-bounce"
+                className="mt-4 bg-[#cba135] text-black font-semibold px-6 py-3 rounded-full transition hover:scale-110 hover:shadow-lg"
               >
                 {slide.buttonText}
               </Link>
@@ -98,18 +82,12 @@ const Hero = () => {
       </Swiper>
 
       {/* Left Navigation Arrow */}
-      <button
-        ref={prevRef}
-        className="absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full left-4 top-1/2 transform -translate-y-1/2 hover:bg-black/80 transition"
-      >
+      <button className="custom-prev hidden sm:flex absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full left-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
         <IoIosArrowBack />
       </button>
 
       {/* Right Navigation Arrow */}
-      <button
-        ref={nextRef}
-        className="absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full right-4 top-1/2 transform -translate-y-1/2 hover:bg-black/80 transition"
-      >
+      <button className="custom-next hidden sm:flex absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full right-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
         <IoIosArrowForward />
       </button>
     </div>
