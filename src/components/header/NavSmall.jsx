@@ -12,12 +12,12 @@ const NavSmall = ({ visible, setVisible }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
 
   // Disable scrolling when drawer is open
-  useEffect(() => {
-    document.body.style.overflow = visible ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [visible]);
+  // useEffect(() => {
+  //   document.body.style.overflow = visible ? "hidden" : "";
+  //   return () => {
+  //     document.body.style.overflow = "";
+  //   };
+  // }, [visible]);
 
   const navItems = [
     { name: "Home", path: "/" },

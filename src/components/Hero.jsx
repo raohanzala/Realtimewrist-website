@@ -15,21 +15,21 @@ const slideList = [
   {
     title: "Massive Discount",
     subtitle: "Get up to 20% off on all luxury watches!",
-    image: assets.hero_img2,
+    image: 'https://images.unsplash.com/photo-1486490686828-196042a38646?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     link: "/all-collection",
     buttonText: "Shop Now",
   },
   {
     title: "Men's Collection",
     subtitle: "Exclusive styles for modern gentlemen.",
-    image: assets.hero_img5,
+    image: 'https://images.unsplash.com/photo-1482954363933-4bed6bbea570?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     link: "/gender/men",
     buttonText: "Shop Men's",
   },
   {
     title: "Women's Collection",
     subtitle: "Elegant timepieces for sophisticated women.",
-    image: assets.hero_img6,
+    image: 'https://images.unsplash.com/photo-1451477334999-a9321157a431?q=80&w=1610&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     link: "/gender/women",
     buttonText: "Shop Women's",
   },
@@ -37,7 +37,7 @@ const slideList = [
 
 const Hero = () => {
   return (
-    <div className="relative w-full sm:h-screen h-[400px]">
+    <div className="relative w-full sm:h-[80vh] h-[400px]">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={50}
@@ -56,7 +56,7 @@ const Hero = () => {
               src={slide.image}
               alt={slide.title}
               effect="blur"
-              className=" h-screen w-screen object-cover"
+              className=" h-[80vh] w-screen object-cover"
             />
 
             {/* Overlay */}
@@ -72,7 +72,7 @@ const Hero = () => {
               </p>
               <Link
                 to={slide.link}
-                className="mt-4 bg-[#cba135] text-white text-sm font-semibold px-6 py-3 rounded transition hover:scale-110 hover:shadow-lg animate-pulse"
+                className="mt-4 bg-[#cba135] text-white text-sm font-semibold px-6 py-3 rounded transition hover:scale-110 hover:shadow-lg "
               >
                 {slide.buttonText}
               </Link>
@@ -82,12 +82,12 @@ const Hero = () => {
       </Swiper>
 
       {/* Left Navigation Arrow */}
-      <button className="custom-prev  absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full left-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
+      <button className="custom-prev sm:block hidden  absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full left-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
         <IoIosArrowBack />
       </button>
 
       {/* Right Navigation Arrow */}
-      <button className="custom-next  absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full right-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
+      <button className="custom-next sm:block hidden  absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full right-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
         <IoIosArrowForward />
       </button>
     </div>

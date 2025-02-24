@@ -39,17 +39,17 @@ const CartDrawer = () => {
     dispatch(closeCart());
   }, [location.pathname, dispatch]);
 
-  useEffect(() => {
-    if (isCartOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+  // useEffect(() => {
+  //   if (isCartOpen) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "";
+  //   }
 
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isCartOpen]);
+  //   return () => {
+  //     document.body.style.overflow = "";
+  //   };
+  // }, [isCartOpen]);
 
   const handleCheckout = () => {
     toast.dismiss();

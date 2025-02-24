@@ -13,7 +13,7 @@ const CategoryProducts = () => {
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
 
-  const { categoryId, category } = useParams(); 
+  const { categoryId, category } = useParams();
   const { products, error, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useProductsByCategory(categoryId);
 
 
@@ -22,11 +22,11 @@ const CategoryProducts = () => {
       <CollectionsSidebar />
 
       <div className="flex-1">
-        <SortingSelect category={category}/>
+        <SortingSelect category={category} />
 
         {/* Products Grid */}
         <div className="relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-          { status === 'pending' ? <ProductSkeleton/> : products?.length > 0 ? (
+          {status === 'pending' ? <ProductSkeleton /> : products?.length > 0 ? (
             products?.map((item) => (
               <ProductItem
                 key={item._id}
@@ -54,7 +54,7 @@ const CategoryProducts = () => {
           </div>
         )}
 
-{!hasNextPage && (
+        {!hasNextPage && (
           <p className="text-center text-gray-500 mt-4">
             No more products to load
           </p>
@@ -62,7 +62,8 @@ const CategoryProducts = () => {
       </div>
     </div>
 
-     ) };
+  )
+};
 
 const ProductSkeleton = () => {
   const skeletons = Array(10).fill(0);
