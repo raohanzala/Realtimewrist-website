@@ -9,34 +9,34 @@ const collections = [
   {
     id: 1,
     title: "Men's Collection",
-    image: 'https://images.pexels.com/photos/1751599/pexels-photo-1751599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: assets.mens_collection,
     link: "/gender/Men",
   },
   {
     id: 2,
     title: "Women's Collection",
-    image: 'https://cdn.pixabay.com/photo/2020/04/11/14/49/wrist-watch-5030716_1280.jpg',
+    image: assets.ladies_collection,
     link: "/gender/Women",
   },
   {
     id: 3,
     title: "All Collection",
-    image: 'https://images.unsplash.com/photo-1609587312208-cea54be969e7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: assets.all_collection,
     link: "/all-collection",
   },
 ];
 
 const CategoryCollection = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 px-3'>
       {collections.map((collection) => (
-        <div key={collection.id} className="overflow-hidden relative group h-96 max-h-96">
+        <div key={collection.id} className="overflow-hidden relative group h-80 sm:max-h-96 rounded">
           <Link to={collection.link}>
-            <div className="relative w-full h-96 transform group-hover:scale-110 duration-300 flex items-center justify-center">
+            <div className="relative w-full h-80 sm:h-96 transform group-hover:scale-110 duration-300 flex items-center justify-center">
               <LazyLoadImage
                 effect="blur"
                 src={collection.image}
-                className="w-full h-96 object-cover"
+                className="w-screen h-80 sm:h-96 object-cover animate-fade-in"
                 alt={collection.title}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>

@@ -1,23 +1,46 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NewsLetterBox = () => {
-
-
-  const onSubmitHandler= (e)=>{
-    e.preventDefault()
-  }
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    // Add form submission logic here
+  };
 
   return (
-    <div className='text-center pt-12'>
-      <p className='text-2xl font-medium text-gray-800'>Join Our Community</p>
-      <p className='text-gray-400 mt-3'>Sign up to receive the latest news, updates, and exclusive offers!</p>
-      <form  onSubmit={onSubmitHandler} className='max-w-[500px] flex items-center gap-3 rounded-sm overflow-hidden mx-auto my-6 border pl-3'>
-        <input className='w-full sm:flex-1 text-sm focus:outline-none' type="email" placeholder='Enter email for newslatter' required />
-        <button type='submit' className='bg-dark-2 text-white text-xs font-semibold px-3 sm:px-4 py-4'>SUBSCIRBE</button>
-      </form>
-        <p className=' text-gray-600 mt-4 text-sm'>By signing up, you agree to our Terms of Service and Privacy Policy.</p>
-    </div>
-  )
-}
+    <div className="text-center pt-12">
+      {/* Heading */}
+      <h2 className="text-2xl text-gray-900">Join Our Community</h2>
+      <p className="text-gray-500 mt-2">Sign up to receive the latest news, updates, and exclusive offers!</p>
 
-export default NewsLetterBox
+      {/* Form */}
+      <form 
+        onSubmit={onSubmitHandler} 
+        className="max-w-lg mx-auto my-6 flex items-center gap-2 border border-gray-300 rounded overflow-hidden p-1 bg-white shadow-sm"
+      >
+        <input 
+          className="w-full px-4 py-3 text-sm text-gray-700 focus:outline-none "
+          type="email"
+          placeholder="Enter your email for newsletter"
+          required 
+        />
+        <button 
+          type="submit"
+          className="bg-dark-2 text-white text-sm font-semibold px-5 py-3 rounded-sm transition-all duration-300 hover:bg-dark-1"
+        >
+          SUBSCRIBE
+        </button>
+      </form>
+
+      {/* Terms & Conditions */}
+      <p className="text-gray-600 text-xs mt-3">
+        By signing up, you agree to our 
+        <a href="#" className="text-primary-1 hover:underline"> Terms of Service </a> 
+        and 
+        <Link to={'/privacy-policy'} className="text-primary-1 hover:underline"> Privacy Policy</Link>.
+      </p>
+    </div>
+  );
+};
+
+export default NewsLetterBox;

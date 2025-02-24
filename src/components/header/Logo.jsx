@@ -9,19 +9,19 @@ import { IoCallOutline } from "react-icons/io5";
 
 const Logo = () => {
   return (
-    <div className='flex items-center sm:justify-between justify-center p-2 px-5 max-w-screen-2xl w-full mx-auto'>
-      <div className='sm:flex hidden items-center'>
+    <div className='flex items-center justify-between  p-2 px-5 max-w-screen-2xl w-full mx-auto'>
+      <a href="tel:+923278272361" className='flex  items-center'>
 
-        <div className='text-2xl text-[#cba135] mr-2'>
-          <IoCallOutline />
-        </div>
+      <a  className="text-2xl text-[#cba135] mr-2">
+        <IoCallOutline />
+      </a>
 
-        <div className='pl-2 border-l-2 '>
+        <div className=' sm:block hidden pl-2 border-l-2 '>
           <h2 className='text-sm'>HELPLINE :</h2>
-          <p className='text-xs font-semibold'>+92-3249221933</p>
+          <p className='text-xs font-semibold'>+92-3278272361</p>
         </div>
 
-      </div>
+      </a>
       <Link to={'/'}>
         <img
           src={assets.logo2}
@@ -30,16 +30,16 @@ const Logo = () => {
         />
       </Link>
 
-      <div className='sm:flex hidden items-center '>
+      <a className='flex  items-center ' href="mailto:realtimewrist@gmail.com">
         <div className='text-2xl text-[#cba135] mr-2'>
           <BsEnvelope />
         </div>
 
-        <div className='pl-2 border-l-2'>
+        <div className='sm:block hidden pl-2 border-l-2'>
           <h2 className='text-sm'>EMAIL US :</h2>
           <p className='text-xs font-semibold'>realtimewrist@gmail.com</p>
         </div>
-      </div>
+      </a>
     </div>
   )
 }

@@ -30,7 +30,7 @@ const ProductDetails = ({ productData, handleAddToCartClick }) => {
               {Math.floor(
                 ((productData.oldPrice - productData.newPrice) /
                   productData.oldPrice) *
-                  100
+                100
               )}
               %
             </p>
@@ -40,29 +40,25 @@ const ProductDetails = ({ productData, handleAddToCartClick }) => {
       <div className="flex items-center gap-5 mt-5">
         <Button
           onClick={handleAddToCartClick}
-          variant='primaryBig'
+          variant='secondary'
+          className='py-3'
         >
-         ADD TO CART
+          ADD TO CART
         </Button>
-        <Button onClick={handleAddToCartClick} variant="secondary"  className="bg-primary-1 py-3 px-8 text-sm uppercase text-white">
+        {/* <Button onClick={handleAddToCartClick} variant="secondary" className="bg-primary-1 py-3 px-8 text-sm uppercase text-white">
           Order Now
-        </Button>
+        </Button> */}
       </div>
       <hr className="mt-8" />
-      {/* <div className="py-6 flex gap-2 items-center">
-        <BsWhatsapp size={25} />
-        Order via WhatsApp : 03278272361
-      </div> */}
-      <div className="mt-8 flex items-center gap-4 bg-green-100 text-green-800 py-3 px-4 rounded-lg border border-green-300">
-  <BsWhatsapp size={28} className="text-green-600" />
-  <p className="text-sm font-medium">
-    <span className="font-semibold">Order via WhatsApp:</span>
-    <a href="https://wa.me/923278272361" target="_blank" rel="noopener noreferrer" className="ml-2 text-green-700 hover:underline">
-      +92 327 8272361
-    </a>
-  </p>
-</div>
-      <hr className="" />
+      <div className="mt-8 flex items-center gap-4 bg-green-100 text-green-800 py-3 px-3 rounded-lg border border-green-300">
+        <BsWhatsapp size={28} className="text-green-600" />
+        <p className="text-sm font-medium">
+          <span className="font-semibold">Order via WhatsApp:</span>
+          <a href="https://wa.me/923278272361" target="_blank" rel="noopener noreferrer" className="ml-2 text-green-700 hover:underline">
+            +92 327 8272361
+          </a>
+        </p>
+      </div>
       <div className="text-sm text-gray-500 mt-5">
         <p>100% same as pictures.</p>
         <p>Cash on delivery is available on this product.</p>

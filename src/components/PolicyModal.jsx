@@ -46,8 +46,8 @@ const PolicyModal = ({
 
   return (
    <div>
-      <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="bg-white rounded shadow-lg p-8 w-11/12 max-w-md relative">
+      <div className="flex items-center justify-center z-50">
+        <div className="w-11/12 max-w-md">
           <h2 className="text-xl font-bold mb-4">Important Information</h2>
           <p className="text-sm text-gray-700">
             Please note that by adding this product to the cart, you are

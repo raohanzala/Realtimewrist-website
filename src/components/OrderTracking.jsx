@@ -14,7 +14,7 @@ const OrderTracking = ({ order, onClose }) => {
   const currentStep = trackingSteps.indexOf(order.status);
 
   return (
-    <div className=" w-96 p-2">
+    <div >
       <h2 className="text-lg font-semibold mb-2">Order Tracking</h2>
       <p className="text-sm text-gray-600">Order ID: <span className="font-medium">{order._id}</span></p>
 

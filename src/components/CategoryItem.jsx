@@ -6,7 +6,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 function CategoryItem({categoryName, categoryImg, link}) {
   return (
     <Link to={`/category/${categoryName}/${link}`}>
-      <div className=" rounded-full max-h-72 max-w-72 overflow-hidden relative m-auto">
+      <div className=" rounded-full max-h-36 max-w-36 overflow-hidden relative m-auto">
         <div className="relative w-full h-full flex items-center justify-center hover:scale-110 duration-300">
           <LazyLoadImage
             effect="blur"

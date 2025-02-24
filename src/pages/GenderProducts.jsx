@@ -44,8 +44,6 @@ const GenderProducts = () => {
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  // if (error) return "Something went wrong";
-
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 mx-auto max-w-[1280px] px-5">
       {/* Filter Options */}
@@ -57,7 +55,7 @@ const GenderProducts = () => {
         <div className="relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
           {status === 'pending' ? (
             <ProductSkeleton />
-          ) : error ? 'Something went wrong' : (
+          ) : (
             products &&
             products.length > 0 &&
             products.map((item) => (
@@ -76,16 +74,16 @@ const GenderProducts = () => {
           )}
         </div>
 
-        <div className="py-10 flex justify-center items-end">
+        {hasNextPage && <div className="py-10 flex justify-center items-end">
           {status === 'pending' ? (
             <Spinner variant={"secondary"} />
           ) : (
-            !products?.length && <Empty resourceName="products" />
+            !products?.length && <div className='col-span-4'> <Empty resourceName="products" /> </div>
           )}
-        </div>
+        </div>}
 
         {/* Loader Trigger */}
-        <div ref={loaderRef} className="h-10 w-full"></div>
+        {hasNextPage && <div ref={loaderRef} className="h-10 w-full"></div>}
 
         {!hasNextPage && (
           <p className="text-center text-gray-500 mt-4">

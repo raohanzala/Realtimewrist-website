@@ -66,7 +66,13 @@ const Collection = () => {
 
         {isFetchingNextPage && <Spinner variant={"secondary"} />}
 
-        <div ref={observerRef} className="h-10"></div>
+        {hasNextPage && <div ref={observerRef} className="h-10"></div>}
+
+        {!hasNextPage && (
+          <p className="text-center text-gray-500 mt-4">
+            No more products to load
+          </p>
+        )}
       </div>
     </div>
   );

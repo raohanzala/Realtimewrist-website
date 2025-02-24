@@ -14,7 +14,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 const slideList = [
   {
     title: "Massive Discount",
-    subtitle: "Get up to 50% off on all luxury watches!",
+    subtitle: "Get up to 20% off on all luxury watches!",
     image: assets.hero_img2,
     link: "/all-collection",
     buttonText: "Shop Now",
@@ -47,16 +47,16 @@ const Hero = () => {
         autoplay={{ delay: 3000 }}
         loop={true}
         navigation={{ nextEl: ".custom-next", prevEl: ".custom-prev" }}
-        className="relative w-full h-full sm:h-screen overflow-hidden"
+        className="relative w-full h-full overflow-hidden"
       >
         {slideList.map((slide, index) => (
-          <SwiperSlide key={index} className="relative w-full h-full flex">
+          <SwiperSlide key={index} className="relative w-full h-full flex animate-fade-in">
             {/* Background Image */}
-            <img
+            <LazyLoadImage
               src={slide.image}
               alt={slide.title}
-              // effect="blur"
-              className="w-full h-screen object-cover"
+              effect="blur"
+              className=" h-screen w-screen object-cover"
             />
 
             {/* Overlay */}
@@ -72,7 +72,7 @@ const Hero = () => {
               </p>
               <Link
                 to={slide.link}
-                className="mt-4 bg-[#cba135] text-black font-semibold px-6 py-3 rounded-full transition hover:scale-110 hover:shadow-lg"
+                className="mt-4 bg-[#cba135] text-white text-sm font-semibold px-6 py-3 rounded transition hover:scale-110 hover:shadow-lg animate-pulse"
               >
                 {slide.buttonText}
               </Link>
@@ -82,12 +82,12 @@ const Hero = () => {
       </Swiper>
 
       {/* Left Navigation Arrow */}
-      <button className="custom-prev hidden sm:flex absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full left-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
+      <button className="custom-prev  absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full left-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
         <IoIosArrowBack />
       </button>
 
       {/* Right Navigation Arrow */}
-      <button className="custom-next hidden sm:flex absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full right-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
+      <button className="custom-next  absolute text-xl z-30 text-white bg-black/50 shadow-lg p-2 rounded-full right-4 sm:top-1/2 top-[60%] transform -translate-y-1/2 hover:bg-black/80 transition">
         <IoIosArrowForward />
       </button>
     </div>

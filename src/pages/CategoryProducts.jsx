@@ -16,9 +16,6 @@ const CategoryProducts = () => {
   const { categoryId, category } = useParams(); 
   const { products, error, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useProductsByCategory(categoryId);
 
-  console.log(status, 'STTAUS')
-
-  if (error) return <p className="text-red-500">Something went wrong</p>;
 
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 mx-auto max-w-[1280px] px-5">
@@ -55,6 +52,12 @@ const CategoryProducts = () => {
               {isFetchingNextPage ? "Loading..." : "Load More"}
             </button>
           </div>
+        )}
+
+{!hasNextPage && (
+          <p className="text-center text-gray-500 mt-4">
+            No more products to load
+          </p>
         )}
       </div>
     </div>

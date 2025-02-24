@@ -83,12 +83,13 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
               />
             )}
           </div>
-          <div className={`text-center relative py-3 px-2 z-10 ${availability === 'Out of stock' ? 'opacity-75' : ''}`}>
+          <div className={`text-center relative sm:py-3 py-2 px-2 z-10 ${availability === 'Out of stock' ? 'opacity-75' : ''}`}>
 
             <button
               disabled={availability === 'Out of stock'}
-              className={`absolute duration-200 disabled:cursor-not-allowed z-20 transition-all ease-in-out ${isHovered ? 'opacity-100 ' : 'opacity-0'
-                } -top-9 left-0 bg-primary-1 hover:bg-primary-2 py-2 flex items-center justify-center gap-1 text-white font-semibold text-xs uppercase w-full`}
+              className={`absolute duration-200 disabled:cursor-not-allowed z-20 transition-all ease-in-out 
+                // ${isHovered ? 'opacity-100 ' : 'opacity-100'}
+                 -top-9 left-0 bg-primary-1 hover:bg-primary-2 py-2 flex items-center justify-center gap-1 text-white sm:font-semibold font-normal text-xs uppercase w-full`}
               onClick={handleAddToCartClick}
             >
               <IoMdCart className='text-xl' />  Add to cart

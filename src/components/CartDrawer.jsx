@@ -18,6 +18,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { useRemoveFromCart } from "../api/useRemoveFromCart";
+import { formatAmount } from "../helpers";
 
 const CartDrawer = () => {
   const { navigate } = useContext(ShopContext);
@@ -80,7 +81,7 @@ const CartDrawer = () => {
       />
 
       <div
-        className={`fixed top-0 right-0 w-full max-w-md min-h-screen h-full bg-white z-[9999] shadow-lg transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 shadow-xl sm:max-w-md max-w-[350px] w-full h-screen bg-white z-[9999] transform transition-transform duration-300 ${
           isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -88,7 +89,7 @@ const CartDrawer = () => {
           <div className="flex items-center justify-between p-4 border-b">
             <h2 className="text-lg font-bold">Your Cart ({totalItems})</h2>
             <button
-              onClick={() => dispatch(closeCart())}
+              onClick={(e) => {dispatch(closeCart()); e.stopPropagation()}}
               className="text-gray-500 hover:text-gray-900"
             >
               <IoCloseSharp size={20} />
@@ -98,7 +99,6 @@ const CartDrawer = () => {
           <div className="flex-1 overflow-y-auto p-4">
             {cartItems.length === 0 ? (
               <div className="py-20 flex gap-1 h-full items-center justify-center text-gray-300">
-                {/* <IoMdCart size={30}/> */}
                 <MdRemoveShoppingCart size={30} />
 
                 <p className="text-xl ">Your cart is empty</p>
@@ -121,7 +121,7 @@ const CartDrawer = () => {
                       <div className="flex items-center gap-2">
                         <p className="text-sm font-semibold">
                           {CURRENCY}
-                          {item?.newPrice}
+                          {formatAmount(item?.newPrice)}
                         </p>
                       </div>
                     </div>
@@ -130,8 +130,9 @@ const CartDrawer = () => {
                       <ImCancelCircle
                         size={14}
                         className="text-gray-500 hover:text-black"
-                        onClick={() => {
+                        onClick={(e) => {
                           handleRemoveFromCart(item._id);
+                          e.stopPropagation()
                         }}
                       />
                     </button>
@@ -142,7 +143,7 @@ const CartDrawer = () => {
             )}
           </div>
 
-          <div className="sm:p-4 p-2 border-t mt-auto">
+          <div className="sm:p-4 p-3 border-t mt-auto">
             <CartTotal isHeading={false} />
             <div className="flex sm:gap-4 gap-2 mt-4">
               <Button
@@ -152,7 +153,7 @@ const CartDrawer = () => {
                 startIcon={<IoMdCart className="text-xl" />}
               >
                 View Cart
-                <p className="absolute right-[-5px] -top-1 w-4 text-center leading-4 bg-[red] text-white aspect-square rounded-full text-[8px]">
+                <p className="absolute right-[-5px] -top-1 w-4 text-center leading-4 bg-[red] text-white rounded-full text-[8px]">
                   {totalItems}
                 </p>
               </Button>

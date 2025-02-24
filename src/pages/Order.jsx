@@ -2,7 +2,7 @@ import Title from "../components/Title";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useOrders } from "../api/useOrders";
-import { formatTimestamp } from "../helpers";
+import { formatAmount, formatTimestamp, timestampToShortDate } from "../helpers";
 import Modal from "../components/Modal";
 import OrderTracking from "../components/OrderTracking";
 
@@ -35,16 +35,15 @@ const handleTrackOrder = ( order) => {
           <SkeletonRow />
         ) : orderData?.length > 0 ? (
           orderData?.map((order, index) => {
-            console.log(order, "ORDER");
             return (
               <div className={`border-b mb-5`} key={index}>
-                <div className="flex justify-between items-center mb-4 w-full bg-gray-100 py-2 px-4 rounded-sm shadow-sm">
-                  <div className="flex flex-col items-center md:flex-row gap-2">
+                <div className="flex flex-wrap gap-2 justify-between items-center mb-4 w-full bg-gray-100 py-2 px-4 rounded-sm shadow-sm">
+                  <div className="flex flex-wrap items-center gap-3">
                     <div className="text-lg font-semibold text-gray-800">
-                      Amount: <span className="text-green-600">{order?.amount}</span>
+                      Amount: <span className="text-green-600">{formatAmount(order?.amount)}</span>
                     </div>
                     <div className="text-sm text-gray-500">
-                      <p>Date: <span className="font-medium text-gray-700">{formatTimestamp(order?.date)}</span></p>
+                      <p>Date: <span className="font-medium text-gray-700">{timestampToShortDate(order?.date)}</span></p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
@@ -73,17 +72,38 @@ const handleTrackOrder = ( order) => {
                         </div>
                         <div className="flex gap-2 text-sm text-gray-500">
                           <p>
-                            Price: <span className="text-gray-400">{item?.newPrice}</span>
+                            Price: <span className="text-gray-400">{formatAmount(item?.newPrice)}</span>
                           </p>
                         </div>
                       </div>
                     </div>
           
                     <div className="md:w-1/2 flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <div className={`min-w-2 h-2 rounded-full ${order.status === "Completed" ? "bg-green-500" : "bg-yellow-500"}`}></div>
-                        <p className="text-sm md:text-base">{order.status}</p>
-                      </div>
+                    <div className="flex items-center gap-2">
+  <div className={`w-2 h-2 rounded-full ${
+    {
+      "Pending": "bg-gray-400",
+      "Order Confirmed": "bg-blue-500",
+      "Processing": "bg-yellow-500",
+      "Out for Delivery": "bg-orange-500",
+      "Delivered": "bg-green-500",
+      "Canceled": "bg-red-500",
+    }[order.status] || "bg-gray-400"
+  }`}></div>
+  <p className={`text-sm md:text-base ${
+    {
+      "Pending": "text-gray-800",
+      "Order Confirmed": "text-blue-800",
+      "Processing": "text-yellow-800",
+      "Out for Delivery": "text-orange-800",
+      "Delivered": "text-green-800",
+      "Canceled": "text-red-800",
+    }[order.status] || "text-gray-800"
+  }`}>
+    {order.status}
+  </p>
+</div>
+
                       <button className="border px-4 py-2 text-sm font-medium rounded-sm " onClick={(e) => {e.stopPropagation();  handleTrackOrder(order)}}>
                         Track Order
                       </button>
