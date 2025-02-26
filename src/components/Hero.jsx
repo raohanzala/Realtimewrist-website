@@ -15,21 +15,20 @@ const slideList = [
   {
     title: "Massive Discount",
     subtitle: "Get up to 20% off on all luxury watches!",
-    image: 'https://images.unsplash.com/photo-1486490686828-196042a38646?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    link: "/all-collection",
+    image: assets.hero_img2,
     buttonText: "Shop Now",
   },
   {
     title: "Men's Collection",
     subtitle: "Exclusive styles for modern gentlemen.",
-    image: 'https://images.unsplash.com/photo-1482954363933-4bed6bbea570?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: assets.hero_img5,
     link: "/gender/men",
     buttonText: "Shop Men's",
   },
   {
     title: "Women's Collection",
     subtitle: "Elegant timepieces for sophisticated women.",
-    image: 'https://images.unsplash.com/photo-1451477334999-a9321157a431?q=80&w=1610&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: assets.hero_img6,
     link: "/gender/women",
     buttonText: "Shop Women's",
   },
@@ -60,19 +59,19 @@ const Hero = () => {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/20"></div>
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
 
             {/* Text Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6 sm:px-12">
-              <h2 className="text-3xl sm:text-5xl font-bold animate-fade-in">
+              <h2 className="text-3xl sm:text-5xl font-bold animate-scale-up">
                 {slide.title}
               </h2>
-              <p className="text-lg sm:text-xl mt-2 animate-slide-up">
+              <p className="text-lg sm:text-xl mt-2 animate-fade-in">
                 {slide.subtitle}
               </p>
               <Link
                 to={slide.link}
-                className="mt-4 bg-[#cba135] text-white text-sm font-semibold px-6 py-3 rounded transition hover:scale-110 hover:shadow-lg "
+                className="mt-4 bg-[#cba135] text-white text-sm font-medium px-6 py-3 rounded-sm transition hover:scale-110 hover:shadow-lg uppercase"
               >
                 {slide.buttonText}
               </Link>

@@ -41,7 +41,7 @@ const Cart = () => {
   ];
 
   return (
-    <div className='border-t pt-14 max-w-[1280px] mx-auto px-5'>
+    <div className='border-t sm:pt-14 pt-10 max-w-[1280px] mx-auto px-5'>
       <Breadcrumb breadcrumbs={breadcrumbs} />
       <div className="text-2xl mb-5">
         <Title text1={'YOUR'} text2={'CART'} />

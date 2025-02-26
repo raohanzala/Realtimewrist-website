@@ -81,13 +81,13 @@ const CartDrawer = () => {
       />
 
       <div
-        className={`fixed top-0 right-0 shadow-xl sm:max-w-md max-w-[350px] w-full h-screen bg-white z-[9999] transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 shadow-xl sm:max-w-md max-w-[340px] w-full h-screen bg-white z-[9999] transform transition-transform duration-300 ${
           isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col justify-between h-full">
           <div className="flex items-center justify-between p-4 border-b">
-            <h2 className="text-lg font-bold">Your Cart ({totalItems})</h2>
+            <h2 className="text-base uppercase">Your Cart ({totalItems})</h2>
             <button
               onClick={(e) => {dispatch(closeCart()); e.stopPropagation()}}
               className="text-gray-500 hover:text-gray-900"
@@ -96,7 +96,7 @@ const CartDrawer = () => {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto sm:p-4 p-2">
             {cartItems.length === 0 ? (
               <div className="py-20 flex gap-1 h-full items-center justify-center text-gray-300">
                 <MdRemoveShoppingCart size={30} />

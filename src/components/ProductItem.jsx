@@ -44,7 +44,7 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
     <>
       <Link to={`/product/${id}`}>
         <div
-          className="flex relative w-full h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border rounded"
+          className="flex relative w-full h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border sm:rounded rounded-sm"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -85,18 +85,9 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
           </div>
           <div className={`text-center relative sm:py-3 py-2 px-2 z-10 ${availability === 'Out of stock' ? 'opacity-75' : ''}`}>
 
-            <button
-              disabled={availability === 'Out of stock'}
-              className={`absolute duration-200 disabled:cursor-not-allowed z-20 transition-all ease-in-out 
-                // ${isHovered ? 'opacity-100 ' : 'opacity-100'}
-                 -top-9 left-0 bg-primary-1 hover:bg-primary-2 py-2 flex items-center justify-center gap-1 text-white sm:font-semibold font-normal text-xs uppercase w-full`}
-              onClick={handleAddToCartClick}
-            >
-              <IoMdCart className='text-xl' />  Add to cart
-            </button>
             <p className="text-sm tracking-wide font-semibold uppercase mb-1 text-gray-800 truncate">{productName}</p>
             <p className="text-xs text-gray-500 hover:underline">{shortDescription}</p>
-            <div className="flex gap-2 justify-center items-center mt-2">
+            <div className="flex gap-2 justify-center items-center mt-2 mb-1">
               {oldPrice && oldPrice > newPrice && (
                 <p className="text-xs sm:text-sm text-gray-400 line-through">
                   {CURRENCY}{formatAmount(oldPrice)}
@@ -106,6 +97,16 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
                 {CURRENCY}{formatAmount(newPrice)}
               </p>
             </div>
+            <button
+              disabled={availability === 'Out of stock'}
+              className={` duration-200 disabled:cursor-not-allowed z-20 transition-all ease-in-out 
+                // ${isHovered ? 'opacity-100 ' : 'opacity-100'}
+                 -top-9 left-0  hover:bg-primary-2 py-2 flex items-center justify-center gap-1 text-white sm:font-semibold font-normal text-xs uppercase px-4 mx-auto bg-primary-1`}
+              onClick={handleAddToCartClick}
+            >
+              {/* <IoMdCart className='text-xl' />   */}
+              Add to cart
+            </button>
           </div>
         </div>
       </Link>

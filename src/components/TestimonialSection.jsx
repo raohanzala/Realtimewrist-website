@@ -14,48 +14,48 @@ const testimonials = [
   {
     image: assets.feedback_1,
     review:
-      "“I absolutely love the product! It exceeded my expectations in both quality”",
-    name: "Kashif Ameen",
-    marks: 2,
+      "“G watch ahci hai.”",
+    name: "Umar Sheikh",
+    marks: 4,
   },
   {
     image: assets.feedback_2,
-    review: "“Outstandng Quality and finishing for the price”",
+    review: "“Outstandng Quality and finishing for the price. Have been searching for such an article with suc quality in low price for quite a while.”",
     name: "Kashif Ameen",
-    marks: 2,
+    marks: 5,
   },
   {
     image: assets.feedback_3,
     review:
-      "“I absolutely love the product! It exceeded my expectations in both quality”",
+      "“Arrived today very pleased with how it looks and feels.”",
     name: "Kashif Ameen",
     marks: 2,
   },
   {
     image: assets.feedback_4,
     review:
-      "“I absolutely love the product! It exceeded my expectations in both quality”",
+      "“Very good quality.”",
     name: "Kashif Ameen",
     marks: 2,
   },
   {
     image: assets.feedback_5,
     review:
-      "“I absolutely love the product! It exceeded my expectations in both quality”",
+      "“Best quality in this price range. Good product highly recommended.”",
     name: "Kashif Ameen",
     marks: 2,
   },
   {
     image: assets.feedback_6,
     review:
-      "“I absolutely love the product! It exceeded my expectations in both quality”",
+      "“Mashallah zabardast Parcel recieved.”",
     name: "Kashif Ameen",
     marks: 2,
   },
   {
     image: assets.feedback_7,
     review:
-      "“I absolutely love the product! It exceeded my expectations in both quality”",
+      "“Salam bhai ap jo cheez bheji hai woh bht umda hai bhai shukriya.”",
     name: "Kashif Ameen",
     marks: 2,
   },

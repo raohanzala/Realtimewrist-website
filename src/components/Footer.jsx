@@ -1,13 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedinIn,
-  FaWhatsapp,
-  FaYoutube,
-} from "react-icons/fa";
 import { assets } from "../assets/assets";
 import SocialLinks from "./SocialLinks";
 
@@ -66,11 +58,15 @@ const Footer = () => {
           <ul className="space-y-2 text-sm text-gray-400">
             <li>
               <span className="font-medium text-white">Phone:</span>{" "}
+              <a href="tel:+923278272361">
               +92-3278272361
+              </a>
             </li>
             <li>
               <span className="font-medium text-white">Email:</span>{" "}
+              <a href="mailto:realtimewrist@gmail.com">
               realtimewrist@gmail.com
+              </a>
             </li>
           </ul>
         </div>

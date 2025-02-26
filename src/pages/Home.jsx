@@ -15,13 +15,13 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      <div className='max-w-screen-xl mx-auto px-5'>
+      <div className='max-w-screen-xl mx-auto px-3'>
         <Category />
         <LatestCollection />
         <BestSeller />
       </div>
       <CategoryCollection />
-      <div className='max-w-screen-2xl mx-auto px-5'>
+      <div className='max-w-screen-2xl mx-auto px-3'>
 
       <TestimonialSection />
       </div>

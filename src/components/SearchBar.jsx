@@ -52,10 +52,10 @@ const SearchBar = ({ setShowSearch }) => {
       
       className="fixed top-0 left-0 w-full h-full bg-black backdrop-blur-sm bg-opacity-50 z-[999] flex justify-center items-start pt-20"
     >
-      <div className="bg-white rounded-sm w-11/12 sm:w-3/4 md:w-1/2 p-4 " ref={ref}>
+      <div className="bg-white rounded-sm w-11/12 sm:w-3/4 md:w-1/2 sm:p-4 px-3 py-2" ref={ref}>
         <div className="flex justify-between items-center border-b ">
           <div className="flex items-center  border-gray-300 w-full bg-white rounded overflow-hidden">
-        <span className="flex items-center pl-3 text-[#5c5c5c]">
+        <span className="flex items-center text-[#5c5c5c]">
           <RiSearchLine />
         </span>
         <input

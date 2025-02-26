@@ -5,7 +5,7 @@ import { IoIosArrowDown, IoLogoInstagram } from "react-icons/io";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { useCategories } from "../../api/useCategories";
-import { IoChevronBackSharp } from "react-icons/io5";
+import { IoChevronBackSharp, IoCloseSharp } from "react-icons/io5";
 
 const NavSmall = ({ visible, setVisible }) => {
   const { isLoading, error, categories } = useCategories();
@@ -33,13 +33,13 @@ const NavSmall = ({ visible, setVisible }) => {
     >
       {/* Sidebar */}
       <div
-        className={`absolute top-0 right-0 shadow-xl max-w-[300px] w-full h-screen bg-dark-2 transition-all ${visible ? "translate-x-0" : "translate-x-full"}`}
+        className={`absolute top-0 right-0 shadow-xl max-w-[300px] w-full h-full bg-dark-2 transition-all ${visible ? "translate-x-0" : "translate-x-full"}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-col text-gray-50 h-full">
           {/* Close Button */}
           <div onClick={() => setVisible(false)} className="flex items-center gap-1 p-3 cursor-pointer text-lg border-b border-gray-700">
-            <IoChevronBackSharp />
+            <IoChevronBackSharp size={20} />
             <p>Back</p>
           </div>
 

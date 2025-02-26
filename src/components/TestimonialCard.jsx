@@ -25,9 +25,9 @@ const TestimonialCard = ({ testimonial }) => {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
 
       {/* Text Content */}
-      <div className="absolute bottom-0 left-0 w-full p-6 text-white bg-black/50 backdrop-blur-md transition-all duration-300">
-        <p className="text-sm leading-relaxed font-light opacity-90 italic">
-          "{testimonial.review}"
+      <div className="absolute bottom-0 left-0 w-full p-6 text-white bg-black/30 backdrop-blur-sm transition-all duration-300">
+        <p className="text-sm leading-relaxed font-light opacity-90">
+          {testimonial.review}
         </p>
 
         <hr className="my-3 border-gray-500 opacity-50" />

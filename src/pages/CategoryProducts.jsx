@@ -18,14 +18,14 @@ const CategoryProducts = () => {
 
 
   return (
-    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 mx-auto max-w-[1280px] px-5">
+    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 mx-auto max-w-[1280px] sm:px-5 px-3">
       <CollectionsSidebar />
 
       <div className="flex-1">
         <SortingSelect category={category} />
 
         {/* Products Grid */}
-        <div className="relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+        <div className="relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-4 gap-2 gap-y-6">
           {status === 'pending' ? <ProductSkeleton /> : products?.length > 0 ? (
             products?.map((item) => (
               <ProductItem
@@ -56,7 +56,7 @@ const CategoryProducts = () => {
 
         {!hasNextPage && (
           <p className="text-center text-gray-500 mt-4">
-            No more products to load
+            No more products to load.
           </p>
         )}
       </div>

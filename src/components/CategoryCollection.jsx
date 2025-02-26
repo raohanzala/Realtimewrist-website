@@ -28,9 +28,9 @@ const collections = [
 
 const CategoryCollection = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 px-3'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 '>
       {collections.map((collection) => (
-        <div key={collection.id} className="overflow-hidden relative group h-80 sm:max-h-96 rounded">
+        <div key={collection.id} className="overflow-hidden relative group min-h-80 sm:max-h-[420px]">
           <Link to={collection.link}>
             <div className="relative w-full h-80 sm:h-96 transform group-hover:scale-110 duration-300 flex items-center justify-center">
               <LazyLoadImage

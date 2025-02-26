@@ -1,10 +1,8 @@
 import React, {
   forwardRef,
-  useContext,
   useEffect,
   useState,
 } from "react";
-import { ShopContext } from "../../context/ShopContext";
 import NavList from "./NavList";
 import Logo from "./Logo";
 import NavSmall from "./NavSmall";
@@ -18,10 +16,6 @@ import { MdOutlineMenu } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/slices/userSlice";
 import { clearCart, openCart } from "../../store/slices/cartSlice";
-import {
-  FaShoppingCart,
-  FaSignOutAlt,
-} from "react-icons/fa";
 import Login from "../../pages/Login";
 import Modal from "../Modal";
 import { useSocialLinks } from "../../api/useSocialLinks";
@@ -38,8 +32,6 @@ const Navbar = forwardRef(({ setShowSearch }, ref) => {
   const [isDropDown, setIsDropDown] =  useState(false)
 
   const navigate = useNavigate()
-
-  // const { navigate } = useContext(ShopContext);
 
   const dropdownRef = useRef(null);
 

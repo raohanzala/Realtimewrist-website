@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { clearFormData, saveFormData } from "../store/slices/orderSlice";
 import Modal from "../components/Modal";
 import ConfirmOrderModal from "../components/ConfirmOrderModal";
+import Breadcrumb from "../components/Breadcrumb";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -91,8 +92,15 @@ const PlaceOrder = () => {
     }
   };
 
+  
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Cart' }
+  ];
+
   return (
     <>
+
     <Formik
       initialValues={{
         name: formData?.name || "",
@@ -112,15 +120,16 @@ const PlaceOrder = () => {
     >
       {({ values, handleChange, handleSubmit }) => (
         <>
+
           <Form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] justify-between gap-10 sm:gap-5 pt-5 px-5 sm:pt-14 border-t max-w-[1280px] mx-auto"
+            className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] justify-between gap-5 sm:gap-5 pt-5 px-5 sm:pt-14 border-t max-w-[1280px] mx-auto"
           >
 
-            <div className="flex flex-col w-full my-5">
-
+            <div className="flex flex-col w-full mt-5">
+            <Breadcrumb breadcrumbs={breadcrumbs} />
               <Title className='mb-5' text1={"DELIVERY"} text2={"INFORMATION"} />
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-3">
                 <FormRowVerticle name="name">
                   <Input
                     type="text"
@@ -212,7 +221,7 @@ const PlaceOrder = () => {
               </div>
             </div>
 
-            <div className="mt-8">
+            <div>
               <div className="mt-8">
                 <CartTotal />
               </div>

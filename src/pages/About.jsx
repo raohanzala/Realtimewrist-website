@@ -60,16 +60,6 @@ const About = () => {
         </p>
       </div>
 
-      <div className='text-xl py-4 px-5'>
-        <Title text1={'OUR'} text2={'COLLECTION'} />
-      </div>
-
-      <div className='text-gray-600'>
-        <p>
-          Discover a variety of styles, from classic to modern watches, each crafted to complement your lifestyle.
-        </p>
-      </div>
-
       <NewsLetterBox />
     </div>
   );

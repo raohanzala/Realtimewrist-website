@@ -10,7 +10,7 @@ const Category = () => {
   const {isPending, error, categories } = useCategories();
 
   return (
-    <div className="pt-12 pb-3 md:pb-6">
+    <div className="pt-6 pb-1 md:pb-1">
       <div className="relative group">
         <Swiper
           modules={[Navigation, Autoplay]}
