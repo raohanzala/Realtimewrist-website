@@ -6,7 +6,7 @@ import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 
-const TestimonialCard = ({ testimonial }) => {
+const TestimonialCard = ({ testimonial, testimonials }) => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   return (
@@ -58,7 +58,6 @@ const TestimonialCard = ({ testimonial }) => {
           open={isLightboxOpen}
           close={() => setIsLightboxOpen(false)}
           slides={[{ src: testimonial.image }]}
-          plugins={[Fullscreen, Zoom, Thumbnails]}
         />
       )}
     </div>

@@ -57,15 +57,15 @@ const ProductImageGallery = ({ product }) => {
       </div>
 
       {/* Modern Lightbox */}
-      {isOpen && (
         <Lightbox
           open={isOpen}
           close={() => setIsOpen(false)}
           index={photoIndex}
-          slides={product.images.map((img) => ({ src: img }))}
-          plugins={[Fullscreen, Zoom, Thumbnails]}
+          slides={product.images.map((src) => ({ src }))}
+          on={{
+            view: ({ index }) => setPhotoIndex(index),
+          }}
         />
-      )}
     </div>
   );
 };

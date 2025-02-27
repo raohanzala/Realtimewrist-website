@@ -105,6 +105,7 @@ const TestimonialSection = () => {
             <SwiperSlide key={index}>
               <TestimonialCard
                 testimonial={testimonial}
+                testimonials={testimonials}
               />
             </SwiperSlide>
           ))}
