@@ -59,7 +59,7 @@ const Hero = () => {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
 
             {/* Text Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6 sm:px-12">

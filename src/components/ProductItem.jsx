@@ -42,7 +42,7 @@ const ProductItem = memo(({ id, description, images, name, newPrice, oldPrice, a
 
   return (
     <>
-      <Link to={`/product/${id}`}>
+      <Link to={availability === "Out of stock" ? "#" : `/product/${id}`} onClick={(e) => availability === "Out of stock" && e.preventDefault()}>
         <div
           className="flex relative w-full h-auto flex-col text-gray-700 cursor-pointer bg-white overflow-hidden transform transition-all border sm:rounded rounded-sm"
           onMouseEnter={() => setIsHovered(true)}

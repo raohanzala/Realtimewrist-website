@@ -11,7 +11,7 @@ import SortingSelect from '../components/SortingSelect';
 
 const Collection = () => {
 
-  const { products, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useProducts();
+  const { products, fetchNextPage,isFetchingNextPage, hasNextPage, status } = useProducts();
   const observerRef = useRef(null);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const Collection = () => {
           )}
         </div>
 
-        {isFetchingNextPage && <Spinner variant={"secondary"} />}
+        {isFetchingNextPage && <div className='flex justify-center sm:mt-10 mt-7'> <Spinner variant={"secondary"} /> </div>}
 
         {hasNextPage && <div ref={observerRef} className="h-10"></div>}
 
