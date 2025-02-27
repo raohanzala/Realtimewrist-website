@@ -4,16 +4,16 @@ import { AiOutlineRight } from 'react-icons/ai';
 const Breadcrumb = ({ breadcrumbs }) => {
   return (
     <nav 
-      className="flex items-center space-x-1 mb-8 text-sm text-gray-600 uppercase" 
+      className="flex items-center space-x-1 mb-8  text-gray-600 uppercase" 
       aria-label="Breadcrumb"
     >
       {breadcrumbs.map((breadcrumb, index) => (
-        <div key={index} className="flex items-center gap-1">
+        <div key={index} className="flex items-center gap-1 text-xs sm:text-sm">
           
          
           
           {index !== 0 && (
-            <AiOutlineRight className="w-4 h-4 text-gray-400" /> 
+            <AiOutlineRight className="text-xs text-gray-400" /> 
           )}
 
           {breadcrumb.href ? (
