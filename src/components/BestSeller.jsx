@@ -7,7 +7,7 @@ const BestSeller = () => {
   const { products, status } = useProducts();
 
   // Derive bestSeller directly (No need for useState + useEffect)
-  const bestSeller = products.filter((item) => item.bestSeller).slice(0, 10);
+  const bestSeller = products.slice(0, 10);
 
   return (
     <div className='my-10'>

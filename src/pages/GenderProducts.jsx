@@ -74,13 +74,8 @@ const GenderProducts = () => {
           )}
         </div>
 
-        {hasNextPage && <div className="py-10 flex justify-center items-end">
-          {status === 'pending' ? (
-            <Spinner variant={"secondary"} />
-          ) : (
-            !products?.length && <div className='col-span-4'> <Empty resourceName="products" /> </div>
-          )}
-        </div>}
+
+        {isFetchingNextPage && <div className='flex justify-center sm:mt-10 mt-7'> <Spinner variant={"secondary"} /> </div>}
 
         {/* Loader Trigger */}
         {hasNextPage && <div ref={loaderRef} className="h-10 w-full"></div>}

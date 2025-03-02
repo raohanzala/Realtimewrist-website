@@ -9,8 +9,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import CartDrawer from './components/CartDrawer';
 import WhatsAppChat from './components/WhatsAppChat'
-import { useLocation } from 'react-router-dom';
-import LoadingLogo from './components/LoadingLogo';
 
 const AppLayout = ({ children }) => {
 

@@ -1,5 +1,3 @@
-import { useContext, useState } from "react";
-import { ShopContext } from "../context/ShopContext";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decrementQuantity,

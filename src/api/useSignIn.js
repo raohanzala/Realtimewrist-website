@@ -7,7 +7,7 @@ import { login } from "../store/slices/userSlice";
 export function useSignIn() {
   const dispatch = useDispatch()
 
-    const {isLoading, mutate : signIn } = useMutation({
+    const {isPending, mutate : signIn } = useMutation({
       mutationFn : async (values)=> {
        const {data} = await axiosInstance.post('/user/login', values)
        return data
@@ -25,5 +25,5 @@ export function useSignIn() {
       onError: (err)=> toast.error(err.message) 
     })
 
-    return {isLoading, signIn}
+    return {isPending, signIn}
 }

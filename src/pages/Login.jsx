@@ -36,8 +36,8 @@ const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const { signIn, isLoading: isSigningIn } = useSignIn();
-  const { signUp, isLoading: isSigningUp } = useSignUp();
+  const { signIn, isPending: isSigningIn } = useSignIn();
+  const { signUp, isPending: isSigningUp } = useSignUp();
 
   const { isLoggedIn } = useSelector((state) => state.user);
 

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Title from "./Title";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Navigation, Autoplay, EffectCoverflow } from "swiper/modules";
@@ -46,14 +45,14 @@ const testimonials = [
     marks: 2,
   },
   {
-    image: assets.feedback_6,
+    image: assets.feedback_9,
     review:
-      "“Mashallah zabardast Parcel recieved.”",
-    name: "Kashif Ameen",
-    marks: 2,
+      "“Watch is so beautiful and qulaity is outstanding. In tis price range it is the best thing you can get.”",
+    name: "Mehver Mirza",
+    marks: 4,
   },
   {
-    image: assets.feedback_7,
+    image: assets.feedback_8,
     review:
       "“Salam bhai ap jo cheez bheji hai woh bht umda hai bhai shukriya.”",
     name: "Kashif Ameen",

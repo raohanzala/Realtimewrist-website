@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import { useState } from "react";
 import Button from "./Button";
 import toast from "react-hot-toast";
 import Spinner from "./Spinner";

@@ -1,9 +1,7 @@
-import React, { useContext, memo, useMemo, useState } from 'react';
-import { ShopContext } from '../context/ShopContext';
+import { memo, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { IoMdCart } from "react-icons/io";
 import PolicyModal from './PolicyModal';
 import { formatAmount } from '../helpers';
 import { CURRENCY } from '../utils/contants';

@@ -19,7 +19,6 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Product = lazy(() => import("./pages/Product"));
 const Cart = lazy(() => import("./pages/Cart"));
-const Login = lazy(() => import("./pages/Login"));
 const PlaceOrder = lazy(() => import("./pages/PlaceOrder"));
 const Orders = lazy(() => import("./pages/Order"));
 const NotFound = lazy(() => import("./components/NotFound"));
@@ -29,7 +28,6 @@ const App = () => {
   useScrollRestoration()
 
   const [isLoading, setLoading] = useState(true)
-  // const location = useLocation()
 
   useEffect(() => {
     const timer = setTimeout(() => {

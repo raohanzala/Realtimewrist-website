@@ -25,7 +25,7 @@ const Modal = ({ title, children, isOpen, onClose }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded shadow-lg max-h-[90vh] overflow-y-scroll scrollbar-hide sn:p-6 p-5"
+        className="bg-white rounded shadow-lg max-h-[90vh] overflow-y-scroll scrollbar-hide snm:p-6 p-2 pb-5"
         ref={ref}
       >
         <div className="flex w-full justify-between items-center">

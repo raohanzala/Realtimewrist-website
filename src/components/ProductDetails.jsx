@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
-import { ShopContext } from "../context/ShopContext";
 import { BsWhatsapp } from "react-icons/bs";
 import { formatAmount } from "../helpers";
 import { CURRENCY } from "../utils/contants";
 import Button from "./Button";
+import SocialLinks from "./SocialLinks";
 
 const ProductDetails = ({ productData, handleAddToCartClick }) => {
   return (
@@ -47,7 +46,7 @@ const ProductDetails = ({ productData, handleAddToCartClick }) => {
         </Button>
         {/* <Button onClick={handleAddToCartClick} variant="secondary" className="bg-primary-1 py-3 px-8 text-sm uppercase text-white">
           Order Now
-        </Button> */}
+          </Button> */}
       </div>
       <hr className="mt-8" />
       <div className="mt-8 flex items-center gap-4 bg-green-100 text-green-800 py-3 px-3 rounded-lg border border-green-300">
@@ -64,6 +63,10 @@ const ProductDetails = ({ productData, handleAddToCartClick }) => {
         <p>Cash on delivery is available on this product.</p>
         <p>Easy return and exchange policy within 7 days.</p>
       </div>
+        <div className="mt-5">
+  
+        <SocialLinks size={22} className='text-dark-1'/>
+        </div>
     </div>
   );
 };

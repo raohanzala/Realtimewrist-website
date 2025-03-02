@@ -11,5 +11,6 @@ export function useCategories() {
   });
 
  const categories = data?.categories
-  return { isPending, error, categories };
+ const totalCategories = data?.totalCategories
+  return { isPending, error, categories, totalCategories };
 }

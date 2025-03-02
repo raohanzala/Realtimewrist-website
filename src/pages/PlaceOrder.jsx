@@ -15,6 +15,7 @@ import { clearFormData, saveFormData } from "../store/slices/orderSlice";
 import Modal from "../components/Modal";
 import ConfirmOrderModal from "../components/ConfirmOrderModal";
 import Breadcrumb from "../components/Breadcrumb";
+import { DELIVERY_FEE } from "../utils/contants";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -30,9 +31,9 @@ const validationSchema = Yup.object({
     .email("Invalid email address")
     .required("Email is required"),
   city: Yup.string().required("City is required"),
-  zipcode: Yup.string()
-    .required("Zipcode is required")
-    .matches(/^\d+$/, "Zipcode must be numeric")
+  address: Yup.string()
+    .required("Address is required")
+    .matches(/^\d+$/, "Address must be numeric")
     .trim(),
   country: Yup.string().required("Country is required"),
   note: Yup.string().nullable(),
@@ -55,7 +56,7 @@ const PlaceOrder = () => {
     let orderData = {
       address: values,
       items: items,
-      amount: totalValue ,
+      amount: totalValue + DELIVERY_FEE,
     };
 
     await placeOrder(orderData)
@@ -77,7 +78,6 @@ const PlaceOrder = () => {
       return; 
     }
 
-
     try {
       switch (method) {
         case "cod":
@@ -91,7 +91,6 @@ const PlaceOrder = () => {
       toast.error(error.message);
     }
   };
-
   
   const breadcrumbs = [
     { label: 'Home', href: '/' },
@@ -100,7 +99,6 @@ const PlaceOrder = () => {
 
   return (
     <>
-
     <Formik
       initialValues={{
         name: formData?.name || "",
@@ -108,8 +106,8 @@ const PlaceOrder = () => {
         whatsapp: formData?.whatsapp || "",
         email: formData?.email || "",
         city: formData?.city || "",
-        zipcode: formData?.zipcode || "",
-        country: formData?.country || "",
+        Address: formData?.address || "",
+        country: formData?.country || "Pakistan",
         note: formData?.note || "",
       }}
       validationSchema={validationSchema}
@@ -126,8 +124,8 @@ const PlaceOrder = () => {
             className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] justify-between gap-5 sm:gap-5 pt-5 px-5 sm:pt-14 border-t max-w-[1280px] mx-auto"
           >
 
-            <div className="flex flex-col w-full mt-5">
-            <Breadcrumb breadcrumbs={breadcrumbs} />
+            <div className="flex flex-col w-full">
+        <Breadcrumb breadcrumbs={breadcrumbs} />
               <Title className='mb-5' text1={"DELIVERY"} text2={"INFORMATION"} />
               <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-3">
                 <FormRowVerticle name="name">
@@ -173,25 +171,25 @@ const PlaceOrder = () => {
                   />
                 </FormRowVerticle>
               </div>
-              <FormRowVerticle name="city">
+              <FormRowVerticle name="address">
                 <Input
                   type="text"
-                  name="city"
-                  value={values.city}
+                  name="address"
+                  value={values.address}
                   onChange={handleChange}
                   disabled={isPending}
-                  placeholder="City"
+                  placeholder="Address"
                 />
               </FormRowVerticle>
               <div className="grid grid-cols-2 gap-3">
-                <FormRowVerticle name="zipcode">
+                <FormRowVerticle name="city">
                   <Input
                     type="number"
-                    name="zipcode"
-                    value={values.zipcode}
+                    name="city"
+                    value={values.city}
                     onChange={handleChange}
                     disabled={isPending}
-                    placeholder="Zipcode"
+                    placeholder="City"
                   />
                 </FormRowVerticle>
                 <FormRowVerticle name="country">
@@ -222,7 +220,7 @@ const PlaceOrder = () => {
             </div>
 
             <div>
-              <div className="mt-8">
+              <div className="mt-12">
                 <CartTotal />
               </div>
               <div className="mt-12">

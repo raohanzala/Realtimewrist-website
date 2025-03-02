@@ -58,13 +58,13 @@ const Footer = () => {
           <ul className="space-y-2 text-sm text-gray-400">
             <li>
               <span className="font-medium text-white">Phone:</span>{" "}
-              <a href="tel:+923278272361">
+              <a href="tel:+923278272361" className="hover:text-white">
               +92-3278272361
               </a>
             </li>
             <li>
               <span className="font-medium text-white">Email:</span>{" "}
-              <a href="mailto:realtimewrist@gmail.com">
+              <a href="mailto:realtimewrist@gmail.com" className="hover:text-white">
               realtimewrist@gmail.com
               </a>
             </li>
@@ -74,26 +74,6 @@ const Footer = () => {
         {/* Social Media */}
         <div className="space-y-4">
           <h4 className="text-lg font-semibold">Follow Us</h4>
-          {/* <div className="flex space-x-4">
-            <Link to="#" className="text-gray-400 hover:text-white transition">
-              <FaFacebookF size={20} />
-            </Link>
-            <Link to="#" className="text-gray-400 hover:text-white transition">
-              <FaInstagram size={20} />
-            </Link>
-            <Link to="#" className="text-gray-400 hover:text-white transition">
-              <FaTwitter size={20} />
-            </Link>
-            <Link to="#" className="text-gray-400 hover:text-white transition">
-              <FaLinkedinIn size={20} />
-            </Link>
-            <Link to="#" className="text-gray-400 hover:text-white transition">
-              <FaWhatsapp size={20} />
-            </Link>
-            <Link to="#" className="text-gray-400 hover:text-white transition">
-              <FaYoutube size={20} />
-            </Link>
-          </div> */}
           <SocialLinks size={20}/>
         </div>
       </div>

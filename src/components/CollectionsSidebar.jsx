@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { RiEqualizer2Line, RiEqualizerLine } from "react-icons/ri";
+import { RiEqualizerLine } from "react-icons/ri";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { useCategories } from "../api/useCategories";
-import Category from "./Category";
-import { CiFilter } from "react-icons/ci";
 
 const CollectionsSidebar = ({ isShowFilter = true }) => {
   const [searchParams, setSearchParams] = useSearchParams();

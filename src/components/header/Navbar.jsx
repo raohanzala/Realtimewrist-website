@@ -97,7 +97,7 @@ const Navbar = forwardRef(({ setShowSearch }, ref) => {
             >
               <MdOutlineMenu />
             </div>
-            <SocialLinks/>
+            <SocialLinks isSmall={true}/>
 
             <NavList />
 

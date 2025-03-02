@@ -7,7 +7,7 @@ import { useCategories } from '../api/useCategories';
 
 const Category = () => {
 
-  const {isPending, error, categories } = useCategories();
+  const {isPending, error, categories, totalCategories } = useCategories(true);
 
   return (
     <div className="pt-6 pb-1 md:pb-1">
@@ -32,7 +32,7 @@ const Category = () => {
           {isPending ? <CategorySkeleton/> :
             categories?.map((category, index) => (
               <SwiperSlide key={index}>
-                <CategoryItem categoryImg={category.image} categoryName={category.name} link={category._id}  key={index} />
+                <CategoryItem categoryImg={category.image}  categoryName={category.name} totalCategories={totalCategories} link={category._id}  key={index} />
               </SwiperSlide>
             ))
           }

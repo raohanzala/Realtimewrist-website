@@ -7,7 +7,7 @@ import { login } from "../store/slices/userSlice";
 export function useSignUp() {
   const dispatch = useDispatch()
 
-    const {isLoading, mutate : signUp } = useMutation({
+    const {isPending, mutate : signUp } = useMutation({
       mutationFn : async (values)=> {
         console.log(values, 'QUERY DATA')
           const {data} = await axiosInstance.post('/user/register', values)
@@ -26,5 +26,5 @@ export function useSignUp() {
       onError: (err)=> toast.error(err.message) 
     })
 
-    return {isLoading, signUp}
+    return {isPending, signUp}
 }

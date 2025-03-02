@@ -1,22 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { IoMdClose } from 'react-icons/io';
 import { Link } from 'react-router-dom';
-import { useCallback } from 'react';
 import { useContext } from 'react';
-import { ShopContext } from '../context/ShopContext';
 import Spinner from './Spinner';
 import { CURRENCY } from '../utils/contants';
 import { formatAmount } from '../helpers';
 import { useOutsideClick } from '../hooks/useOutsideClick';
 import { RiSearchLine } from 'react-icons/ri';
+import axiosInstance from '../api/axiosInstance';
 
 const SearchBar = ({ setShowSearch }) => {
   const [query, setQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { backendUrl } = useContext(ShopContext)
   const close = ()=> setShowSearch(false)
 
   const ref = useOutsideClick(close, false)
@@ -31,7 +29,7 @@ const SearchBar = ({ setShowSearch }) => {
       setIsLoading(true);
 
       try {
-        const response = await axios.get(backendUrl + `/api/product/search?query=${query}`);
+        const response = await axiosInstance.get(`/product/search?query=${query}`);
         if (response.data.success) {
           setFilteredProducts(response.data.products);
         }

@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import { ShopContext } from "../context/ShopContext";
 import CartTotal from "../components/CartTotal";
 import toast from "react-hot-toast";
 import { IoCloseSharp } from "react-icons/io5";
@@ -10,18 +9,15 @@ import Button from "./Button";
 import { CURRENCY } from "../utils/contants";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addToCart,
-  clearCart,
   closeCart,
   removeFromCart,
 } from "../store/slices/cartSlice";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { useRemoveFromCart } from "../api/useRemoveFromCart";
 import { formatAmount } from "../helpers";
 
 const CartDrawer = () => {
-  const { navigate } = useContext(ShopContext);
 
   const {
     items: cartItems,
@@ -30,6 +26,7 @@ const CartDrawer = () => {
   } = useSelector((state) => state.cart);
   const { isLoggedIn } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate  = useNavigate()
 
   const { isPending, removeFromCart: removeFromUserCart } = useRemoveFromCart();
 
@@ -39,17 +36,17 @@ const CartDrawer = () => {
     dispatch(closeCart());
   }, [location.pathname, dispatch]);
 
-  // useEffect(() => {
-  //   if (isCartOpen) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "";
-  //   }
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-  //   return () => {
-  //     document.body.style.overflow = "";
-  //   };
-  // }, [isCartOpen]);
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isCartOpen]);
 
   const handleCheckout = () => {
     toast.dismiss();

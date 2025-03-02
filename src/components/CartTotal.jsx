@@ -1,5 +1,3 @@
-import React, { useContext } from 'react'
-import { ShopContext } from '../context/ShopContext'
 import Title from './Title'
 import { useSelector } from 'react-redux'
 import { CURRENCY, DELIVERY_FEE } from '../utils/contants'
