@@ -4,7 +4,7 @@ import { useCategories } from '../../api/useCategories';
 import { IoIosArrowDown } from 'react-icons/io';
 
 const NavList = () => {
-  const { isLoading, error, categories } = useCategories();
+  const { isLoading, error, categories } = useCategories(true);
 
   const navItems = [
     { name: 'Home', path: '/' },

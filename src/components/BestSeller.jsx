@@ -8,6 +8,7 @@ const BestSeller = () => {
 
   // Derive bestSeller directly (No need for useState + useEffect)
   const bestSeller = products.slice(0, 10);
+  // console.log(bestSeller, 'BEST SELLER')
 
   return (
     <div className='my-10'>

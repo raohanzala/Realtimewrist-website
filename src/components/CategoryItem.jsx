@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-function CategoryItem({ categoryName, categoryImg,totalCategories, link }) {
+function CategoryItem({ categoryName, categoryImg, link }) {
   return (
-    <Link to={`/category/${categoryName}/${link}`} className="flex flex-col gap-4 items-center">
+    <Link to={`/category/${categoryName}/${link}`} className="flex flex-col gap-4 items-center justify-center">
       <div >
         <div className=" rounded-full max-h-36 max-w-36 overflow-hidden m-auto shadow">
           <div className="relative w-full h-full flex items-center justify-center hover:scale-110 duration-300">
@@ -24,7 +24,7 @@ function CategoryItem({ categoryName, categoryImg,totalCategories, link }) {
         </div>
       </div>
       <div>
-        <h2 className='text-sm text-dark-1 uppercase'>{categoryName} <span className="font-normal">({totalCategories})</span></h2>
+        <h2 className='text-sm text-dark-1 uppercase'>{categoryName}</h2>
       </div>
     </Link>
   );

@@ -49,7 +49,7 @@ const Hero = () => {
         className="relative w-full h-full overflow-hidden"
       >
         {slideList.map((slide, index) => (
-          <SwiperSlide key={index} className="relative w-full h-full flex animate-fade-in">
+          <SwiperSlide key={index} className="relative w-full h-full flex">
             {/* Background Image */}
             <LazyLoadImage
               src={slide.image}
@@ -62,11 +62,11 @@ const Hero = () => {
             <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
 
             {/* Text Content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6 sm:px-12">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6 sm:px-12 animate-fade-in">
               <h2 className="text-3xl sm:text-5xl font-bold animate-scale-up">
                 {slide.title}
               </h2>
-              <p className="text-lg sm:text-xl mt-2 animate-fade-in">
+              <p className="text-lg sm:text-xl mt-2">
                 {slide.subtitle}
               </p>
               <Link

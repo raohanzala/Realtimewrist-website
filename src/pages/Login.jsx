@@ -144,7 +144,9 @@ const Login = () => {
               }
               className="cursor-pointer"
             >
-              {currentState === "Login" ? "Create account" : "Login Here"}
+               {currentState === "Login"
+      ? "Don't have an account? Sign up"
+      : "Already have an account? Login here"}
             </p>
           </div>
 

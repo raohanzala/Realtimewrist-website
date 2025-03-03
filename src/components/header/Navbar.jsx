@@ -140,14 +140,14 @@ const Navbar = forwardRef(({ setShowSearch }, ref) => {
                     <div className="flex flex-col w-36 bg-white text-gray-500 rounded-sm shadow-lg">
                       <p
                         onClick={() => {navigate("/orders"); dropDownToggle()}}
-                        className="cursor-pointer hover:text-gray-700 hover:bg-gray-50 flex items-center gap-2 px-5 py-2"
+                        className="cursor-pointer hover:text-gray-700 hover:bg-gray-50 flex items-center gap-2 px-3 py-2"
                       >
                         <AiOutlineShopping className=" text-xl" />
                         My Orders
                       </p>
                       <p
                         onClick={()=>{logOut(); dropDownToggle()}}
-                        className="cursor-pointer text-red-400 hover:text-red-600 px-5 py-2 hover:bg-red-50 flex items-center gap-2"
+                        className="cursor-pointer text-red-400 hover:text-red-600 px-3 py-2 hover:bg-red-50 flex items-center gap-2"
                       >
                         <IoLogOutOutline className=" text-xl" />
                         Logout
@@ -164,7 +164,7 @@ const Navbar = forwardRef(({ setShowSearch }, ref) => {
                 <div className="text-white text-xl">
                   <IoMdCart />
                 </div>
-                <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[red] text-white aspect-square rounded-full text-[8px]">
+                <p className="absolute right-[-5px] bottom-[-5px] size-4 text-center leading-4 bg-[red] text-white aspect-square rounded-full text-[8px]">
                   {totalItems}
                 </p>
               </div>

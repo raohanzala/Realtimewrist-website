@@ -5,6 +5,7 @@ import "yet-another-react-lightbox/styles.css";
 
 const TestimonialCard = ({ testimonial, testimonials }) => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
 
   return (
     <div
@@ -16,6 +17,7 @@ const TestimonialCard = ({ testimonial, testimonials }) => {
         src={testimonial.image}
         alt="WhatsApp Review"
         className="w-full h-80 object-cover transition-all duration-500 group-hover:scale-110"
+        onClick={()=>setPhotoIndex(index)}
       />
 
       {/* Overlay Gradient */}
@@ -55,6 +57,10 @@ const TestimonialCard = ({ testimonial, testimonials }) => {
           open={isLightboxOpen}
           close={() => setIsLightboxOpen(false)}
           slides={testimonials?.map((testimonial) => ({ src: testimonial.image }))}
+          index={photoIndex}
+          on={{
+            view: ({ index }) => setPhotoIndex(index),
+          }}
         />
       )}
     </div>

@@ -32,9 +32,7 @@ const validationSchema = Yup.object({
     .required("Email is required"),
   city: Yup.string().required("City is required"),
   address: Yup.string()
-    .required("Address is required")
-    .matches(/^\d+$/, "Address must be numeric")
-    .trim(),
+    .required("Address is required"),
   country: Yup.string().required("Country is required"),
   note: Yup.string().nullable(),
 });
@@ -184,7 +182,7 @@ const PlaceOrder = () => {
               <div className="grid grid-cols-2 gap-3">
                 <FormRowVerticle name="city">
                   <Input
-                    type="number"
+                    type="text"
                     name="city"
                     value={values.city}
                     onChange={handleChange}
