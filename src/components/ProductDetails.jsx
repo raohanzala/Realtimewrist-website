@@ -46,15 +46,6 @@ const ProductDetails = ({ productData, handleAddToCartClick }) => {
         </Button>
       </div>
       <hr className="mt-8" />
-      {/* <div className="mt-8 flex items-center gap-4 bg-green-100 text-green-800 py-3 px-3 rounded-lg border border-green-300">
-        <BsWhatsapp size={28} className="text-green-600" />
-        <p className="text-sm font-medium">
-          <span className="font-semibold">Order via WhatsApp:</span>
-          <a href="https://wa.me/923278272361" target="_blank" rel="noopener noreferrer" className="ml-2 text-green-700 hover:underline">
-            +92 327 8272361
-          </a>
-        </p>
-      </div> */}
 
 <div className="mt-8 space-y-4">
   {/* Order via WhatsApp */}

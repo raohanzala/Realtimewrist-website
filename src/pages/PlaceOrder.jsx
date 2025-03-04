@@ -104,7 +104,7 @@ const PlaceOrder = () => {
         whatsapp: formData?.whatsapp || "",
         email: formData?.email || "",
         city: formData?.city || "",
-        Address: formData?.address || "",
+        address: formData?.address || "",
         country: formData?.country || "Pakistan",
         note: formData?.note || "",
       }}
