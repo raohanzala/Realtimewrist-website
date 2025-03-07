@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import CartDrawer from './components/CartDrawer';
 import WhatsAppChat from './components/WhatsAppChat'
+import WhatsAppModal from './components/WhatsAppModal';
 
 const AppLayout = ({ children }) => {
 
@@ -32,7 +33,8 @@ const AppLayout = ({ children }) => {
         <ToastContainer />
         {children}
       </div>
-      <WhatsAppChat />   
+      <WhatsAppChat />  
+      <WhatsAppModal/> 
       <Footer />
     </div>
     </div>

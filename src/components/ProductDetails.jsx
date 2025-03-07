@@ -40,7 +40,7 @@ const ProductDetails = ({ productData, handleAddToCartClick }) => {
         <Button
           onClick={handleAddToCartClick}
           variant='secondary'
-          className='py-3'
+          className='py-3 sm:w-auto w-full'
         >
           ADD TO CART
         </Button>

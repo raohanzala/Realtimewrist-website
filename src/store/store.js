@@ -4,12 +4,14 @@ import storage from 'redux-persist/lib/storage';
 import cartReducer from './slices/cartSlice';
 import userReducer from './slices/userSlice';
 import orderSlice from './slices/orderSlice'
+import whatsappModalSlice from './slices/whatsappModalSlice'
 
 
 const rootReducer = combineReducers({
   cart : cartReducer,
   user : userReducer,
-  order : orderSlice
+  order : orderSlice,
+  whatsApp : whatsappModalSlice
 });
 
 const persistConfig = {
